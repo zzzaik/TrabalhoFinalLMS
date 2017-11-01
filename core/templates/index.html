@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block estiloUnico %}{% static '/' %}css/home.css{% endblock %}
+
+{% block title %}Faculdade Impacta - Home{% endblock %}
+
+{% block main %}
+	<section>
+		<div class = "Banner">
+			<img class = "Banner img_banner" src = "{% static '/' %}img/Propaganda-vestibular.png"
+			alt = "propaganda do vestibular 2018" />
+		</div>
+		<div class = "BannerCell">
+			<img class = "BannerCell" src = "{% static '/' %}img/BannerCell.png"
+			alt = "propaganda do vestibular 2018 mobile" />
+		</div>
+		<article class = "sobre">
+			<h1 class = "sobre">Sobre</h1>
+			<p class = "sobre" > A Faculdade Impacta Tecnologia nasceu da percepção de um Grupo, 
+			que desde 1998 é referência em TI, Gestão e Design, para suprir a 
+			falta de mão de obra especializada do mercado de tecnologia e oferecer 
+			uma formação completa e multidisciplinar aos alunos.</p>
+		</article>
+		<article class = "comentsAlunos">
+			<h2 class = "comentsAlunos">Comentários dos ex-alunos</h2>
+				<h3 class = "comentsAlunos">Alexandre</h3>
+					<p>A Impacta proporciona a todos, independentemente do nível técnico 
+					ou da profissão, a oportunidade de compartilhar e obter conhecimentos 
+					em informática ou qualquer outro setor escolhido. As salas oferecem boa 
+					infra-estrutura, o que proporciona ótimos resultados nos laboratórios 
+					dos cursos MOC. Os equipamentos são de boa qualidade, ajudando muito no 
+					decorrer e aproveitamento dos cursos. Os instrutores são ótimos, tem ótima 
+					didática e trazem a todos a possibilidade de obter os conhecimentos necessários.
+					No geral, a Impacta proporciona um grande prazer em conhecer produtos e 
+					aprender cada vez mais, dentro da vontade de cada um. Foi muito bom ter 
+					participado dos treinamentos na Impacta.</p>
+				<h3 class = "comentsAlunos">Maria</h3>
+					<p>Desde os 18 anos trabalhei como secretária, quando por indicação de um amigo 
+					fui à IMPACTA para fazer o ICS Desktop Publisher. Com essa certificação, consegui 
+					uma vitória incrível em um mercado tão concorrido! Investi na compra de equipamento 
+					de ponta e software originais para montar um mini bureau. Hoje desenvolvo rótulos, 
+					anúncios, pôsteres, banners em gigantografia, catálogos e identidade visual para eventos 
+					nacionais e internacionais. Um dos meus clientes é nada menos que a Polícia Militar 
+					de São Paulo. Com o apoio de todos os instrutores, além de montar a minha empresa, 
+					consegui a preparação para os caminhos certos, porque a IMPACTA oferece verdadeiros 
+					profissionais aos alunos. Agradeço à IMPACTA pelos amigos e pelo círculo profissional 
+					que conquistei!</p>
+		</article>
+	</section>
+{% endblock %}

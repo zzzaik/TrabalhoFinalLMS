@@ -1,0 +1,59 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang = "pt-BR">
+<head>
+	<link rel="icon" href="{% static '/' %}img/icone.ico" type="image/x-icon" />
+	<link rel = "stylesheet" href = "{% static '/' %}css/site.css"/>
+	<link rel = "stylesheet" href = {% block estiloUnico %}{% endblock %}/>
+	<meta charset = "UTF-8"/>
+	<meta name = "viewport" content = "width = device-width, initial-scale = 1.0"/>
+	<title>{% block title %}{% endblock %}</title>
+</head>
+<body class = "corpo">
+	<header>
+		<nav class = "menu">
+			<a class = "link" href = "/" title = "Logo Faculdade Impacta">
+			<img class = "img_logo" src = "{% static '/' %}img/logo-novo.png" alt = "Logo e link para a home"/></a>
+			<div class = "menuhidden" >
+				<img src = "{% static '/' %}img/menu-icon-8.png" class="menuIcon"/>
+				<ul class = "dropmenu">
+					<li><a class = "link" href = "lista_curso.html" >Lista de Cursos</a></li>
+					<li><a class = "link" href = "detalhe_curso.html" >Detalhe de Curso</a/></li>
+					<li><a class = "link" href = "disciplina.html" >Disciplina</a></li>
+					<li><a class = "link" href = "noticia.html" >Notícias</a></li>
+				</ul>
+			</div>
+		</nav>
+	</header>
+   <main>
+      {% block main %}
+
+      {% endblock %}
+   </main>
+	<footer>
+		<div class = "sigaImpacta">
+			<h3 class = "sigaImpacta">SIGA A IMPACTA</h3>
+			<nav class = "siga" >
+				<a class = "link" href = "https://twitter.com/facimpacta" 
+				target = "Blank" title = "twitter"><img src = "{% static '/' %}img/twitter.png"
+				alt = "link para pagina da impacta no twitter" /></a>	
+				<a class = "link" href = "https://www.youtube.com/user/GrupoImpacta" 
+				target = "Blank" title = "youtube"><img src = "{% static '/' %}img/youtube.png"
+				alt = "link para pagina da impacta no youtube"/></a>
+				<a class = "link" href = "https://www.facebook.com/FacImpacta/" 
+				target = "Blank" title = "facebook"><img src = "{% static '/' %}img/facebook.png"
+				alt = "link para pagina da impacta no facebook"/></a>
+				<a class = "link" href = "https://www.instagram.com/facimpacta/" 
+				target = "Blank" title = "instagram"><img src = "{% static '/' %}img/instagram.png"
+				alt = "link para pagina da impacta no instagram"/></a>
+				<a class = "link" href = "https://www.linkedin.com/edu/faculdade-impacta-tecnologia-161006" 
+				target = "Blank" title = "linkedin"><img src = "{% static '/' %}img/linkedin.png"
+				alt = "link para pagina da impacta no linkedin"/></a>
+			</nav>
+		</div>
+		<div class = "copyright">
+			<h4>© Grupo Draco 2017. Todos os direitos reservados. Política de privacidade<h4>
+		</div>
+	</footer>
+</body>
+</html>
