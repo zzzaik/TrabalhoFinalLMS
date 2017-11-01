@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang = "pt-BR">
+	<head>
+		<link rel="icon" href="img/icone.ico" type="image/x-icon" />
+		<link rel = "stylesheet" href = "css/site.css"/>
+		<link rel = "stylesheet" href = "css/nova_disciplina.css"/>
+		<meta charset = "UTF-8"/>
+		<meta name = "Author" Value = "Ivo Santana"/>
+		<meta name = "viewport" content = "width = device-width, initial-scale = 1.0"/>
+		<title>Nova Disciplina</title>
+	</head>
+	<body>
+		<header>
+			<nav class = "menu">
+				<a class = "link" href = "Home_TF_TecWeb.html" title = "Logo Faculdade Impacta">
+				<img class = "img_logo" src = "img/logo-novo.png" alt = "Logo e link para a home"/></a>
+				<div class = "menuhidden" >
+					<img src = "img/menu-icon-8.png" class="menuIcon"/>
+					<ul class = "dropmenu">
+						<li><a class = "link" href = "ListaCurso_TF_TecWeb.html" >Lista de Cursos</a></li>
+						<li><a class = "link" href = "detalheCurso_TF_TecWeb.html" >Detalhe de Curso</a/></li>
+						<li><a class = "link" href = "Disciplinas_TF_TecWeb.html" >Disciplina</a></li>
+						<li><a class = "link" href = "Noticias_TF_TecWeb.html" >Notícias</a></li>
+					</ul>
+				</div>
+			</nav>
+		</header>
+		<div class = "conteiner">
+			<div class = "mainbody">
+				<form method="POST">
+					<fieldset class="nd_fildset">
+						Nova Disciplina
+					</fieldset>
+					<label for="input_prof_resp">Professor Responsável</label><br/>					
+					<input type="text" name="prof_resp" id="input_prof_resp" required /><br/><br/>
+					<label for="input_nome_disc">Nome da Disciplina</label><br/>					
+					<input type="text" name="nome_disc" id="input_nome_disc" required /><br/><br/>
+					<label for="input_qtd_horas">Quantidade de Horas mensais</label><br/>					
+					<input type="number" name="qtd_horas" min=20 id="input_qtd_horas" required /><br/><br/>
+					<label for="input_tempo_aula">Duração da aula</label><br/>
+					<input type="number" name="tempo_aula" min=30 id="input_tempo_aula" placeholder="Em minutos" required /><br/><br/>
+					<label for="select_dia_aula">Dia (semana) da aula</label><br/>
+					<select name="dia_aula" id="select_dia_aula" required >
+						<option value="">-Selecione-</option>
+						<option>Segunda</option>
+						<option>Terça</option>
+						<option>Quarta</option>
+						<option>Quinta</option>
+						<option>Sexta</option>
+						<option>Sábado</option>
+					</select><br/><br/>
+					<label for="textarea_ementa">Ementa</label><br/>
+					<textarea name="ementa" id="textarea_ementa" placeholder="Digite, resumidamente, o conteúdo da disciplina."></textarea><br/><br/>
+					<button type="submit">Confirmar</button>										
+				</form>						
+			</div>
+		</div>
+		<div class = "footer">
+			<div class = "sigaImpacta">
+			<h3 class = "sigaImpacta">SIGA A IMPACTA</h3>
+			<nav class = "siga" >
+				<a class = "link" href = "https://twitter.com/facimpacta" 
+				target = "Blank" title = "twitter"><img src = "img/twitter.png"
+				alt = "link para pagina da impacta no twitter" /></a>	
+				<a class = "link" href = "https://www.youtube.com/user/GrupoImpacta" 
+				target = "Blank" title = "youtube"><img src = "img/youtube.png"
+				alt = "link para pagina da impacta no youtube"/></a>
+				<a class = "link" href = "https://www.facebook.com/FacImpacta/" 
+				target = "Blank" title = "facebook"><img src = "img/facebook.png"
+				alt = "link para pagina da impacta no facebook"/></a>
+				<a class = "link" href = "https://www.instagram.com/facimpacta/" 
+				target = "Blank" title = "instagram"><img src = "img/instagram.png"
+				alt = "link para pagina da impacta no instagram"/></a>
+				<a class = "link" href = "https://www.linkedin.com/edu/faculdade-impacta-tecnologia-161006" 
+				target = "Blank" title = "linkedin"><img src = "img/linkedin.png"
+				alt = "link para pagina da impacta no linkedin"/></a>
+			</nav>
+			</div>
+			<div class = "nd_copyright">
+				<h4>© Grupo Draco 2017. Todos os direitos reservados. Política de privacidade<h4>
+			</div>
+		</div>
+	</body>
+</html>

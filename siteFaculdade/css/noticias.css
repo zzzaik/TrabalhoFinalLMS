@@ -1,0 +1,50 @@
+* {
+	box-sizing: border-box;
+}
+.Banner {
+	position:relative;
+	width: 100%;
+}
+
+.BannerCell {
+	display: none;
+}
+.img_banner {
+	margin-top: 3.53em;
+}
+
+article.conteudo {
+	display: grid;
+	grid-template: 10% 10% 35% 10% 35% / 1fr;
+	margin: 1em;
+	margin-top: 0em;
+	text-align: justify;
+}
+h2.conteudo, h3.conteudo {
+	text-align: center;
+	color: #676f7c;
+}
+h3.conteudo {
+	color: #474747;
+	text-align: center;
+}
+@media only screen and (min-width: 320px) and (max-width: 736px)
+{
+	article.sobre {
+		display: grid;
+		grid-template: 10% 1fr 10% / 5% 90% 5%; 
+	}
+	.Banner {
+		display: none;
+	}
+	.BannerCell {
+		display: block;
+		position: relative;
+		width: 100%;
+		margin-top: 3.53em;
+	}
+}
+
+.imagem {
+	margin-top: 1.53em;
+}

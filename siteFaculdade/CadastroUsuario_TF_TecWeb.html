@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+
+<html lang="pt-br">
+	
+	<head>
+		<link rel="icon" href="img/icone.ico" type="image/x-icon" />
+		<link rel = "stylesheet" href = "css/site.css"/>
+		<link rel = "stylesheet" href = "css/usuario.css"/>
+		<meta charset = "UTF-8"/>
+		<meta name = "Author" Value = "João Carlos"/>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Cadastro de Usuario</title>
+	</head>
+
+	<body>
+		<header>
+			<nav class = "menu">
+				<a class = "link" href = "Home_TF_TecWeb.html" title = "Logo Faculdade Impacta">
+				<img class = "img_logo" src = "img/logo-novo.png" alt = "Logo e link para a home"/></a>
+				<div class = "menuhidden" >
+					<img src = "img/menu-icon-8.png" class="menuIcon"/>
+					<ul class = "dropmenu">
+						<li><a class = "link" href = "ListaCurso_TF_TecWeb.html" >Lista de Cursos</a></li>
+						<li><a class = "link" href = "detalheCurso_TF_TecWeb.html" >Detalhe de Curso</a/></li>
+						<li><a class = "link" href = "Disciplinas_TF_TecWeb.html" >Disciplina</a></li>
+						<li><a class = "link" href = "Noticias_TF_TecWeb.html" >Notícias</a></li>
+					</ul>
+				</div>
+			</nav>
+		</header>
+
+		<section id="cadastro">
+			
+			<div class = "corpo">
+				<form class="flexForm" method="POST">
+				
+					<h3>Formulário de Cadastro</h3>
+
+					<fieldset id="usuario">
+						<legend>Dados Pessoais</legend>
+						
+						<div class="itens">
+							<p><label for="cNome">Nome:</label> </br> <input type="text" name="tNome" id="cNome" size="25" maxlength="40" placeholder="Nome completo"/></p>
+							<p><label for="cRA">RA:</label> </br> <input type="text" name="tRA" id="cRA" size="25" maxlength="40" placeholder="RA"/></p>
+							<p><label for="cSenha">Senha:</label> </br> <input type="password" name="tSenha" id="cSenha" size="15" maxlength="20" placeholder="Digite uma senha"/></p>
+							<p><label for="cTelefone">Telefone:</label> </br> <input type="text" name="tTelefone" id="cTelefone" size="25" maxlength="40" placeholder="Telefone"/></p>
+							<p><label for="cMail">E-mail:</label> </br> <input type="email" name="tMail" id="cMail" size="20" maxlength="40" placeholder="Digite seu e-mail"/></p>
+							
+							
+							<fieldset id="sexo"><legend>Sexo:</legend>
+								<input type="radio" name="tSexo" id="cMasc"/> <label for="cMasc">Masculino</label><br/>
+								<input type="radio" name="tSexo" id="cFem"/> <label for="cFem">Feminino</label>
+							</fieldset>
+							<p><label for="cNasc">Nascimento:</label> </br> <input type="date" name="tNasc" id="cNasc"/></p>
+						</div>
+					</fieldset>
+					
+					</br>
+					
+					<fieldset id="curso">
+						<legend>Curso</legend>
+						
+						<div class="itens">
+							<select name="tCurso" id="cCurso">
+								<option value="SI" selected>Sistemas de Informação</option>
+								<option value="ADS" selected>Análise e Desenvolvimento de Sistemas</option>
+								<option value="ADM" selected>Administração</option>
+								<option value="BD" selected>Banco de Dados</option>
+								<option value="GSI" selected>Gestão de Tecnologia da Informação</option>
+								<option value="JD" selected>Jogos Digitais</option>
+								<option value="PG" selected>Processos gerenciais</option>
+								<option value="PM" selected>Produção multimídia</option>
+								<option value="RD" selected>Redes de Computadores</option>
+								<option value="" selected>--Selecione--</option>
+							</select>
+						</div>
+					
+					</fieldset>
+					
+					</br>
+
+					<fieldset id="endereco">
+						<legend>Endereço do Usuário</legend>
+						
+						<div class="itens">
+							<p><label for="cRua">Logradouro:</label> </br> <input type="text" name="tRua" id="cRua" size="25" maxlength="80" placeholder="Rua, Av, Trav, ..."/></p>
+							<p><label for="cNum">Número:</label> </br> <input type="number" name="tNum" id="cNum" min="0" max="99999"/></p>
+							<p><label for="cEst">Estado:</label> </br>
+							
+							<select name="tEst" id="cEst">
+								<option value="Outros" selected>Outros...</option>
+								<option value="SP" selected>São Paulo</option>
+								<option value="RJ" selected>Rio De Janeiro</option>
+								<option value="BH" selected>Belo Horizonte</option>
+								<option value="" selected>--Selecione--</option>
+							</select></p>
+							<p><label for="cBairro">Bairro:</label> </br> <input type="text" name="tbairro" id="cBairro" size="25" maxlength="80" placeholder="Bairro"/></p>
+						</div>
+					</fieldset>
+					
+					</br>
+
+					<button type="submit">Cadastrar</button>
+
+				</form>
+			<div>
+		</section>
+		
+		<footer>
+			<div class = "sigaImpacta">
+				<h3 class = "sigaImpacta">SIGA A IMPACTA</h3>
+					<nav class = "siga" >
+						<a class = "link" href = "https://twitter.com/facimpacta" 
+						target = "Blank" title = "twitter"><img src = "img/twitter.png"
+						alt = "link para pagina da impacta no twitter" /></a>
+						
+						<a class = "link" href = "https://www.youtube.com/user/GrupoImpacta" 
+						target = "Blank" title = "youtube"><img src = "img/youtube.png"
+						alt = "link para pagina da impacta no youtube"/></a>
+						
+						<a class = "link" href = "https://www.facebook.com/FacImpacta/" 
+						target = "Blank" title = "facebook"><img src = "img/facebook.png"
+						alt = "link para pagina da impacta no facebook"/></a>
+						
+						<a class = "link" href = "https://www.instagram.com/facimpacta/" 
+						target = "Blank" title = "instagram"><img src = "img/instagram.png"
+						alt = "link para pagina da impacta no instagram"/></a>
+						
+						<a class = "link" href = "https://www.linkedin.com/edu/faculdade-impacta-tecnologia-161006" 
+						target = "Blank" title = "linkedin"><img src = "img/linkedin.png"
+						alt = "link para pagina da impacta no linkedin"/></a>
+					</nav>
+			</div>
+		</footer>
+		</div>
+	</body>
+</html>
