@@ -1,6 +1,6 @@
 # TrabalhoFinalLMS
 
-Grupo:
+*Grupo:
 
 Gustavo Zaik 1700591 zzzaik21@gmail.com
 
