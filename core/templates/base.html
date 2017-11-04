@@ -4,19 +4,20 @@
 <head>
 	<link rel="icon" href="{% static '/' %}img/icone.ico" type="image/x-icon" />
 	<link rel = "stylesheet" href = "{% static '/' %}css/site.css"/>
-	<link rel = "stylesheet" href = {% block estiloUnico %}{% endblock %}/>
+	<script src = "{% static '/' %}js/script.js"/></script>
 	<meta charset = "UTF-8"/>
 	<meta name = "viewport" content = "width = device-width, initial-scale = 1.0"/>
 	<title>{% block title %}{% endblock %}</title>
 </head>
-<body class = "corpo">
+<body class = "corpo" onload="chkView()">
 	<header>
 		<nav class = "menu">
 			<a class = "link" href = "/" title = "Logo Faculdade Impacta">
-			<img class = "img_logo" src = "{% static '/' %}img/logo-novo.png" alt = "Logo e link para a home"/></a>
-			<div class = "menuhidden" >
+				<img class = "img_logo" src = "{% static '/' %}img/logo-novo.png" alt = "Logo e link para a home"/>
+			</a>
+			<div class = "menuhidden" onClick="dropMenu()">
 				<img src = "{% static '/' %}img/menu-icon-8.png" class="menuIcon"/>
-				<ul class = "dropmenu">
+				<ul class = "dropmenu" id="dropmenu">
 					<li><a class = "link" href = "lista_curso.html" >Lista de Cursos</a></li>
 					<li><a class = "link" href = "detalhe_curso.html" >Detalhe de Curso</a/></li>
 					<li><a class = "link" href = "disciplina.html" >Disciplina</a></li>
