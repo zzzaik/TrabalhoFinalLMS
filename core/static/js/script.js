@@ -1,5 +1,10 @@
-function dropMenu(){
-    document.getElementById("dropmenu").classList.toggle("show");
+function dropMenu(id){
+    if (id == 'dropmenu'){
+        document.getElementById(id).classList.toggle("show");
+    } else if(id == 'loginForm'){
+        document.getElementById(id).classList.toggle("showF");
+    }
+    
 }
 
 function chkView(){
