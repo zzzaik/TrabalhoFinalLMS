@@ -1,11 +1,16 @@
 function dropMenu(id){
-    if (id == 'dropmenu'){
-        document.getElementById(id).classList.toggle("show");
-    } else if(id == 'loginForm'){
-        document.getElementById(id).classList.toggle("showF");
-    }
-    
+    document.getElementById(id).classList.toggle("show");
 }
+
+function dropLogin(id){
+    document.getElementById(id).style.display='block';
+}
+function liftLogin(id){
+    document.getElementById(id).style.display='none';
+}
+
+
+
 
 function chkView(){
     width=document.documentElement.clientWidth;

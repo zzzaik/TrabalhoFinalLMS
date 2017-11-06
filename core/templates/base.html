@@ -16,9 +16,9 @@
 				<img class = "img_logo" src = "{% static '/' %}img/logo-novo.png" alt = "Logo e link para a home"/>
 			</a>
 			<div class = "userLogin">
-				<img class = "userIcon" src="{% static '/' %}img/userIcon.jpg" onClick="dropMenu('loginForm')"/>
-				<div class="loginForm" id="loginForm">
-				<form method="POST" class="loginForm">
+				<img class = "userIcon" src="{% static '/' %}img/userIcon.jpg" onclick="dropLogin('loginFrame')" ondblclick="liftLogin('loginFrame')"/>
+				<div class="loginFrame" id="loginFrame">
+				<form method="POST" class="loginForm" id="loginForm">
 					<div class="inputGroup">
 						<label for:"ra">RA: </label>
 						<input name="ra" id="ra" class="inputField"required/>
@@ -31,7 +31,7 @@
 				</form>
 				</div>
 			</div>
-			<div class = "menuhidden" onClick="dropMenu('dropmenu')">
+			<div class = "menuhidden" onclick="dropMenu('dropmenu')">
 				<img src = "{% static '/' %}img/menu-icon-8.png" class="menuIcon"/>
 				<ul class = "dropmenu" id="dropmenu">
 					<li><a class = "link" href = "lista_curso.html" >Lista de Cursos</a></li>
