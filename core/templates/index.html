@@ -4,31 +4,7 @@
 
 {% block estilo_unico %}{% static '/' %}css/home.css{% endblock %}
 
-{% block login %}
-	{% if logado == False %}
-		Sign In
-	{% else %}
-		Logged
-	{% endif %}
-{% endblock %}
-
-{% block login_btn %}
-	{% if logado == False %}
-		Sign In
-	{% else %}
-		Your Picture
-	{% endif %}
-{% endblock %}
-
 {% block script_unico %}{% endblock %}
-
-{% block img_user %}
-	{% if logado == False %}  
-		{% static '/' %}img/img_user.png
-	{% else %}
-		{% static '/' %}img/img_user.png <!--Foto do usuário-->
-	{% endif %}
-{% endblock %}
 
 {% block title %}Faculdade Impacta - Home{% endblock %}
 

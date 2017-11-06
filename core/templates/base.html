@@ -1,29 +1,32 @@
 {% load static %}
 <!DOCTYPE html>
-<html lang = "pt-BR">
+<html lang="pt-BR">
 <head>
-	<meta charset = "UTF-8" />
-	<meta name = "viewport" content = "width = device-width, initial-scale = 1.0" />
-	<link rel = "icon" href = "{% static '/' %}img/icone.ico" type = "image/x-icon" />
-	<link rel = "stylesheet" href = "{% static '/' %}css/site.css" />
-	<link rel = "stylesheet" href = '{% block estilo_unico %}{% endblock %}'/>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width = device-width, initial-scale = 1.0" />
+	<link rel="icon" href="{% static '/' %}img/icone.ico" type="image/x-icon" />
+	<link rel="stylesheet" href="{% static '/' %}css/site.css" />
+	<link rel="stylesheet" href='{% block estilo_unico %}{% endblock %}' />
 	<script src="{% static '/' %}src/site.js"></script>
 	<script src="{% block script_unico %}{% endblock %}"></script>
 	<title>{% block title %}{% endblock %}</title>
 </head>
 <body>
-<header>
-	<nav class = "menu">
-		<a class = "logo" href = "/" title = "Logo Faculdade Impacta">
-			<img class="img_logo" src="{% static '/' %}img/logo-novo.png" alt="Logo e link para a home" />
-		</a>
-		<div>
-			<div class = "drop_login">
-				<button class = "user" onclick = "login_function()" title = "{% block login %}{% endblock %}">
-						<img class = "img_user" src = "{% block img_user %}{% endblock %}" alt = "{% block login_btn %}{% endblock %}"/>
-				</button>
-				<div id = "drop_login" class = "conteudo_login">
-					{% if logado == False %}
+	<header>
+		<nav class="menu">
+			<a class="logo" href="/" title="Logo Faculdade Impacta">
+				<img class="img_logo" src="{% static '/' %}img/logo-novo.png" alt="Logo e link para a home" />
+			</a>
+			<div>
+				<div class="drop_login">
+					<button class="user" onclick="login_function()" title="{% if logado == False %}Sign In{% else %}
+					Logged{% endif %}">
+						<img class="img_user" src="{% if logado == False %}{% static '/' %}img/img_user.png
+								{% else %}{% static '/' %}img/img_user.png{% endif %}" alt="{% if logado == False %}
+								Sign In{% else %}Your Picture{% endif %}" />
+					</button>
+					<div id="drop_login" class="conteudo_login">
+						{% if logado == False %}
 						<form class="flexForm" method="POST">
 							{% csrf_token %}
 							<label for="ra">RA: </label>
@@ -31,57 +34,58 @@
 							<label for="senha" required>Senha: </label>
 							<input id="senha" class="informs" name="senha" type="password" required/>
 							<button type="submit">Enviar</button>
-							<a class="formLogin" href="#">Esqueci a senha.</a>
+							<a class="formLogin" href="#Esqueci_a_senha">Esqueci a senha.</a>
 						</form>
-					{% else %}
-					<nav>
+						{% else %}
+						<nav>
 							{% if tipo_user == 'aluno' %}
-							<a href = '#Aluno'>Área do aluno</a>
+							<a href='#Aluno'>Área do aluno</a>
 							{% elif tipo_user == 'professor' %}
-							<a href = '#Professor'>Área do professor</a>
+							<a href='#Professor'>Área do professor</a>
 							{% endif %}
 						</nav>
-					{% endif %}
+						{% endif %}
+					</div>
+					<div class="drop_menu" title="Menu">
+						<button onclick="menu_function()" class="dropbtn">
+							<img src="{% static '/' %}img/menu_icons_bars.png" class="menu_icon" />
+						</button>
+						<div id="drop" class="conteudo_menu">
+							<a class="link" href="cursos.html" title="Cursos">Cursos</a>
+							<a class="link" href="noticias.html" title="Notícias">Notícias</a>
+						</div>
+					</div>
 				</div>
-			<div class = "drop_menu" title = "Menu">
-				<button onclick = "menu_function()" class = "dropbtn">
-					<img src = "{% static '/' %}img/menu_icons_bars.png" class = "menu_icon" />
-				</button>
-				<div id = "drop" class = "conteudo_menu">
-					<a class = "link" href = "cursos.html" title = "Cursos">Cursos</a>
-					<a class = "link" href = "noticias.html" title = "Notícias">Notícias</a>
-				</div>
-			</div>
-		</div>
-	</nav>
-</header>
-<main>
-	{% block main %}{% endblock %}
-</main>
-<footer>
-	<div class = "sigaImpacta">
-		<h3 class = "sigaImpacta">SIGA A IMPACTA</h3>
-		<nav class = "siga">
-			<a class = "redes_impacta" href = "https://twitter.com/facimpacta" target = "Blank" title = "twitter">
-				<img src = "{% static '/' %}img/twitter.png" alt = "Twitter Faculdade Impacta" />
-			</a>
-			<a class = "redes_impacta" href = "https://www.youtube.com/user/GrupoImpacta" target = "Blank" title = "youtube">
-				<img src = "{% static '/' %}img/youtube.png" alt = "Youtube Faculdade Impacta" />
-			</a>
-			<a class = "redes_impacta" href = "https://www.facebook.com/FacImpacta/" target = "Blank" title = "facebook">
-				<img src = "{% static '/' %}img/facebook.png" alt = "Facebook Faculdade Impacta" />
-			</a>
-			<a class = "redes_impacta" href = "https://www.instagram.com/facimpacta/" target = "Blank" title = "instagram">
-				<img src = "{% static '/' %}img/instagram.png" alt = "Instagram Faculdade Impacta" />
-			</a>
-			<a class = "redes_impacta" href = "https://www.linkedin.com/edu/faculdade-impacta-tecnologia-161006" target = "Blank" title = "linkedin">
-				<img src = "{% static '/' %}img/linkedin.png" alt = "Linkedin Faculdade Impacta" />
-			</a>
 		</nav>
-	</div>
-	<div class = "copyright">
-		<h4>© Grupo Draco 2017. Todos os direitos reservados. Política de privacidade<h4>
-	</div>
-</footer>
+	</header>
+	<main>
+		{% block main %}{% endblock %}
+	</main>
+	<footer>
+		<div class="sigaImpacta">
+			<h3 class="sigaImpacta">SIGA A IMPACTA</h3>
+			<nav class="siga">
+				<a class="redes_impacta" href="https://twitter.com/facimpacta" target="Blank" title="twitter">
+					<img src="{% static '/' %}img/twitter.png" alt="Twitter Faculdade Impacta" />
+				</a>
+				<a class="redes_impacta" href="https://www.youtube.com/user/GrupoImpacta" target="Blank" title="youtube">
+					<img src="{% static '/' %}img/youtube.png" alt="Youtube Faculdade Impacta" />
+				</a>
+				<a class="redes_impacta" href="https://www.facebook.com/FacImpacta/" target="Blank" title="facebook">
+					<img src="{% static '/' %}img/facebook.png" alt="Facebook Faculdade Impacta" />
+				</a>
+				<a class="redes_impacta" href="https://www.instagram.com/facimpacta/" target="Blank" title="instagram">
+					<img src="{% static '/' %}img/instagram.png" alt="Instagram Faculdade Impacta" />
+				</a>
+				<a class="redes_impacta" href="https://www.linkedin.com/edu/faculdade-impacta-tecnologia-161006" target="Blank" title="linkedin">
+					<img src="{% static '/' %}img/linkedin.png" alt="Linkedin Faculdade Impacta" />
+				</a>
+			</nav>
+		</div>
+		<div class="copyright">
+			<h4>© Grupo Draco 2017. Todos os direitos reservados. Política de privacidade
+				<h4>
+		</div>
+	</footer>
 </body>
 </html>

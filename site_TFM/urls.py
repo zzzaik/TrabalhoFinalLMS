@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.conf.urls import url
 from django.contrib import admin
-from core.views import *
+from core.views import index, cursos, detalhe_curso, disciplina, noticias, recuperar_senha
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
@@ -23,5 +23,6 @@ urlpatterns = [
     url(r'^cursos', cursos),
     url(r'^detalhe_curso', detalhe_curso),
     url(r'^disciplina', disciplina),
-    url(r'^noticias', noticias)
+    url(r'^noticias', noticias),
+    url(r'^recuperar_senha', recuperar_senha)
 ]

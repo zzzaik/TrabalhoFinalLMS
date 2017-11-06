@@ -1,0 +1,45 @@
+* {
+	box-sizing: border-box;
+}
+.section {
+	display: grid;
+	grid-template: 10% 1fr / 1fr ;
+}
+.cursos {
+	display: grid;
+	gird-row-start: 2;
+	display: flex;
+	justify-content: center;
+	flex-wrap: wrap;
+}
+.t1{
+	display: grid;
+	grid-row-start: 1;
+	color:purple;	
+	text-align: center;
+}
+.it{
+	font-family:italic;
+	width: 60%;
+}
+
+.margin {
+	margin: 1em;
+	margin-top: 3.53em;
+	margin-bottom: 3em;
+}
+button.it{
+	padding: 5px 15px;
+	margin-bottom: 0.3em;
+    border-radius: 7px;
+    border-color: #0055cc #0055cc #003580;
+    background-image: -webkit-linear-gradient(top, #0088cc, #0055cc);
+    background-color: #0074cc;
+    color: #ffffff;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+}
+@media only screen and (min-width: 320px) and (max-width: 762px) {
+	.it{
+	width: 70%;
+}
+}
