@@ -75,15 +75,32 @@ WSGI_APPLICATION = 'site_TFM.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
 
+#DATABASES = {
+#    'default': {
+#        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#        'NAME': 'DB_LMS',
+#        'USER': 'postgres',
+#        'PASSWORD': 'LMS_GP_Draco',
+#        'HOST': 'localhost',
+#        'PORT': '8000'
+#    }
+#}
+
+#Instalar Driver ODBC para Django com MSSQL Server
+#pip install django-pyodbc
+#
+
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'DB_LMS',
-        'USER': 'postgres',
-        'PASSWORD': 'LMS_GP_Draco',
-        'HOST': 'localhost',
-        'PORT': '8000'
-    }
+   'default': {
+       'ENGINE': "django_pyodbc",
+       'HOST': "127.0.0.1,1433",
+       'USER': "sa",
+       'PASSWORD': "LMS_GP_Draco",
+       'NAME': "DB_LMS",
+       'OPTIONS': {
+           'host_is_server': True
+       },
+   }
 }
 
 
