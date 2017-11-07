@@ -21,15 +21,20 @@ function login_function() {
 }
 
 window.onclick = function(event) {
-if (!event.target.matches('.user')) {
+  if (!event.target.matches('.user')) {
 
-  var dropdowns = document.getElementsByClassName("contudo");
-  var i;
-  for (i = 0; i < dropdowns.length; i++) {
-    var openDropdown = dropdowns[i];
-    if (openDropdown.classList.contains('show')) {
-      openDropdown.classList.remove('show');
+    var dropdowns = document.getElementsByClassName("contudo");
+    var i;
+    for (i = 0; i < dropdowns.length; i++) {
+      var openDropdown = dropdowns[i];
+      if (openDropdown.classList.contains('show')) {
+        openDropdown.classList.remove('show');
+      }
     }
   }
 }
+
+function error_message() {
+  alert('{{ form.error }}')  
 }
+

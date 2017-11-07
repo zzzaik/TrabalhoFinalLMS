@@ -7,19 +7,30 @@ from core.models import AuthUser
 def index(request):
     sessao = False
     if request.POST:
-        form = LoginForm(request.POST['ra'], request.POST['senha'])
-        login = form.logar()
-        user = AuthUser.objects.filter('username' == login[1])
-        if login[0] == 0:
-            sessao = False
-            prim_login = False
-            tipo_user = False
-        elif login[0] == 1:
+        form = LoginForm(request.POST)
+        if form.is_valid():
+            login = form.logar()
+            ''' Código view login ainda incompleto
+            user = AuthUser.objects.all()
+            for username in user:
+                for quebra in username:
+                    if quebra == ',':
+                        username.index()
+
+                print(dados_user)
+                if user == login['ra']:
+                    pass
+                else:
+                    pass
             sessao == True
             prim_login = user['first_login']
             tipo_user = user['user_type']
+            '''
+            sessao = True
+            prim_login = True
+            tipo_user = 'Professor'
     else:
-        form = LoginForm('000000', '000000')
+        form = LoginForm()
         sessao = False
         prim_login = False
         tipo_user = False
@@ -36,19 +47,31 @@ def cursos(request):
     if request.POST:
         form = LoginForm(request.POST)
         if form.is_valid():
-            login = form.Logar()
-            user = AuthUser.objects.filter('username' == login[1])
-            if login[0] == 0:
-                sessao = False
-                prim_login = False
-                tipo_user = False
-            elif login[0] == 1:
-                sessao == True
-                prim_login = user['first_login']
-                tipo_user = user['user_type']
+            login = form.logar()
+            ''' Código view login ainda incompleto
+            user = AuthUser.objects.all()
+            for username in user:
+                for quebra in username:
+                    if quebra == ',':
+                        username.index()
+
+                print(dados_user)
+                if user == login['ra']:
+                    pass
+                else:
+                    pass
+            sessao == True
+            prim_login = user['first_login']
+            tipo_user = user['user_type']
+            '''
+            sessao = True
+            prim_login = True
+            tipo_user = 'Professor'
     else:
         form = LoginForm()
         sessao = False
+        prim_login = False
+        tipo_user = False
     context = {
         'tipo_user': tipo_user,
         'logado': sessao,
@@ -62,19 +85,31 @@ def detalhe_curso(request):
     if request.POST:
         form = LoginForm(request.POST)
         if form.is_valid():
-            login = form.Logar()
-            user = AuthUser.objects.filter('username' == login[1])
-            if login[0] == 0:
-                sessao = False
-                prim_login = False
-                tipo_user = False
-            elif login[0] == 1:
-                sessao == True
-                prim_login = user['first_login']
-                tipo_user = user['user_type']
+            login = form.logar()
+            ''' Código view login ainda incompleto
+            user = AuthUser.objects.all()
+            for username in user:
+                for quebra in username:
+                    if quebra == ',':
+                        username.index()
+
+                print(dados_user)
+                if user == login['ra']:
+                    pass
+                else:
+                    pass
+            sessao == True
+            prim_login = user['first_login']
+            tipo_user = user['user_type']
+            '''
+            sessao = True
+            prim_login = True
+            tipo_user = 'Professor'
     else:
         form = LoginForm()
         sessao = False
+        prim_login = False
+        tipo_user = False
     context = {
         'tipo_user': tipo_user,
         'logado': sessao,
@@ -88,19 +123,31 @@ def disciplina(request):
     if request.POST:
         form = LoginForm(request.POST)
         if form.is_valid():
-            login = form.Logar()
-            user = AuthUser.objects.filter('username' == login[1])
-            if login[0] == 0:
-                sessao = False
-                prim_login = False
-                tipo_user = False
-            elif login[0] == 1:
-                sessao == True
-                prim_login = user['first_login']
-                tipo_user = user['user_type']
+            login = form.logar()
+            ''' Código view login ainda incompleto
+            user = AuthUser.objects.all()
+            for username in user:
+                for quebra in username:
+                    if quebra == ',':
+                        username.index()
+
+                print(dados_user)
+                if user == login['ra']:
+                    pass
+                else:
+                    pass
+            sessao == True
+            prim_login = user['first_login']
+            tipo_user = user['user_type']
+            '''
+            sessao = True
+            prim_login = True
+            tipo_user = 'Professor'
     else:
         form = LoginForm()
         sessao = False
+        prim_login = False
+        tipo_user = False
     context = {
         'tipo_user': tipo_user,
         'logado': sessao,
@@ -114,19 +161,31 @@ def noticias(request):
     if request.POST:
         form = LoginForm(request.POST)
         if form.is_valid():
-            login = form.Logar()
-            user = AuthUser.objects.filter('username' == login[1])
-            if login[0] == 0:
-                sessao = False
-                prim_login = False
-                tipo_user = False
-            elif login[0] == 1:
-                sessao == True
-                prim_login = user['first_login']
-                tipo_user = user['user_type']
+            login = form.logar()
+            ''' Código view login ainda incompleto
+            user = AuthUser.objects.all()
+            for username in user:
+                for quebra in username:
+                    if quebra == ',':
+                        username.index()
+
+                print(dados_user)
+                if user == login['ra']:
+                    pass
+                else:
+                    pass
+            sessao == True
+            prim_login = user['first_login']
+            tipo_user = user['user_type']
+            '''
+            sessao = True
+            prim_login = True
+            tipo_user = 'Professor'
     else:
         form = LoginForm()
         sessao = False
+        prim_login = False
+        tipo_user = False
     context = {
         'tipo_user': tipo_user,
         'logado': sessao,
