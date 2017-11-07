@@ -39,7 +39,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'core',
     'criar_aluno',
-    'messages'
 
 ]
 
@@ -102,10 +101,10 @@ DATABASES = {
     #},
 
 
-    'default': { # Banco de testes sqlite 
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
+    #'default': { # Banco de testes sqlite 
+    #    'ENGINE': 'django.db.backends.sqlite3',
+    #    'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    #}
 }
 
 '''passos e comandos inatall mssql-azure
