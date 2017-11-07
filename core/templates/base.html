@@ -29,17 +29,11 @@
 						{% if logado == False %}
 						<form class="flexForm" method="POST">
 							{% csrf_token %}
-<<<<<<< HEAD
-							RA: <input id="ra" class="informs" name="ra" required/>
-							Senha: <input id="senha" class="informs" name="senha" type="password" required/>
-							<button id='btn_submit' onclick='error_messege()' type="submit">Enviar</button>
-=======
 							<label for="ra">RA: </label>
 							<input id="ra" class="informs" name="ra" required/>
 							<label for="senha" required>Senha: </label>
 							<input id="senha" class="informs" name="senha" type="password" required/>
 							<button type="submit">Enviar</button>
->>>>>>> origin/master
 							<a class="formLogin" href="#Esqueci_a_senha">Esqueci a senha.</a>
 						</form>
 						{% else %}
