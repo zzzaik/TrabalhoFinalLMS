@@ -78,27 +78,68 @@ WSGI_APPLICATION = 'site_TFM.wsgi.application'
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
 
 DATABASES = {
-    #'default': { # Banco no postgreSQL
-    #    'ENGINE': 'django.db.backends.postgresql_psycopg2',
-    #    'NAME': 'DB_LMS',
-    #    'USER': 'postgres',
-    #    'PASSWORD': 'LMS_GP_Draco',
-    #    'HOST': 'localhost',
-    #    'PORT': '8000'
-    #},
+    'default': { # Banco no postgreSQL
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+       'NAME': 'DB_LMS',
+        'USER': 'postgres',
+        'PASSWORD': 'LMS_GP_Draco',
+        'HOST': 'localhost',
+        'PORT': '8000'
+    },
+
+    ## Config Ainda incompleta ##
     #'default': { # Banco no MSSQL
     #    'ENGINE': "sqlserver_ado",
-    #    'HOST': "127.0.0.1,1433",
-    #    'USER': "sa",
-    #    'PASSWORD': "LMS_GP_Draco",
+    #    'HOST': "draco-server.database.windows.net",
+    #    'USER': "lms_draco_admin",
+    #    'PASSWORD': "Dr@c0_gr0up",
     #    'NAME': "DB_LMS_MSSQL",
+    #    'PORT': '1433',
+    #    'OPTIONS':{
+    #       'host_is_server': True,
+    #       'driver': 'FreeTDS'       
+    #     }
     #},
+
+
     'default': { # Banco de testes sqlite 
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
 
+'''passos e comandos inatall mssql-azure
+1 - ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+2 - brew install unixodbc
+    brew install freetds --with-unixodbc
+3 - open /usr/local/etc/odbcinst.ini
+4 - Copy this and paste it in odbcinst.ini.
+        [FreeTDS]
+        Description = TD Driver (MSSQL)
+        Driver = /usr/local/lib/libtdsodbc.so
+        Setup = /usr/local/lib/libtdsodbc.so
+        FileUsage = 1
+5 - sudo pip install django-pyodbc-azure
+6 - git clone https://github.com/Azure/azure-sql-database-samples.git
+7 - cd into the azure-sql-database-samples/Django/Django-pyodbc-azure folder
+8 - python setup.py servername datbasename username password
+9 - DATABASES = {
+        'default': {
+        'ENGINE': 'sql_server.pyodbc',
+        'NAME': databasename',
+        'USER': ‘username@servername',
+        'PASSWORD': ‘password',
+        'HOST': ‘servername.database.windows.net',
+        'PORT': '1433',
+        'OPTIONS': {
+            'host_is_server': True,
+            'driver': 'FreeTDS'
+                },
+        },
+    }
+10 - python manage.py migrate
+11 - python manage.py runserver
+'''
 
 # Password validation
 # https://docs.djangoproject.com/en/1.11/ref/settings/#auth-password-validators
