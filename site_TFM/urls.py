@@ -15,12 +15,8 @@ Including another URLconf
 """
 from django.conf.urls import url
 from django.contrib import admin
-<<<<<<< HEAD
 from core.views import index, cursos, detalhe_curso, disciplina, noticias, recuperar_senha
-=======
-from core.views import index, lista_curso, detalhe_curso, disciplina, noticia
 from messages.views import mensagem
->>>>>>> origin/master
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
@@ -28,11 +24,7 @@ urlpatterns = [
     url(r'^cursos', cursos),
     url(r'^detalhe_curso', detalhe_curso),
     url(r'^disciplina', disciplina),
-<<<<<<< HEAD
     url(r'^noticias', noticias),
-    url(r'^recuperar_senha', recuperar_senha)
-=======
-    url(r'^noticia', noticia),
+    url(r'^recuperar_senha', recuperar_senha),
     url(r'^mensagem', mensagem)
->>>>>>> origin/master
 ]
