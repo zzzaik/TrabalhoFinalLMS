@@ -37,7 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'core'
+    'core',
+    'criar_aluno'
 ]
 
 MIDDLEWARE = [
@@ -75,7 +76,22 @@ WSGI_APPLICATION = 'site_TFM.wsgi.application'
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
 
 DATABASES = {
-    'default': {
+    #'default': { # Banco no postgreSQL
+    #    'ENGINE': 'django.db.backends.postgresql_psycopg2',
+    #    'NAME': 'DB_LMS',
+    #    'USER': 'postgres',
+    #    'PASSWORD': 'LMS_GP_Draco',
+    #    'HOST': 'localhost',
+    #    'PORT': '8000'
+    #},
+    #'default': { # Banco no MSSQL
+    #    'ENGINE': "sqlserver_ado",
+    #    'HOST': "127.0.0.1,1433",
+    #    'USER': "sa",
+    #    'PASSWORD': "LMS_GP_Draco",
+    #    'NAME': "DB_LMS_MSSQL",
+    #},
+    'default': { # Banco de testes sqlite 
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }

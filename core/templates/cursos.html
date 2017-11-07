@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block estilo_unico %}{% static '/' %}css/cursos.css{% endblock %}
+
+{% block script_unico %}{% endblock %}
+
+{% block login %}{% endblock %}
+
+{% block img_user %}{% endblock %}
+
+{% block title %}Faculdade Impacta - Home{% endblock %}
+
+{% block main %}
+	<section class = "section margin">
+		<h1 class= "t1 ">Cursos</h1>
+ 		<nav class = "cursos">
+				<button class="it"> Análise e Desenvolvimento de Sistemas </button>
+				<button class="it"> Administração </button>
+				<button class="it"> Banco de Dados </button>
+				<button class="it"> Gestão de Tecnologia da Informação </button>
+				<button class="it"> Jogos Digitais </button>
+				<button class="it"> Processos gerenciais </button>
+				<button class="it"> Produção multimídia </button>
+				<button class="it"> Redes de Computadores </button>
+				<button class="it"> Sistemas de Informação </button>
+		</nav>
+	</section>
+{% endblock %}
