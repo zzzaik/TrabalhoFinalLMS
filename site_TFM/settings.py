@@ -38,7 +38,11 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'core',
+<<<<<<< HEAD
     'criar_aluno'
+=======
+    'messages'
+>>>>>>> origin/master
 ]
 
 MIDDLEWARE = [

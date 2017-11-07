@@ -12,4 +12,4 @@ João Carlos 1601603 joao.carlos_25@hotmail.com
 
 Luka Gabriel 1700706 luka.gcs@gmail.com
 
-Ivo Dantana 1700756 ivos4santana@gmail.com
+Ivo Santana 1700756 ivos4santana@gmail.com

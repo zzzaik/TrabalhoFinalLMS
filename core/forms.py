@@ -8,3 +8,4 @@ class LoginForm(forms.Form):
     def logar(self):
         retorno = {'ra': self.cleaned_data['ra'], 'senha': self.cleaned_data['senha']}
         return retorno
+
