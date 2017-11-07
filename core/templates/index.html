@@ -1,19 +1,13 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block estiloUnico %}{% static '/' %}css/home.css{% endblock %}
-
 {% block title %}Faculdade Impacta - Home{% endblock %}
 
 {% block main %}
 	<section>
 		<div class = "Banner">
 			<img class = "Banner img_banner" src = "{% static '/' %}img/Propaganda-vestibular.png"
-			alt = "propaganda do vestibular 2018" />
-		</div>
-		<div class = "BannerCell">
-			<img class = "BannerCell" src = "{% static '/' %}img/BannerCell.png"
-			alt = "propaganda do vestibular 2018 mobile" />
+			alt = "propaganda do vestibular 2018" id = "bannerIndex"/>
 		</div>
 		<article class = "sobre">
 			<h1 class = "sobre">Sobre</h1>

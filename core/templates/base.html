@@ -1,58 +1,90 @@
 {% load static %}
 <!DOCTYPE html>
-<html lang = "pt-BR">
+<html lang="pt-BR">
 <head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width = device-width, initial-scale = 1.0" />
 	<link rel="icon" href="{% static '/' %}img/icone.ico" type="image/x-icon" />
-	<link rel = "stylesheet" href = "{% static '/' %}css/site.css"/>
-	<link rel = "stylesheet" href = {% block estiloUnico %}{% endblock %}/>
-	<meta charset = "UTF-8"/>
-	<meta name = "viewport" content = "width = device-width, initial-scale = 1.0"/>
+	<link rel="stylesheet" href="{% static '/' %}css/site.css" />
+	<link rel="stylesheet" href='{% block estilo_unico %}{% endblock %}' />
+	<script src="{% static '/' %}src/site.js"></script>
+	<script src="{% block script_unico %}{% endblock %}"></script>
 	<title>{% block title %}{% endblock %}</title>
 </head>
-<body class = "corpo">
+<body>
 	<header>
-		<nav class = "menu">
-			<a class = "link" href = "/" title = "Logo Faculdade Impacta">
-			<img class = "img_logo" src = "{% static '/' %}img/logo-novo.png" alt = "Logo e link para a home"/></a>
-			<div class = "menuhidden" >
-				<img src = "{% static '/' %}img/menu-icon-8.png" class="menuIcon"/>
-				<ul class = "dropmenu">
-					<li><a class = "link" href = "lista_curso.html" >Lista de Cursos</a></li>
-					<li><a class = "link" href = "detalhe_curso.html" >Detalhe de Curso</a/></li>
-					<li><a class = "link" href = "disciplina.html" >Disciplina</a></li>
-					<li><a class = "link" href = "noticia.html" >Notícias</a></li>
-				</ul>
-			</div>
+		<nav class="menu">
+			<a class="logo" href="/" title="Logo Faculdade Impacta">
+				<img class="img_logo" src="{% static '/' %}img/logo-novo.png" alt="Logo e link para a home" />
+			</a>
+			<div>
+				<div class="drop_login">
+					<button class="user" onclick="login_function()" title="{% if logado == False %}Sign In{% else %}
+					Logged{% endif %}">
+						<img class="img_user" src="{% if logado == False %}{% static '/' %}img/img_user.png
+								{% else %}{% static '/' %}img/img_user.png{% endif %}" alt="{% if logado == False %}
+								Sign In{% else %}Your Picture{% endif %}" />
+					</button>
+					<div id="drop_login" class="conteudo_login">
+						{% if logado == False %}
+						<form class="flexForm" method="POST">
+							{% csrf_token %}
+							<label for="ra">RA: </label>
+							<input id="ra" class="informs" name="ra" required/>
+							<label for="senha" required>Senha: </label>
+							<input id="senha" class="informs" name="senha" type="password" required/>
+							<button type="submit">Enviar</button>
+							<a class="formLogin" href="#Esqueci_a_senha">Esqueci a senha.</a>
+						</form>
+						{% else %}
+						<nav>
+							{% if tipo_user == 'aluno' %}
+							<a href='#Aluno'>Área do aluno</a>
+							{% elif tipo_user == 'professor' %}
+							<a href='#Professor'>Área do professor</a>
+							{% endif %}
+						</nav>
+						{% endif %}
+					</div>
+					<div class="drop_menu" title="Menu">
+						<button onclick="menu_function()" class="dropbtn">
+							<img src="{% static '/' %}img/menu_icons_bars.png" class="menu_icon" />
+						</button>
+						<div id="drop" class="conteudo_menu">
+							<a class="link" href="cursos.html" title="Cursos">Cursos</a>
+							<a class="link" href="noticias.html" title="Notícias">Notícias</a>
+						</div>
+					</div>
+				</div>
 		</nav>
 	</header>
-   <main>
-      {% block main %}
-
-      {% endblock %}
-   </main>
+	<main>
+		{% block main %}{% endblock %}
+	</main>
 	<footer>
-		<div class = "sigaImpacta">
-			<h3 class = "sigaImpacta">SIGA A IMPACTA</h3>
-			<nav class = "siga" >
-				<a class = "link" href = "https://twitter.com/facimpacta" 
-				target = "Blank" title = "twitter"><img src = "{% static '/' %}img/twitter.png"
-				alt = "link para pagina da impacta no twitter" /></a>	
-				<a class = "link" href = "https://www.youtube.com/user/GrupoImpacta" 
-				target = "Blank" title = "youtube"><img src = "{% static '/' %}img/youtube.png"
-				alt = "link para pagina da impacta no youtube"/></a>
-				<a class = "link" href = "https://www.facebook.com/FacImpacta/" 
-				target = "Blank" title = "facebook"><img src = "{% static '/' %}img/facebook.png"
-				alt = "link para pagina da impacta no facebook"/></a>
-				<a class = "link" href = "https://www.instagram.com/facimpacta/" 
-				target = "Blank" title = "instagram"><img src = "{% static '/' %}img/instagram.png"
-				alt = "link para pagina da impacta no instagram"/></a>
-				<a class = "link" href = "https://www.linkedin.com/edu/faculdade-impacta-tecnologia-161006" 
-				target = "Blank" title = "linkedin"><img src = "{% static '/' %}img/linkedin.png"
-				alt = "link para pagina da impacta no linkedin"/></a>
+		<div class="sigaImpacta">
+			<h3 class="sigaImpacta">SIGA A IMPACTA</h3>
+			<nav class="siga">
+				<a class="redes_impacta" href="https://twitter.com/facimpacta" target="Blank" title="twitter">
+					<img src="{% static '/' %}img/twitter.png" alt="Twitter Faculdade Impacta" />
+				</a>
+				<a class="redes_impacta" href="https://www.youtube.com/user/GrupoImpacta" target="Blank" title="youtube">
+					<img src="{% static '/' %}img/youtube.png" alt="Youtube Faculdade Impacta" />
+				</a>
+				<a class="redes_impacta" href="https://www.facebook.com/FacImpacta/" target="Blank" title="facebook">
+					<img src="{% static '/' %}img/facebook.png" alt="Facebook Faculdade Impacta" />
+				</a>
+				<a class="redes_impacta" href="https://www.instagram.com/facimpacta/" target="Blank" title="instagram">
+					<img src="{% static '/' %}img/instagram.png" alt="Instagram Faculdade Impacta" />
+				</a>
+				<a class="redes_impacta" href="https://www.linkedin.com/edu/faculdade-impacta-tecnologia-161006" target="Blank" title="linkedin">
+					<img src="{% static '/' %}img/linkedin.png" alt="Linkedin Faculdade Impacta" />
+				</a>
 			</nav>
 		</div>
-		<div class = "copyright">
-			<h4>© Grupo Draco 2017. Todos os direitos reservados. Política de privacidade<h4>
+		<div class="copyright">
+			<h4>© Grupo Draco 2017. Todos os direitos reservados. Política de privacidade
+				<h4>
 		</div>
 	</footer>
 </body>
