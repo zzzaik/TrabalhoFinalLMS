@@ -17,46 +17,42 @@
 			<a href="/" title="Logo Faculdade Impacta">
 				<img class="img_logo" src="{% static '/' %}img/logo-novo.png" alt="Logo e link para a home" />
 			</a>
-			<div>
-				<div class="drop_login">
-					<button class="user" onclick="login_function()" title="{% if logado == False %}Sign In{% else %}
-					Logged{% endif %}">
-						<img class="img_user" src="{% if logado == False %}{% static '/' %}img/img_user.png
-								{% else %}{% static '/' %}img/img_user.png{% endif %}" alt="{% if logado == False %}
-								Sign In{% else %}Your Picture{% endif %}" />
-					</button>
-					<div id="drop_login" class="conteudo_login">
-						{% if logado == False %}
-						<form class="flexForm" method="POST">
-							{% csrf_token %}
-							<label for="ra">RA: </label>
-							<input id="ra" class="informs" name="ra" required/>
-							<label for="senha" required>Senha: </label>
-							<input id="senha" class="informs" name="senha" type="password" required/>
-							<button type="submit">Enviar</button>
-							<a class="formLogin" href="#Esqueci_a_senha">Esqueci a senha.</a>
-						</form>
-						{% else %}
-						<nav>
-							{% if tipo_user == 'aluno' %}
-							<a href='#Aluno'>Área do aluno</a>
-							{% elif tipo_user == 'professor' %}
-							<a href='#Professor'>Área do professor</a>
-							{% endif %}
-						</nav>
-						{% endif %}
-					</div>
-					<div class="drop_menu" title="Menu">
-						<button onclick="menu_function()" class="dropbtn">
-							<img src="{% static '/' %}img/menu_icons_bars.png" class="menu_icon" />
-						</button>
-						<div id="drop" class="conteudo_menu">
-							<a class="link" href="cursos.html" title="Cursos">Cursos</a>
-							<a class="link" href="noticias.html" title="Notícias">Notícias</a>
-						</div>
-					</div>
-				</div>
+			<div class="linkBtn"><a class="link" href="cursos.html" title="Cursos">Cursos</a></div>
+			<div class="linkBtn"><a class="link" href="noticias.html" title="Notícias">Notícias</a></div>
+			<div class="drop_login">
+				<button class="user" onclick="login_function()" title="{% if logado == False %}Sign In{% else %}
+						Logged{% endif %}">
+					<img class="img_user" src="{% if logado == False %}{% static '/' %}img/img_user.png
+						{% else %}{% static '/' %}img/img_user.png{% endif %}" alt="{% if logado == False %}
+						Sign In{% else %}Your Picture{% endif %}" />
+				</button>
+			</div>
 		</nav>
+		<div id="drop_login" class="conteudo_login">
+			
+				<form class="flexForm" method="POST">
+					{% csrf_token %}
+					<div class="inputGroup">
+						<label for="ra">RA: </label>
+						<input id="ra" class="informs" name="ra" required/>
+					</div>
+					<div class="inputGroup">
+						<label for="senha" required>Senha: </label>
+						<input id="senha" class="informs" name="senha" type="password" required/>
+					</div>
+					<button class="btnLogin"type="submit">Enviar</button>
+					<a class="formLogin" href="#Esqueci_a_senha">Esqueci a senha.</a>
+				</div>
+				
+				<div>
+					{% if tipo_user == 'aluno' %}
+					<a href='areaAluno.html'>Área do aluno</a>
+					{% elif tipo_user == 'professor' %}
+					<a href='#Professor'>Área do professor</a>
+					{% endif %}-->
+				</form>
+				
+		</div>
 	</header>
 	<main>
 		{% block main %}{% endblock %}
@@ -81,6 +77,7 @@
 					<img src="{% static '/' %}img/linkedin.png" alt="Linkedin Faculdade Impacta" />
 				</a>
 			</nav>
+			
 		</div>
 		<div class="copyright">
 			<h4>© Grupo Draco 2017. Todos os direitos reservados. Política de privacidade
