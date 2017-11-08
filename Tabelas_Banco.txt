@@ -5,7 +5,7 @@ Create table Curso (
 	constraint pkCurso PRIMARY KEY (id),
 	constraint ucCurso UNIQUE (sigla_curso),
 	constraint ucCurso_2 UNIQUE (nome_curso)	
-)
+);
 go
 
 Create table GradeCurricular (
@@ -16,7 +16,7 @@ Create table GradeCurricular (
 	constraint pk_GradeCurricular primary key (id),
 	constraint uc_GradeCurricular unique (sigla_curso, ano_grade, semestre_grade),
 	constraint fk_GradeCurricular foreign key (sigla_curso) references curso (id)
-)
+);
 go
 
 Create table periodo (
@@ -29,8 +29,8 @@ Create table periodo (
 	constraint ucPeriodo unique (sigla_curso, ano_grade, semestre_grade, numero_periodo),
 	constraint fkPeriodo foreign key (sigla_curso) references curso (id),
 	constraint fkPeriodo_2 foreign key (ano_grade) references GradeCurricular (id),
-	constraint fkPeriodo_3 foreign key (semestre_grade) references GradeCurricular (id),
-)
+	constraint fkPeriodo_3 foreign key (semestre_grade) references GradeCurricular (id)
+);
 go
 
 Create table disciplina (
@@ -47,7 +47,7 @@ Create table disciplina (
 	bibliografia_complementar_disciplina text,
 	constraint pkDisciplina primary key (id),
 	constraint ucDisciplina unique (nome_disciplina)
-)
+);
 go
 
 Create table PeriodoDisciplina (
@@ -64,7 +64,7 @@ numero_periodo, nome_disciplina),
 	constraint fkPeriodoDisciplina_2 foreign key (ano_grade) references GradeCurricular (id),
 	constraint fkPeriodoDisciplina_3 foreign key (semestre_grade) references GradeCurricular (id),
 	constraint fkPeriodoDisciplina_4 foreign key (nome_disciplina) references disciplina (id)
-)
+);
 go
 
 Create table DisciplinaOfertada (
@@ -74,8 +74,8 @@ Create table DisciplinaOfertada (
 	semestre_disciplina_ofertada char(1),
 	constraint pkDisciplinaOfertada primary key (id),
 	constraint ucDisciplinaOfertada unique (nome_disciplina, ano_disciplina_ofertada, semestre_disciplina_ofertada),
-	constraint fkDisciplinaOfertada foreign key (nome_disciplina) references disciplina (id),
-)
+	constraint fkDisciplinaOfertada foreign key (nome_disciplina) references disciplina (id)
+);
 go
 
 Create table aluno (
@@ -88,7 +88,8 @@ Create table aluno (
 
 	CONSTRAINT pkAluno PRIMARY KEY (id),
 	constraint ucAluno Unique (ra_aluno)
-)
+);
+go
 
 CREATE TABLE Professor (
 	id int identity (1, 1) not null,
@@ -101,7 +102,8 @@ CREATE TABLE Professor (
 	CONSTRAINT pkProfessor PRIMARY KEY (id),
 	CONSTRAINT ucProfessor UNIQUE (apelido),
 	constraint ucProfessor_2 unique (ra_professor)
-)
+);
+go
 
 Create table turma (
 	id int identity (1, 1) not null,
@@ -118,7 +120,7 @@ Create table turma (
 	constraint fkturma_2 foreign key (ano_ofertado) references DisciplinaOfertada (id),
 	constraint fkturma_3 foreign key (semestre_ofertado) references DisciplinaOfertada(id),
 	constraint fkturma_4 foreign key (ra_professor) references Professor (id)
-)
+);
 go	
 
 Create table matricula (
@@ -134,8 +136,8 @@ Create table matricula (
 	constraint fkmatricula_2 foreign key (nome_disciplina) references disciplina (id),
 	constraint fkmatricula_3 foreign key (ano_ofertado) references DisciplinaOfertada (id),	
 	constraint fkmatricula_4 foreign key (semestre_ofertado) references DisciplinaOfertada (id),
-	constraint fkmatricula_5 foreign key (id_turma) references turma (id),
-)
+	constraint fkmatricula_5 foreign key (id_turma) references turma (id)
+);
 go
 
 Create table CursoTurma (
@@ -151,8 +153,8 @@ Create table CursoTurma (
 	constraint fkCursoTurma_2 foreign key (nome_disciplina) references disciplina (id),
 	constraint fkCursoTurma_3 foreign key (ano_ofertado) references DisciplinaOfertada (id),
 	constraint fkCursoTurma_4 foreign key (semestre_ofertado) references DisciplinaOfertada (id),
-	constraint fkCursoTurma_5 foreign key (id_turma) references turma (id),
-)
+	constraint fkCursoTurma_5 foreign key (id_turma) references turma (id)
+);
 go
 
 Create table questao (
@@ -171,7 +173,7 @@ Create table questao (
 	constraint fkquestao_2 foreign key (ano_ofertado) references DisciplinaOfertada (id),	
 	constraint fkquestao_3 foreign key (semestre_ofertado) references DisciplinaOfertada (id),
 	constraint fkquestao_4 foreign key (id_turma) references turma (id)
-)
+);
 go
 
 Create table ArquivoQuestao (
@@ -189,7 +191,7 @@ Create table ArquivoQuestao (
 	constraint fkArquivoQuestao_3 foreign key (semestre_ofertado) references DisciplinaOfertada (id),
 	constraint fkArquivoQuestao_4 foreign key (id_turma) references turma (id),
 	constraint fkArquivoQuestao_5 foreign key (numero_questao) references questao (id)
-)
+);
 go
 
 Create table resposta (
@@ -212,7 +214,7 @@ Create table resposta (
 	constraint fkresposta_3 foreign key (semestre_ofertado) references DisciplinaOfertada (id),
 	constraint fkresposta_4 foreign key (id_turma) references turma (id),
 	constraint fkresposta_5 foreign key (numero_questao) references questao (id)
-)
+);
 go
 
 create table ArquivosResposta (
@@ -231,8 +233,8 @@ create table ArquivosResposta (
 	constraint fkArquivosResposta_3 foreign key (semestre_ofertado) references DisciplinaOfertada (id),
 	constraint fkArquivosResposta_4 foreign key (id_turma) references turma (id),
 	constraint fkArquivosResposta_5 foreign key (numero_questao) references questao (id),
-	constraint fkArquivosResposta_6 foreign key (ra_aluno) references aluno (id),
-)
+	constraint fkArquivosResposta_6 foreign key (ra_aluno) references aluno (id)
+);
 go
 
 SELECT * FROM Curso
