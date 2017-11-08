@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block main %}
+    <section>
+        <div>
+            <form method="POST">
+                <input name="destinatario" id="destinatario"/>
+                <input name="remetente" id="remetente"readonly value="{%  %}"/>
+                <div>
+                    <input name="curso" id="curso"readonly/>
+                    <input name="turma" id="turma"readonly/>
+                </div>
+                <textarea name="msg" id="msg"></textarea>
+                <button type="submit">Enviar</button>
+            </form>
+        </div>
+    </section>
+{% endblock %}

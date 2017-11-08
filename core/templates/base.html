@@ -7,14 +7,14 @@
 	<link rel="icon" href="{% static '/' %}img/icone.ico" type="image/x-icon" />
 	<link rel="stylesheet" href="{% static '/' %}css/site.css" />
 	<link rel="stylesheet" href='{% block estilo_unico %}{% endblock %}' />
-	<script src="{% static '/' %}src/site.js"></script>
+	<script src="{% static '/' %}js/script.js"></script>
 	<script src="{% block script_unico %}{% endblock %}"></script>
 	<title>{% block title %}{% endblock %}</title>
 </head>
 <body>
 	<header>
 		<nav class="menu">
-			<a class="logo" href="/" title="Logo Faculdade Impacta">
+			<a href="/" title="Logo Faculdade Impacta">
 				<img class="img_logo" src="{% static '/' %}img/logo-novo.png" alt="Logo e link para a home" />
 			</a>
 			<div>

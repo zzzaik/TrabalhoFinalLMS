@@ -15,3 +15,6 @@ def disciplina(request):
 
 def noticia(request):
    return render(request, 'noticia.html')
+
+def areaAluno(request):
+    return render(request,"areaAluno.html")
