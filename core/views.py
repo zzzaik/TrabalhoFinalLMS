@@ -1,7 +1,6 @@
 from django.shortcuts import render
 from core.forms import LoginForm
-from criar_aluno.models import Aluno
-from core.models import AuthUser
+from core.models import Usuario
 
 # Create your views here.
 def index(request):
@@ -10,26 +9,27 @@ def index(request):
         form = LoginForm(request.POST)
         if form.is_valid():
             login = form.logar()
-            test_login = AuthUser.objects.all()
-            if test_login == login['ra']:
-                user = AuthUser.objects.get(username = login['ra'])
-                sessao == True
-                prim_login = user.first_login
-                tipo_user = user.user_type
-                ''' Verificação de senha
-                if user.password == login['senha']:
-                    sessao == True
-                    prim_login = user.first_login
-                    tipo_user = user.user_type
-                else:
-                    sessao = False
-                    prim_login = False
-                    tipo_user = False
-                '''
-            else:
-                sessao = False
-                prim_login = False
-                tipo_user = False
+            #test_login = AuthUser.objects.all()
+            #for usuario in test_login:
+            #    if str(usuario) == login['ra']:
+            #        user = AuthUser.objects.get(username = login['ra'])
+            #        sessao = True
+            #        prim_login = user.first_login
+            #        tipo_user = user.user_type
+            #        ''' Verificação de senha
+            #        if user.password == login['senha']:
+            #            sessao == True
+            #            prim_login = user.first_login
+            #            tipo_user = user.user_type
+            #        else:
+            #            sessao = False
+            #            prim_login = False
+            #            tipo_user = False
+            #    else:
+            #        if sessao == False:
+            sessao = False
+            prim_login = False
+            tipo_user = False
     else:
         form = LoginForm()
         sessao = False
@@ -49,21 +49,27 @@ def cursos(request):
         form = LoginForm(request.POST)
         if form.is_valid():
             login = form.logar()
-            test_login = AuthUser.objects.all()
-            if test_login == login['ra']:
-                user = AuthUser.objects.get(username = login['ra'])
-                if user.password == login['senha']:
-                    sessao == True
-                    prim_login = user.first_login
-                    tipo_user = user.user_type
-                else:
-                    sessao = False
-                    prim_login = False
-                    tipo_user = False
-            else:
-                sessao = False
-                prim_login = False
-                tipo_user = False
+            #test_login = AuthUser.objects.all()
+            #for usuario in test_login:
+            #    if str(usuario) == login['ra']:
+            #        user = AuthUser.objects.get(username = login['ra'])
+            #        sessao = True
+            #        prim_login = user.first_login
+            #        tipo_user = user.user_type
+            #        ''' Verificação de senha
+            #        if user.password == login['senha']:
+            #            sessao == True
+            #            prim_login = user.first_login
+            #            tipo_user = user.user_type
+            #        else:
+            #            sessao = False
+            #            prim_login = False
+            #            tipo_user = False
+            #    else:
+            #        if sessao == False:
+            sessao = False
+            prim_login = False
+            tipo_user = False
     else:
         form = LoginForm()
         sessao = False
@@ -83,21 +89,27 @@ def detalhe_curso(request):
         form = LoginForm(request.POST)
         if form.is_valid():
             login = form.logar()
-            test_login = AuthUser.objects.all()
-            if test_login == login['ra']:
-                user = AuthUser.objects.get(username = login['ra'])
-                if user.password == login['senha']:
-                    sessao == True
-                    prim_login = user.first_login
-                    tipo_user = user.user_type
-                else:
-                    sessao = False
-                    prim_login = False
-                    tipo_user = False
-            else:
-                sessao = False
-                prim_login = False
-                tipo_user = False
+            #test_login = AuthUser.objects.all()
+            #for usuario in test_login:
+            #    if str(usuario) == login['ra']:
+            #        user = AuthUser.objects.get(username = login['ra'])
+            #        sessao = True
+            #        prim_login = user.first_login
+            #        tipo_user = user.user_type
+            #        ''' Verificação de senha
+            #        if user.password == login['senha']:
+            #            sessao == True
+            #            prim_login = user.first_login
+            #            tipo_user = user.user_type
+            #        else:
+            #            sessao = False
+            #            prim_login = False
+            #            tipo_user = False
+            #    else:
+            #        if sessao == False:
+            sessao = False
+            prim_login = False
+            tipo_user = False
     else:
         form = LoginForm()
         sessao = False
@@ -117,21 +129,27 @@ def disciplina(request):
         form = LoginForm(request.POST)
         if form.is_valid():
             login = form.logar()
-            test_login = AuthUser.objects.all()
-            if test_login == login['ra']:
-                user = AuthUser.objects.get(username = login['ra'])
-                if user.password == login['senha']:
-                    sessao == True
-                    prim_login = user.first_login
-                    tipo_user = user.user_type
-                else:
-                    sessao = False
-                    prim_login = False
-                    tipo_user = False
-            else:
-                sessao = False
-                prim_login = False
-                tipo_user = False
+            #test_login = AuthUser.objects.all()
+            #for usuario in test_login:
+            #    if str(usuario) == login['ra']:
+            #        user = AuthUser.objects.get(username = login['ra'])
+            #        sessao = True
+            #        prim_login = user.first_login
+            #        tipo_user = user.user_type
+            #        ''' Verificação de senha
+            #        if user.password == login['senha']:
+            #            sessao == True
+            #            prim_login = user.first_login
+            #            tipo_user = user.user_type
+            #        else:
+            #            sessao = False
+            #            prim_login = False
+            #            tipo_user = False
+            #    else:
+            #        if sessao == False:
+            sessao = False
+            prim_login = False
+            tipo_user = False
     else:
         form = LoginForm()
         sessao = False
@@ -151,21 +169,27 @@ def noticias(request):
         form = LoginForm(request.POST)
         if form.is_valid():
             login = form.logar()
-            test_login = AuthUser.objects.all()
-            if test_login == login['ra']:
-                user = AuthUser.objects.get(username = login['ra'])
-                if user.password == login['senha']:
-                    sessao == True
-                    prim_login = user.first_login
-                    tipo_user = user.user_type
-                else:
-                    sessao = False
-                    prim_login = False
-                    tipo_user = False
-            else:
-                sessao = False
-                prim_login = False
-                tipo_user = False
+            #test_login = AuthUser.objects.all()
+            #for usuario in test_login:
+            #    if str(usuario) == login['ra']:
+            #        user = AuthUser.objects.get(username = login['ra'])
+            #        sessao = True
+            #        prim_login = user.first_login
+            #        tipo_user = user.user_type
+            #        ''' Verificação de senha
+            #        if user.password == login['senha']:
+            #            sessao == True
+            #            prim_login = user.first_login
+            #            tipo_user = user.user_type
+            #        else:
+            #            sessao = False
+            #            prim_login = False
+            #            tipo_user = False
+            #    else:
+            #        if sessao == False:
+            sessao = False
+            prim_login = False
+            tipo_user = False
     else:
         form = LoginForm()
         sessao = False
@@ -187,3 +211,6 @@ def area_aluno(request):
 
 def area_professor(request):
     return render(request, 'area_professor.html')
+
+def primeiro_login(request):
+    return render(request, 'primeiro_login.html')

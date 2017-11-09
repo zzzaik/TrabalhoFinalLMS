@@ -235,6 +235,26 @@ create table ArquivosResposta (
 )
 go
 
+CREATE TABLE Msg_aluno (
+	id int identity(1, 1),
+	destinatario varchar(4) not null,
+	remetente varchatr(4) not null,
+	curso varchar(100) not null,
+	turma varchat(50) not null,
+	data_envio datetime not null,
+	mensagem varchar(max) not null,
+	constraint pkMsgAluno foreign key (id)
+)
+
+CREATE TABLE Msg_professor (
+	id int identity(1, 1),
+	destinatario varchar(4) not null,
+	remetente varchatr(4) not null,
+	data_envio datetime not null,
+	mensagem varchar(max) not null,
+	constraint pkMsgAluno foreign key (id)
+)
+
 SELECT * FROM Curso
 SELECT * FROM disciplina
 SELECT * FROM matricula
