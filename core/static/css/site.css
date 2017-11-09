@@ -10,6 +10,12 @@ html {
 .corpo {
 	margin: 0px;
 }
+/* mother nav*/
+.motherNav{
+	display: flex;
+	flex-flow: column wrap;
+	align-items: flex-end;
+}
 /* nav */
 .menu {
 	display: flex;
@@ -78,15 +84,18 @@ a.link:active {
 	height:3em;
 }
 .conteudo_login{
-	display:block;
+	display:flex;
+	justify-content: center;
+	z-index:1;
+	top:80px;
 	background-color: #4e5b60;
+	width:20%;
 }
-
 .flexForm{
 	display:flex;
 	flex-flow:column wrap;
 	align-items: center;
-	width:80%;
+	width:90%;
 	margin-bottom: 1em;
 }
 .inputGroup{
@@ -99,7 +108,7 @@ a.link:active {
 	width:100%;
 }
 .informs{
-	width:75%;
+	width:85%;
 	height:2em;
 	border:none;
 	border-radius:5px;
@@ -108,7 +117,7 @@ a.link:active {
 .btnLogin{
 	margin-top:1.3em;
 	border-radius: 10px;
-	font-size: 1.2em;
+	font-size: 70%;
 	width:40%;
 }
 
