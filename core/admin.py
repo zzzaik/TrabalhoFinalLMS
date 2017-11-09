@@ -7,7 +7,7 @@ from django import forms
 class NovoAlunoForm(forms.ModelForm):
     class Meta:
         model = Aluno
-        fields = ('ra', 'email', 'nome', 'curso', 'celular')
+        fields = ('ra', 'nome', 'email', 'celular', 'curso')
 
     def save(self, commit=True):
         user = super(NovoAlunoForm, self).save(commit=False)
@@ -15,7 +15,7 @@ class NovoAlunoForm(forms.ModelForm):
         user.user_type = 'A'
         if commit:
             user.save()
-            return user
+        return user
 
 
 class AlterarAlunoForm(forms.ModelForm):
@@ -27,10 +27,7 @@ class AlterarAlunoForm(forms.ModelForm):
 class AlunoAdmin(UserAdmin):
     form = AlterarAlunoForm
     add_form = NovoAlunoForm
-
-
-class AlunoAdmin(UserAdmin):
-    list_display = ('email', 'nome', 'curso', 'celular')
+    list_display = ('ra', 'nome', 'curso', 'email', 'celular')
     list_filter = ('user_type',)
     fieldsets = ((None, {'fields': ('email', 'nome', 'curso')}),)
     add_fieldsets = (
@@ -55,7 +52,7 @@ class NovoProfessorForm(forms.ModelForm):
         user.user_type = 'P'
         if commit:
             user.save()
-            return user
+        return user
 
 
 class AlterarProfessorForm(forms.ModelForm):
@@ -67,7 +64,7 @@ class AlterarProfessorForm(forms.ModelForm):
 class ProfessorAdmin(UserAdmin):
     form = AlterarProfessorForm
     add_form = NovoProfessorForm
-    list_display = ('email', 'nome', 'apelido')
+    list_display = ('nome', 'apelido', 'email')
     list_filter = ('user_type',)
     fieldsets = (
         (None, {'fields': ('email', 'nome', 'apelido')}),)

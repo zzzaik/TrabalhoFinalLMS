@@ -20,23 +20,13 @@ class UsuarioManager(BaseUserManager):
         return self._create_user(ra, password, **extra_fields)
 
 
-ALUNO = 'A'
-PROFESSOR = 'P'
-COORDENADOR = 'C'
-PERFIS = (
-    (ALUNO, 'Aluno'),
-    (PROFESSOR, 'Professor'),
-    (COORDENADOR, 'Coordenador')
-)
-
-
 class Usuario(AbstractBaseUser):
     nome = models.CharField('Nome', max_length=100, blank=True)
     ra = models.IntegerField('RA', unique=True)
     password = models.CharField(max_length=150)
     user_type = models.CharField(
-        'Tipo de usuário', max_length=1, choices=PERFIS)
-    ative = models.BooleanField('Ativo', default=True)
+        'Tipo de usuário', max_length=1, default = 'C')
+    ativo = models.BooleanField('Ativo', default=True)
     email = models.EmailField('E-mail', unique=True)
 
     def __str__(self):
@@ -59,7 +49,7 @@ class Usuario(AbstractBaseUser):
         return self.user_type == 'C'
 
     USERNAME_FIELD = 'ra'
-    REQUIRED_FIELDS = ['nome', 'email', 'user_type']
+    REQUIRED_FIELDS = ['nome', 'email']
     objects = UsuarioManager()
 
 
@@ -125,8 +115,7 @@ class Periodo(models.Model):
 
 
 class Aluno(Usuario):
-    ra_aluno = models.OneToOneField(
-        Usuario, primary_key=True, db_column='ra', parent_link=True, related_name='+')
+    parent_link = models.OneToOneField(Usuario, primary_key=True, db_column='user_id', parent_link=True)
     curso = models.ForeignKey(Curso, blank=True, null=False)
     celular = models.CharField('Celular', max_length=11, null=True)
 
@@ -135,10 +124,9 @@ class Aluno(Usuario):
 
 
 class Professor(Usuario):
-    ra_professor = models.OneToOneField(
-        Usuario, primary_key=True, db_column='ra', parent_link=True, related_name='+')
+    parent_link = models.OneToOneField(Usuario, primary_key=True, db_column='user_id', parent_link=True)
     celular = models.CharField('Celular', max_length=11, null=True)
-    apelido = models.CharField('Apelido', max_length=30, null=False)
+    apelido = models.CharField('Apelido', max_length=30, null=False, unique = True)
 
     def __str__(self):
         return self.nome
