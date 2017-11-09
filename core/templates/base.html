@@ -22,31 +22,36 @@
 				</a>
 				<div class="linkBtn"><a class="link" href="cursos.html" title="Cursos">Cursos</a></div>
 				<div class="linkBtn"><a class="link" href="noticias.html" title="Notícias">Notícias</a></div>
-				<div class="drop_login">
-					<button class="user" onclick="login_function()" title="{% if logado == False %}Sign In{% else %}
+				<div class="containerLogin">
+					<div class="drop_login">
+						<button class="user" onclick="login_function()" title="{% if logado == False %}Sign In{% else %}
 						Logged{% endif %}">
-						<img class="img_user" src="{% if logado == False %}{% static '/' %}img/img_user.png
-						{% else %}{% static '/' %}img/img_user.png{% endif %}" alt="{% if logado == False %}
-						Sign In{% else %}Your Picture{% endif %}" />
-						</button>
+							<img class="img_user"
+							src="{% if logado == False %}{% static '/' %}img/img_user.png
+						{% else %}{% static '/' %}img/img_user.png
+						{% endif %}"
+							alt="{% if logado == False %}Sign In
+								{% else %}Your Picture
+								{% endif %}" />
+							</button>
+							<div id="drop_login" class="conteudo_login">
+								<form class="flexForm" method="POST">
+									{% csrf_token %}
+									<div class="inputGroup">
+										<label for="ra">RA: </label>
+										<input id="ra" class="informs" name="ra" required/>
+									</div>
+									<div class="inputGroup">
+										<label for="senha" required>Senha: </label>
+										<input id="senha" class="informs" name="senha" type="password" required/>
+									</div>
+									<button class="btnLogin" type="submit">Enviar</button>
+									<a class="formLogin" href="#Esqueci_a_senha">Esqueci a senha.</a>
+								</form>
+							</div>
+					</div>
 				</div>
 			</nav>
-			
-			<div id="drop_login" class="conteudo_login">
-				<form class="flexForm" method="POST">
-					{% csrf_token %}
-					<div class="inputGroup">
-						<label for="ra">RA: </label>
-						<input id="ra" class="informs" name="ra" required/>
-					</div>
-					<div class="inputGroup">
-						<label for="senha" required>Senha: </label>
-						<input id="senha" class="informs" name="senha" type="password" required/>
-					</div>
-					<button class="btnLogin" type="submit">Enviar</button>
-					<a class="formLogin" href="#Esqueci_a_senha">Esqueci a senha.</a>
-				</form>
-			</div>
 
 			<div>
 				{% if tipo_user == 'aluno' %}

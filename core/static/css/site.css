@@ -20,7 +20,7 @@ html {
 .menu {
 	display: flex;
 	flex-flow: row;
-	justify-content:flex-start;
+	justify-content:space-between;
 	align-content: center;
 	background-color:#2a3c4a;
 	position: fixed;
@@ -68,12 +68,20 @@ a.link:active {
 }
 
 /* box de login */
-.drop_login{
+.containerLogin{
 	display:block;
+	width:18em;
+}
+.drop_login{
+	display:flex;
 	position: relative;
-	background-color: rgb(0,0,0,0);
+	flex-flow: column;
+	width:100%;
+	background-color: rgb(0,0,0,0);	
 }
 .user{
+	display: flex;
+	align-self: flex-end;
 	width:4em;
 	height:4em;
 	background-color: #2a3c4a;
@@ -85,11 +93,12 @@ a.link:active {
 }
 .conteudo_login{
 	display:flex;
+	position:absolute;
+	top:107%;
 	justify-content: center;
 	z-index:1;
-	top:80px;
 	background-color: #4e5b60;
-	width:20%;
+	width:100%;
 }
 .flexForm{
 	display:flex;
