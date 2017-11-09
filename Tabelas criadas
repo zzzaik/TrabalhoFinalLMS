@@ -3,21 +3,19 @@ Create table Curso (
 	sigla_curso varchar(5) not null,
 	nome_curso varchar(50) not null,
 	constraint pkCurso PRIMARY KEY (id),
-	constraint ucCurso UNIQUE (sigla_curso)
+	constraint ucCurso UNIQUE (sigla_curso),
 	constraint ucCurso_2 UNIQUE (nome_curso)	
-)
-go
+);
 
 Create table GradeCurricular (
 	id int identity(1, 1) not null,
 	sigla_curso int,
 	ano_grade smallint,
-	semestre_grade char(1)
+	semestre_grade char(1),
 	constraint pk_GradeCurricular primary key (id),
 	constraint uc_GradeCurricular unique (sigla_curso, ano_grade, semestre_grade),
 	constraint fk_GradeCurricular foreign key (sigla_curso) references curso (id)
-)
-go
+);
 
 Create table periodo (
 	id int identity (1, 1) not null,
@@ -29,9 +27,8 @@ Create table periodo (
 	constraint ucPeriodo unique (sigla_curso, ano_grade, semestre_grade, numero_periodo),
 	constraint fkPeriodo foreign key (sigla_curso) references curso (id),
 	constraint fkPeriodo_2 foreign key (ano_grade) references GradeCurricular (id),
-	constraint fkPeriodo_3 foreign key (semestre_grade) references GradeCurricular (id),
-)
-go
+	constraint fkPeriodo_3 foreign key (semestre_grade) references GradeCurricular (id)
+);
 
 Create table disciplina (
 	id int identity (1, 1) not null,
@@ -47,8 +44,7 @@ Create table disciplina (
 	bibliografia_complementar_disciplina text,
 	constraint pkDisciplina primary key (id),
 	constraint ucDisciplina unique (nome_disciplina)
-)
-go
+);
 
 Create table PeriodoDisciplina (
 	id int identity (1, 1) not null,
@@ -58,14 +54,13 @@ Create table PeriodoDisciplina (
 	numero_periodo int,
 	nome_disciplina int,
 	constraint pkPeriodoDisciplina primary key (id),
-	constraint ucPeriodoDisciplina unique (sigla_curso, ano_grade, semestre_grade
-numero_periodo, nome_disciplina),
-	constraint fkPeriodoDisciplina foreign key (sigla_curso) references curso (id)
+	constraint ucPeriodoDisciplina unique (sigla_curso, ano_grade, semestre_grade, numero_periodo, nome_disciplina),
+	constraint fkPeriodoDisciplina foreign key (sigla_curso) references curso (id),
 	constraint fkPeriodoDisciplina_2 foreing key (ano_grade) references GradeCurricular (id),
 	constraint fkPeriodoDisciplina_3 foreing key (semestre_grade) references GradeCurricular (id),
 	constraint fkPeriodoDisciplina_4 foreing key (nome_disciplina) references disciplina (id)
-)
-go
+);
+
 
 Create table DisciplinaOfertada (
 	id int identity (1, 1) not null,
@@ -74,9 +69,9 @@ Create table DisciplinaOfertada (
 	semestre_disciplina_ofertada char(1),
 	constraint pkDisciplinaOfertada primary key (id),
 	constraint ucDisciplinaOfertada unique (nome_disciplina, ano_disciplina_ofertada, semestre_disciplina_ofertada),
-	constraint fkDisciplinaOfertada foreign key (nome_disciplina) references disciplina (id),
-)
-go
+	constraint fkDisciplinaOfertada foreign key (nome_disciplina) references disciplina (id)
+);
+
 
 Create table aluno (
 	id int identity (1, 1) not null,
@@ -88,7 +83,7 @@ Create table aluno (
 
 	CONSTRAINT pkAluno PRIMARY KEY (id),
 	constraint ucAluno Unique (ra_aluno)
-)
+);
 
 CREATE TABLE Professor (
 	id int identity (1, 1) not null,
@@ -101,7 +96,7 @@ CREATE TABLE Professor (
 	CONSTRAINT pkProfessor PRIMARY KEY (id),
 	CONSTRAINT ucProfessor UNIQUE (apelido),
 	constraint ucProfessor_2 unique (ra_professor)
-)
+);
 
 Create table turma (
 	id int identity (1, 1) not null,
@@ -113,13 +108,13 @@ Create table turma (
 	ra_professor int,
 	constraint pkturma primary key (id),
 	constraint ucturma unique (nome_disciplina, ano_ofertado, semestre_ofertado),
-	constraint ucturma_2 unique (id_turma)
+	constraint ucturma_2 unique (id_turma),
 	constraint fkturma foreign key (nome_disciplina) references disciplina (id)
 	constraint fkturma_2 foreign key (ano_ofertado) references DisciplinaOfertada (id),
 	constraint fkturma_3 foreign key (semestre_ofertado) references DisciplinaOfertada(id),
 	constraint fkturma_4 foreign key (ra_professor) references Professor (id)
-)
-go	
+);
+	
 
 Create table matricula (
 	id int identity (1, 1) not null,
@@ -134,9 +129,9 @@ Create table matricula (
 	constraint fkmatricula_2 foreign key (nome_disciplina) references disciplina (id),
 	constraint fkmatricula_3 foreign key (ano_ofertado) references DisciplinaOfertada (id),	
 	constraint fkmatricula_4 foreign key (semestre_ofertado) references DisciplinaOfertada (id),
-	constraint fkmatricula_5 foreign key (id_turma) references turma (id),
-)
-go
+	constraint fkmatricula_5 foreign key (id_turma) references turma (id)
+);
+
 
 Create table CursoTurma (
 	id int identity (1, 1) not null,
@@ -152,8 +147,8 @@ Create table CursoTurma (
 	constraint fkCursoTurma_3 foreign key (ano_ofertado) references DisciplinaOfertada (id),
 	constraint fkCursoTurma_4 foreign key (semestre_ofertado) references DisciplinaOfertada (id),
 	constraint fkCursoTurma_5 foreign key (id_turma) references turma (id),
-)
-go
+);
+
 
 Create table questao (
 	id int identity (1, 1) not null,
@@ -171,8 +166,7 @@ Create table questao (
 	constraint fkquestao_2 foreign key (ano_ofertado) references DisciplinaOfertada (id),	
 	constraint fkquestao_3 foreign key (semestre_ofertado) references DisciplinaOfertada (id),
 	constraint fkquestao_4 foreign key (id_turma) references turma (id)
-)
-go
+);
 
 Create table ArquivoQuestao (
 	id int identity (1, 1) not null,
@@ -183,14 +177,13 @@ Create table ArquivoQuestao (
 	numero_questao int,
 	arquivo_questao varchar(500),
 	constraint pkArquivoQuestao primary key (id),
-	constraint ucArquivoQuestao unique (nome_disciplina, ano_ofertado, semestre_ofertado, id_turma, numero_questao, arquivo_questao)
+	constraint ucArquivoQuestao unique (nome_disciplina, ano_ofertado, semestre_ofertado, id_turma, numero_questao, arquivo_questao),
 	constraint fkArquivoQuestao foreign key (nome_disciplina) references disciplina (id),
 	constraint fkArquivoQuestao_2 foreign key (ano_ofertado) references DisciplinaOfertada (id),
 	constraint fkArquivoQuestao_3 foreign key (semestre_ofertado) references DisciplinaOfertada (id),
 	constraint fkArquivoQuestao_4 foreign key (id_turma) references turma (id),
 	constraint fkArquivoQuestao_5 foreign key (numero_questao) references questao (id)
-)
-go
+);
 
 Create table resposta (
 	id int identity (1, 1) not null,
@@ -212,8 +205,7 @@ Create table resposta (
 	constraint fkresposta_3 foreign key (semestre_ofertado) references DisciplinaOfertada (id),
 	constraint fkresposta_4 foreign key (id_turma) references turma (id),
 	constraint fkresposta_5 foreign key (numero_questao) references questao (id)
-)
-go
+);
 
 create table ArquivosResposta (
 	id int identity (1, 1) not null,
@@ -231,8 +223,7 @@ create table ArquivosResposta (
 	constraint fkArquivosResposta_3 foreign key (semestre_ofertado) references DisciplinaOfertada (id),
 	constraint fkArquivosResposta_4 foreign key (id_turma) references turma (id),
 	constraint fkArquivosResposta_5 foreign key (numero_questao) references questao (id),
-	constraint fkArquivosResposta_6 foreign key (ra_aluno) references aluno (id),
-)
-go
+	constraint fkArquivosResposta_6 foreign key (ra_aluno) references aluno (id)
+);
 
 	
