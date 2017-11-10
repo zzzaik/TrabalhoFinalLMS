@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.conf.urls import url
 from django.contrib import admin
-#from django.contrib.auth.views import login, logout
+from django.contrib.auth.views import login, logout
 from core.views import index, cursos, detalhe_curso, disciplina, noticias, recuperar_senha, area_aluno, area_professor, primeiro_login
 
 urlpatterns = [
@@ -29,4 +29,6 @@ urlpatterns = [
     url(r'^area_aluno', area_aluno, name='area_aluno'),
     url(r'^area_professor', area_professor, name='area_professor'),
 #    url(r'^primeiro_login', primeiro_login, name='primeiro_login'),
+#    url(r'^login', login, name='login', {'template_name':'login.html'}),
+#    url(r'^logout', logout, name='logout', {'template_name': 'index.html'})
 ]

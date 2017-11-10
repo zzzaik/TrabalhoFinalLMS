@@ -25,7 +25,7 @@ class Usuario(AbstractBaseUser):
     ra = models.IntegerField('RA', unique=True)
     password = models.CharField(max_length=150)
     user_type = models.CharField(
-        'Tipo de usuário', max_length=1, default = 'C')
+        'Tipo de usuário', max_length=1)
     ativo = models.BooleanField('Ativo', default=True)
     email = models.EmailField('E-mail', unique=True)
 
@@ -97,6 +97,8 @@ class Gradecurricular(models.Model):
         db_table = 'gradecurricular'
         unique_together = (('sigla_curso', 'ano_grade', 'semestre_grade'),)
 
+    def __str__(self):
+        return self.semestre_grade
 
 class Periodo(models.Model):
     sigla_curso = models.ForeignKey(
@@ -153,6 +155,8 @@ class Disciplinaofertada(models.Model):
         db_table = 'disciplinaofertada'
         unique_together = (('nome_disciplina', 'ano_disciplina_ofertada', 'semestre_disciplina_ofertada'),)
 
+    def __str__(self):
+        return self.nome_disciplina
 
 class Turma(models.Model):
     nome_disciplina = models.ForeignKey('Disciplina', models.DO_NOTHING, db_column='nome_disciplina', blank=True, null=True)
