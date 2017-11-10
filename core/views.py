@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from core.forms import LoginForm
 from core.models import Usuario
+#from djangp.contrib.auth.
 
 # Create your views here.
 def index(request):

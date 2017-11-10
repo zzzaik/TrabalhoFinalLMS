@@ -73,28 +73,6 @@ Create table DisciplinaOfertada (
 	constraint fkDisciplinaOfertada foreign key (nome_disciplina) references disciplina (id)
 );
 
-Create table aluno (
-	id serial not null,
-	ra_aluno int,
-	nome VARCHAR(120),
-	email VARCHAR (80),
-	celular CHAR (11),
-	sigla_curso_aluno CHAR (2),
-	CONSTRAINT pkAluno PRIMARY KEY (id),
-	constraint ucAluno Unique (ra_aluno)
-);
-
-CREATE TABLE Professor (
-	id serial not null,
-	ra_professor INT,
-	apelido VARCHAR(30),
-	nome VARCHAR (120),
-	email CHAR (80),
-	celular CHAR (11),
-	CONSTRAINT pkProfessor PRIMARY KEY (id),
-	CONSTRAINT ucProfessor UNIQUE (apelido),
-	constraint ucProfessor_2 unique (ra_professor)
-);
 
 Create table turma (
 	id serial not null,

@@ -9,158 +9,128 @@ from __future__ import unicode_literals
 
 from django.db import models
 
-
-class AuthGroup(models.Model):
-    name = models.CharField(unique=True, max_length=80)
-
-    class Meta:
-        managed = False
-        db_table = 'auth_group'
-
-
-class AuthGroupPermissions(models.Model):
-    group = models.ForeignKey(AuthGroup, models.DO_NOTHING)
-    permission = models.ForeignKey('AuthPermission', models.DO_NOTHING)
+class Periododisciplina(models.Model):
+    sigla_curso = models.ForeignKey('Curso', models.DO_NOTHING, db_column='sigla_curso', blank=True, null=True)
+    ano_grade = models.ForeignKey('Gradecurricular', models.DO_NOTHING, db_column='ano_grade', blank=True, null=True)
+    semestre_grade = models.ForeignKey('Gradecurricular', models.DO_NOTHING, db_column='semestre_grade', blank=True, null=True)
+    numero_periodo = models.IntegerField(blank=True, null=True)
+    nome_disciplina = models.ForeignKey('Disciplina', models.DO_NOTHING, db_column='nome_disciplina', blank=True, null=True)
 
     class Meta:
         managed = False
-        db_table = 'auth_group_permissions'
-        unique_together = (('group', 'permission'),)
+        db_table = 'periododisciplina'
+        unique_together = (('sigla_curso', 'ano_grade', 'semestre_grade', 'numero_periodo', 'nome_disciplina'),)
 
-
-class AuthPermission(models.Model):
-    name = models.CharField(max_length=255)
-    content_type = models.ForeignKey('DjangoContentType', models.DO_NOTHING)
-    codename = models.CharField(max_length=100)
-
-    class Meta:
-        managed = False
-        db_table = 'auth_permission'
-        unique_together = (('content_type', 'codename'),)
-
-
-class CoreAluno(models.Model):
-    ra = models.ForeignKey('CoreUsuario', models.DO_NOTHING, db_column='ra', primary_key=True)
-    celular = models.CharField(max_length=11, blank=True, null=True)
-    curso = models.ForeignKey('Curso', models.DO_NOTHING)
+class Disciplinaofertada(models.Model):
+    nome_disciplina = models.ForeignKey('Disciplina', models.DO_NOTHING, db_column='nome_disciplina', blank=True, null=True)
+    ano_disciplina_ofertada = models.SmallIntegerField(blank=True, null=True)
+    semestre_disciplina_ofertada = models.CharField(max_length=1, blank=True, null=True)
 
     class Meta:
         managed = False
-        db_table = 'core_aluno'
+        db_table = 'disciplinaofertada'
+        unique_together = (('nome_disciplina', 'ano_disciplina_ofertada', 'semestre_disciplina_ofertada'),)
 
 
-class CoreProfessor(models.Model):
-    ra = models.ForeignKey('CoreUsuario', models.DO_NOTHING, db_column='ra', primary_key=True)
-    celular = models.CharField(max_length=11, blank=True, null=True)
-    apelido = models.CharField(max_length=30)
-
-    class Meta:
-        managed = False
-        db_table = 'core_professor'
-
-
-class CoreUsuario(models.Model):
-    last_login = models.DateTimeField(blank=True, null=True)
-    nome = models.CharField(max_length=100)
-    ra = models.IntegerField(unique=True)
-    password = models.CharField(max_length=150)
-    user_type = models.CharField(max_length=1)
-    ative = models.BooleanField()
-    email = models.CharField(unique=True, max_length=254)
+class Turma(models.Model):
+    nome_disciplina = models.ForeignKey('Disciplina', models.DO_NOTHING, db_column='nome_disciplina', blank=True, null=True)
+    ano_ofertado = models.ForeignKey('Disciplinaofertada', models.DO_NOTHING, db_column='ano_ofertado', blank=True, null=True)
+    semestre_ofertado = models.ForeignKey('Disciplinaofertada', models.DO_NOTHING, db_column='semestre_ofertado', blank=True, null=True)
+    id_turma = models.CharField(unique=True, max_length=1, blank=True, null=True)
+    turno = models.CharField(max_length=15, blank=True, null=True)
+    ra_professor = models.ForeignKey('CoreProfessor', models.DO_NOTHING, db_column='ra_professor', blank=True, null=True)
 
     class Meta:
         managed = False
-        db_table = 'core_usuario'
+        db_table = 'turma'
+        unique_together = (('nome_disciplina', 'ano_ofertado', 'semestre_ofertado'),)
 
 
-class Curso(models.Model):
-    sigla_curso = models.CharField(unique=True, max_length=5)
-    nome_curso = models.CharField(unique=True, max_length=50)
-
-    class Meta:
-        managed = False
-        db_table = 'curso'
-
-
-class Disciplina(models.Model):
-    nome_disciplina = models.CharField(unique=True, max_length=240)
-    carga_horaria = models.SmallIntegerField()
-    teoria_disciplina = models.DecimalField(max_digits=3, decimal_places=0)
-    pratica_disciplina = models.DecimalField(max_digits=3, decimal_places=0)
-    ementa_disciplina = models.TextField(blank=True, null=True)
-    competencias_disciplina = models.TextField(blank=True, null=True)
-    habilidades_disciplina = models.TextField(blank=True, null=True)
-    conteudo_disciplina = models.TextField(blank=True, null=True)
-    bibliografia_basica_disciplina = models.TextField(blank=True, null=True)
-    bibliografia_complementar_disciplina = models.TextField(blank=True, null=True)
+class Matricula(models.Model):
+    ra_aluno = models.ForeignKey('CoreAluno', models.DO_NOTHING, db_column='ra_aluno', blank=True, null=True)
+    nome_disciplina = models.ForeignKey('Disciplina', models.DO_NOTHING, db_column='nome_disciplina', blank=True, null=True)
+    ano_ofertado = models.ForeignKey('Disciplinaofertada', models.DO_NOTHING, db_column='ano_ofertado', blank=True, null=True)
+    semestre_ofertado = models.ForeignKey('Disciplinaofertada', models.DO_NOTHING, db_column='semestre_ofertado', blank=True, null=True)
+    id_turma = models.ForeignKey(Turma, models.DO_NOTHING, db_column='id_turma', blank=True, null=True)
 
     class Meta:
         managed = False
-        db_table = 'disciplina'
+        db_table = 'matricula'
+        unique_together = (('ra_aluno', 'nome_disciplina', 'ano_ofertado', 'semestre_ofertado', 'id_turma'),)
 
 
-class DjangoAdminLog(models.Model):
-    action_time = models.DateTimeField()
-    object_id = models.TextField(blank=True, null=True)
-    object_repr = models.CharField(max_length=200)
-    action_flag = models.SmallIntegerField()
-    change_message = models.TextField()
-    content_type = models.ForeignKey('DjangoContentType', models.DO_NOTHING, blank=True, null=True)
-    user = models.ForeignKey(CoreUsuario, models.DO_NOTHING)
-
-    class Meta:
-        managed = False
-        db_table = 'django_admin_log'
-
-
-class DjangoContentType(models.Model):
-    app_label = models.CharField(max_length=100)
-    model = models.CharField(max_length=100)
+class Cursoturma(models.Model):
+    sigla_curso = models.ForeignKey('Curso', models.DO_NOTHING, db_column='sigla_curso', blank=True, null=True)
+    nome_disciplina = models.ForeignKey('Disciplina', models.DO_NOTHING, db_column='nome_disciplina', blank=True, null=True)
+    ano_ofertado = models.ForeignKey('Disciplinaofertada', models.DO_NOTHING, db_column='ano_ofertado', blank=True, null=True)
+    semestre_ofertado = models.ForeignKey('Disciplinaofertada', models.DO_NOTHING, db_column='semestre_ofertado', blank=True, null=True)
+    id_turma = models.ForeignKey('Turma', models.DO_NOTHING, db_column='id_turma', blank=True, null=True)
 
     class Meta:
         managed = False
-        db_table = 'django_content_type'
-        unique_together = (('app_label', 'model'),)
+        db_table = 'cursoturma'
+        unique_together = (('sigla_curso', 'nome_disciplina', 'ano_ofertado', 'semestre_ofertado', 'id_turma'),)
 
 
-class DjangoMigrations(models.Model):
-    app = models.CharField(max_length=255)
-    name = models.CharField(max_length=255)
-    applied = models.DateTimeField()
-
-    class Meta:
-        managed = False
-        db_table = 'django_migrations'
-
-
-class DjangoSession(models.Model):
-    session_key = models.CharField(primary_key=True, max_length=40)
-    session_data = models.TextField()
-    expire_date = models.DateTimeField()
+class Questao(models.Model):
+    nome_disciplina = models.ForeignKey('Disciplina', models.DO_NOTHING, db_column='nome_disciplina', blank=True, null=True)
+    ano_ofertado = models.ForeignKey('Disciplinaofertada', models.DO_NOTHING, db_column='ano_ofertado', blank=True, null=True)
+    semestre_ofertado = models.ForeignKey('Disciplinaofertada', models.DO_NOTHING, db_column='semestre_ofertado', blank=True, null=True)
+    id_turma = models.ForeignKey(Turma, models.DO_NOTHING, db_column='id_turma', blank=True, null=True)
+    numero_questao = models.IntegerField(blank=True, null=True)
+    data_limite_entrega = models.DateField(blank=True, null=True)
+    descricao = models.TextField(blank=True, null=True)
+    data = models.DateField(blank=True, null=True)
 
     class Meta:
         managed = False
-        db_table = 'django_session'
+        db_table = 'questao'
+        unique_together = (('nome_disciplina', 'ano_ofertado', 'semestre_ofertado', 'id_turma', 'numero_questao'),)
 
 
-class Gradecurricular(models.Model):
-    sigla_curso = models.ForeignKey(Curso, models.DO_NOTHING, db_column='sigla_curso', blank=True, null=True)
-    ano_grade = models.SmallIntegerField(blank=True, null=True)
-    semestre_grade = models.CharField(max_length=1, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'gradecurricular'
-        unique_together = (('sigla_curso', 'ano_grade', 'semestre_grade'),)
-
-
-class Periodo(models.Model):
-    sigla_curso = models.ForeignKey(Curso, models.DO_NOTHING, db_column='sigla_curso', blank=True, null=True)
-    ano_grade = models.ForeignKey(Gradecurricular, models.DO_NOTHING, db_column='ano_grade', blank=True, null=True)
-    semestre_grade = models.ForeignKey(Gradecurricular, models.DO_NOTHING, db_column='semestre_grade', blank=True, null=True)
-    numero_periodo = models.SmallIntegerField(blank=True, null=True)
+class Arquivoquestao(models.Model):
+    nome_disciplina = models.ForeignKey('Disciplina', models.DO_NOTHING, db_column='nome_disciplina', blank=True, null=True)
+    ano_ofertado = models.ForeignKey('Disciplinaofertada', models.DO_NOTHING, db_column='ano_ofertado', blank=True, null=True)
+    semestre_ofertado = models.ForeignKey('Disciplinaofertada', models.DO_NOTHING, db_column='semestre_ofertado', blank=True, null=True)
+    id_turma = models.ForeignKey('Turma', models.DO_NOTHING, db_column='id_turma', blank=True, null=True)
+    numero_questao = models.ForeignKey('Questao', models.DO_NOTHING, db_column='numero_questao', blank=True, null=True)
+    arquivo_questao = models.CharField(max_length=500, blank=True, null=True)
 
     class Meta:
         managed = False
-        db_table = 'periodo'
-        unique_together = (('sigla_curso', 'ano_grade', 'semestre_grade', 'numero_periodo'),)
+        db_table = 'arquivoquestao'
+        unique_together = (('nome_disciplina', 'ano_ofertado', 'semestre_ofertado', 'id_turma', 'numero_questao', 'arquivo_questao'),)
+
+
+class Resposta(models.Model):
+    nome_disciplina = models.ForeignKey('Disciplina', models.DO_NOTHING, db_column='nome_disciplina', blank=True, null=True)
+    ano_ofertado = models.ForeignKey('Disciplinaofertada', models.DO_NOTHING, db_column='ano_ofertado', blank=True, null=True)
+    semestre_ofertado = models.ForeignKey('Disciplinaofertada', models.DO_NOTHING, db_column='semestre_ofertado', blank=True, null=True)
+    id_turma = models.ForeignKey(Turma, models.DO_NOTHING, db_column='id_turma', blank=True, null=True)
+    numero_questao = models.ForeignKey(Questao, models.DO_NOTHING, db_column='numero_questao', blank=True, null=True)
+    ra_aluno = models.IntegerField(blank=True, null=True)
+    data_avaliacao = models.DateField(blank=True, null=True)
+    nota = models.DecimalField(max_digits=4, decimal_places=2, blank=True, null=True)
+    avaliacao = models.TextField(blank=True, null=True)
+    descricao = models.TextField(blank=True, null=True)
+    data_de_envio = models.DateField(blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'resposta'
+        unique_together = (('nome_disciplina', 'ano_ofertado', 'semestre_ofertado', 'id_turma', 'numero_questao', 'ra_aluno'),)
+
+
+class Arquivosresposta(models.Model):
+    nome_disciplina = models.ForeignKey('Disciplina', models.DO_NOTHING, db_column='nome_disciplina', blank=True, null=True)
+    ano_ofertado = models.ForeignKey('Disciplinaofertada', models.DO_NOTHING, db_column='ano_ofertado', blank=True, null=True)
+    semestre_ofertado = models.ForeignKey('Disciplinaofertada', models.DO_NOTHING, db_column='semestre_ofertado', blank=True, null=True)
+    id_turma = models.ForeignKey('Turma', models.DO_NOTHING, db_column='id_turma', blank=True, null=True)
+    numero_questao = models.ForeignKey('Questao', models.DO_NOTHING, db_column='numero_questao', blank=True, null=True)
+    ra_aluno = models.ForeignKey('CoreAluno', models.DO_NOTHING, db_column='ra_aluno', blank=True, null=True)
+    arquivo_resposta = models.CharField(max_length=500, blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'arquivosresposta'
+        unique_together = (('nome_disciplina', 'ano_ofertado', 'semestre_ofertado', 'id_turma', 'numero_questao', 'ra_aluno', 'arquivo_resposta'),)
