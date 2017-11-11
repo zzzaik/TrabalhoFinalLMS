@@ -1,6 +1,7 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
 	<meta charset="UTF-8" />
 	<meta name="viewport" content="width = device-width, initial-scale = 1.0" />
@@ -11,6 +12,7 @@
 	<script src="{% block script_unico %}{% endblock %}"></script>
 	<title>{% block title %}{% endblock %}</title>
 </head>
+
 <body>
 	<header>
 		<nav class="menu">
@@ -19,33 +21,26 @@
 			</a>
 			<div>
 				<div class="drop_login">
-					<button class="user" onclick="login_function()" title="{% if logado == False %}Sign In{% else %}
-					Logged{% endif %}">
-						<img class="img_user" src="{% if logado == False %}{% static '/' %}img/img_user.png
-								{% else %}{% static '/' %}img/img_user.png{% endif %}" alt="{% if logado == False %}
-								Sign In{% else %}Your Picture{% endif %}" />
-					</button>
-					<div id="drop_login" class="conteudo_login">
-						{% if logado == False %}
-						<form class="flexForm" method="POST">
-							{% csrf_token %}
-							<label for="ra">RA: </label>
-							<input id="ra" class="informs" name="ra" required/>
-							<label for="senha" required>Senha: </label>
-							<input id="senha" class="informs" name="senha" type="password" required/>
-							<button type="submit">Enviar</button>
-							<a class="formLogin" href="recuperar_senha.html">Esqueci a senha.</a>
-						</form>
-						{% else %}
+					{% if not user.is_authenticated %}
+						<button class="user" title="{% if logado == False %}Sign In{% else %}Logged{% endif %}">
+							<a href='login.html'>
+								<img class="img_user" src="{% if logado == False %}{% static '/' %}img/img_user.png{% else %}{% static '/' %}img/img_user.png{% endif %}"
+								alt="{% if logado == False %}Sign In{% else %}Your Picture{% endif %}" />
+							</a>
+						</button>
+					{% else %}
+						<button class="user" onclick="login_function()" title="{% if logado == False %}Sign In{% else %}Logged{% endif %}">
+							<img class="img_user" src="{% if logado == False %}{% static '/' %}img/img_user.png{% else %}{% static '/' %}img/img_user.png{% endif %}"
+							alt="{% if logado == False %}Sign In{% else %}Your Picture{% endif %}" />
+						</button>
 						<nav>
-							{% if tipo_user == 'Aluno' %}
+							{% if user.user_type == 'A' %}
 							<a href='area_aluno.html'>Área do aluno</a>
-							{% elif tipo_user == 'Professor' %}
+							{% elif user.user_type == 'P' %}
 							<a href='area_professor.html'>Área do professor</a>
 							{% endif %}
 						</nav>
-						{% endif %}
-					</div>
+					{% endif %}
 					<div class="drop_menu" title="Menu">
 						<button onclick="menu_function()" class="dropbtn">
 							<img src="{% static '/' %}img/menu_icons_bars.png" class="menu_icon" />
@@ -88,4 +83,5 @@
 		</div>
 	</footer>
 </body>
+
 </html>

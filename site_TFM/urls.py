@@ -28,7 +28,7 @@ urlpatterns = [
     url(r'^recuperar_senha', recuperar_senha, name='recuperar_senha'),
     url(r'^area_aluno', area_aluno, name='area_aluno'),
     url(r'^area_professor', area_professor, name='area_professor'),
-#    url(r'^primeiro_login', primeiro_login, name='primeiro_login'),
-#    url(r'^login', login, name='login', {'template_name':'login.html'}),
-#    url(r'^logout', logout, name='logout', {'template_name': 'index.html'})
+    url(r'^primeiro_login', primeiro_login, name='primeiro_login'),
+    url(r'^login', login, {'template_name':'login.html'}),
+    url(r'^logout', logout, {'next_page': 'index.html'})
 ]
