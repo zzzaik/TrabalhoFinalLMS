@@ -74,6 +74,30 @@ Create table DisciplinaOfertada (
 );
 
 
+Create table aluno (
+	id serial not null,
+	ra_aluno int,
+	nome VARCHAR(120),
+	email VARCHAR (80),
+	celular CHAR (11),
+	sigla_curso_aluno CHAR (2),
+	CONSTRAINT pkAluno PRIMARY KEY (id),
+	constraint ucAluno Unique (ra_aluno)
+);
+
+CREATE TABLE Professor (
+	id serial not null,
+	ra_professor INT,
+	apelido VARCHAR(30),
+	nome VARCHAR (120),
+	email CHAR (80),
+	celular CHAR (11),
+	CONSTRAINT pkProfessor PRIMARY KEY (id),
+	CONSTRAINT ucProfessor UNIQUE (apelido),
+	constraint ucProfessor_2 unique (ra_professor)
+);
+
+
 Create table turma (
 	id serial not null,
 	nome_disciplina int,
@@ -199,6 +223,27 @@ create table ArquivosResposta (
 	constraint fkArquivosResposta_6 foreign key (ra_aluno) references aluno (id)
 );
 
+-- depois de rodar o migrate no django para criar as tabelas 
+-- core_usuario, core_aluno e core_professor
+-- use os comandos abaixo.
+
+ALTER TABLE turma
+   DROP CONSTRAINT fkturma_4
+ , ADD  CONSTRAINT fkturma_4 FOREIGN KEY (ra_professor) REFERENCES core_professor (id); 
+      
+ALTER TABLE matricula
+   DROP CONSTRAINT fkmatricula
+ , ADD  CONSTRAINT fkmatricula FOREIGN KEY (ra_aluno) REFERENCES core_aluno (id);
+
+ALTER TABLE ArquivosResposta
+   DROP CONSTRAINT fkArquivosResposta_6
+ , ADD  CONSTRAINT fkArquivosResposta_6 FOREIGN KEY (ra_aluno) REFERENCES core_aluno (id);
+
+Drop Table aluno;
+Drop Table Professor;
+
+
+
 SELECT * FROM Curso;
 SELECT * FROM disciplina;
 SELECT * FROM matricula;
@@ -214,3 +259,8 @@ SELECT * FROM DisciplinaOfertada;
 SELECT * FROM periodo;
 SELECT * FROM PeriodoDisciplina;
 SELECT * FROM turma;
+
+
+
+
+
