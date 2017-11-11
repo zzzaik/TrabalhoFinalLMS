@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block estilo_unico %}{% static '/' %}css/home.css{% endblock %}
+
+{% block script_unico %}{% endblock %}
+	   
+{% block title %}Faculdade Impacta - Matrícula{% endblock %}
+
+{% block main %}
+	<section>
+		<div class = "Banner">
+			<img class = "Banner img_banner" src = "{% static '/' %}img/Propaganda-vestibular.png"
+			alt = "propaganda do vestibular 2018" />
+ 		</div>
+ 		<div class = "BannerCell">
+ 			<img class = "BannerCell" src = "{% static '/' %}img/BannerCell.png"
+ 			alt = "propaganda do vestibular 2018 mobile" />
+		</div>
+		<article class = "mat">
+			<h1 class = "mat">Matrícula</h1>
+		</article>
+		<form action="novoAluno" method = "POST">
+            <label for="nomeCompleto">Nome Completo</label>:<br>
+            <input type="text" name="nomeCompleto" id="nomeCompleto"><br>
+            <label for="celular">Celular</label>:<br>
+            <input type="text" name="celular" id="celular"><br>
+            <label for="email">E-mail</label>:<br>
+            <input type="email" name="email" id="email"><br>
+            <button type="button">Alterar</button>
+            <button type="button">Enviar</button>
+            </form>
+        </article>
+        
+	</section>
+{% endblock %}
