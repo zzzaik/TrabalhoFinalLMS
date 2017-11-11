@@ -30,5 +30,5 @@ urlpatterns = [
     url(r'^area_professor', area_professor, name='area_professor'),
     url(r'^primeiro_login', primeiro_login, name='primeiro_login'),
     url(r'^login', login, {'template_name':'login.html'}),
-    url(r'^logout', logout, {'next_page': 'index.html'})
+    url(r'^logout', logout, {'next_page':'/'})
 ]

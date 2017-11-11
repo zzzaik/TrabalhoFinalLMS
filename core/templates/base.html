@@ -36,8 +36,10 @@
 						<nav>
 							{% if user.user_type == 'A' %}
 							<a href='area_aluno.html'>Área do aluno</a>
+							<a href = "/logout">Sair</a>
 							{% elif user.user_type == 'P' %}
 							<a href='area_professor.html'>Área do professor</a>
+							<a href = "/logout">Sair</a>
 							{% endif %}
 						</nav>
 					{% endif %}
