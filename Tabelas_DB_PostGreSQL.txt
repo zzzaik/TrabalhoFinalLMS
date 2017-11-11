@@ -229,15 +229,28 @@ create table ArquivosResposta (
 
 ALTER TABLE turma
    DROP CONSTRAINT fkturma_4
- , ADD  CONSTRAINT fkturma_4 FOREIGN KEY (ra_professor) REFERENCES core_professor (id); 
+ , ADD  CONSTRAINT fkturma_4 FOREIGN KEY (ra_professor) REFERENCES core_professor (User_id); 
       
 ALTER TABLE matricula
    DROP CONSTRAINT fkmatricula
- , ADD  CONSTRAINT fkmatricula FOREIGN KEY (ra_aluno) REFERENCES core_aluno (id);
+ , ADD  CONSTRAINT fkmatricula FOREIGN KEY (ra_aluno) REFERENCES core_aluno (User_id);
 
 ALTER TABLE ArquivosResposta
    DROP CONSTRAINT fkArquivosResposta_6
- , ADD  CONSTRAINT fkArquivosResposta_6 FOREIGN KEY (ra_aluno) REFERENCES core_aluno (id);
+ , ADD  CONSTRAINT fkArquivosResposta_6 FOREIGN KEY (ra_aluno) REFERENCES core_aluno (User_id);
+
+ALTER TABLE core_aluno
+   ADD COLUMN semestre_atual char(1) not null;
+
+create table codigo_matricula(
+	id serial not null,
+	id_aluno integer not null,
+	sigla_curso varchar(5) not null,      
+	codigo varchar(10) not null,
+	status boolean,
+	constraint uccodigo_matricula unique (id_aluno, sigla_curso, codigo),
+	constraint fkcodigo_matricula foreign key (id_aluno) references core_aluno (user_id)
+);
 
 Drop Table aluno;
 Drop Table Professor;
@@ -259,8 +272,3 @@ SELECT * FROM DisciplinaOfertada;
 SELECT * FROM periodo;
 SELECT * FROM PeriodoDisciplina;
 SELECT * FROM turma;
-
-
-
-
-
