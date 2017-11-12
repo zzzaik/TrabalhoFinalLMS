@@ -17,6 +17,7 @@ from django.conf.urls import url
 from django.contrib import admin
 from django.contrib.auth.views import login, logout
 from core.views import index, cursos, noticias, recuperar_senha, area_aluno, area_professor, primeiro_login, matricula
+
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', index, name='home'),
