@@ -40,3 +40,6 @@ def area_professor(request):
 
 def primeiro_login(request):
     return render(request, 'primeiro_login.html')
+
+def matricula(request):
+    return render(request, 'matricula.html')

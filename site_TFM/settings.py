@@ -83,6 +83,11 @@ DATABASES = {
     #    'HOST': 'localhost',
     #    'PORT': '8000'
     #},
+<<<<<<< HEAD
+=======
+
+    ## Config Ainda incompleta ##
+>>>>>>> 2733d8d212c2cbbd1a1481019094530cb4c73dc3
     'default': { # Banco no MSSQL
         'ENGINE': "sql_server.pyodbc",
         'NAME': "DB_LMS_postgreSQL",
@@ -91,6 +96,11 @@ DATABASES = {
         'USER': "LMS_DB_admin@db-lms-draco",
         'PASSWORD': "P@ssw0rd",
     },
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> 2733d8d212c2cbbd1a1481019094530cb4c73dc3
     #'default': { # Banco de testes sqlite 
     #    'ENGINE': 'django.db.backends.sqlite3',
     #    'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
