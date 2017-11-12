@@ -18,7 +18,7 @@ class UsuarioManager(BaseUserManager):
 
     def create_superuser(self, ra, password, **extra_fields):
         return self._create_user(ra, password, **extra_fields)
-
+    
 
 class Usuario(AbstractBaseUser):
     nome = models.CharField('Nome', max_length=100, blank=True)
@@ -120,6 +120,7 @@ class Aluno(Usuario):
     parent_link = models.OneToOneField(Usuario, primary_key=True, db_column='user_id', parent_link=True)
     curso = models.ForeignKey(Curso, blank=True, null=False)
     celular = models.CharField('Celular', max_length=11, null=True)
+    semestre_atual = models.CharField('Semestre Atual', max_length=1, null=False)
 
     def __str__(self):
         return self.nome
@@ -156,7 +157,7 @@ class Disciplinaofertada(models.Model):
         unique_together = (('nome_disciplina', 'ano_disciplina_ofertada', 'semestre_disciplina_ofertada'),)
 
     def __str__(self):
-        return self.nome_disciplina
+        return str(self.nome_disciplina)
 
 class Turma(models.Model):
     nome_disciplina = models.ForeignKey('Disciplina', models.DO_NOTHING, db_column='nome_disciplina', blank=True, null=True)
@@ -171,6 +172,7 @@ class Turma(models.Model):
         db_table = 'turma'
         unique_together = (('nome_disciplina', 'ano_ofertado', 'semestre_ofertado'),)
 
+    
 
 class Matricula(models.Model):
     ra_aluno = models.ForeignKey('Aluno', models.DO_NOTHING, db_column='ra_aluno', blank=True, null=True)
