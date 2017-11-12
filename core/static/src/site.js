@@ -23,7 +23,7 @@ function login_function() {
 window.onclick = function(event) {
   if (!event.target.matches('.user')) {
 
-    var dropdowns = document.getElementsByClassName("contudo");
+    var dropdowns = document.getElementsByClassName("login_content");
     var i;
     for (i = 0; i < dropdowns.length; i++) {
       var openDropdown = dropdowns[i];
@@ -33,8 +33,3 @@ window.onclick = function(event) {
     }
   }
 }
-
-function error_message() {
-  alert('{{ form.error }}')  
-}
-

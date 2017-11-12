@@ -5,6 +5,11 @@
 html {
 	font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
 }
+.contet{margin-top: 2em;}
+.menus{
+	display: flex;
+	justify-content: space-between;
+}
 .img_logo {
 	width: 12em;
 	height: 3.6em;
@@ -15,14 +20,16 @@ html {
 	margin: 0.5em;
 }
 .user, .dropbtn, .logo {
+	width: 5em;
+	height: 4.5em;
 	background-color: #2a3c4a;
 	border: 0px black solid
 }
 .dropbtn:hover, .user:hover {
-    background-color: #23313c;
+	background-color: #23313c;
+	box-shadow: 0 5px 5px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
 }
 .dropbtn:focus, .user:focus {
-	box-shadow: 0 0 0 0;
 	border: 0 none;
 	outline: 0;
 }
@@ -38,13 +45,7 @@ html {
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     z-index: 1;
 }
-.conteudo_menu a {
-    color: #ffffff;
-    padding: 12px 16px;
-    text-decoration: none;
-    display: block;
-}
-.conteudo_login form {
+.conteudo_menu a, .conteudo_login a {
     color: #ffffff;
     padding: 12px 16px;
     text-decoration: none;
@@ -55,7 +56,6 @@ html {
 }
 nav.menu {
 	display: flex;
-	flex-flow: row wrap;
 	justify-content:space-between;
 	background-color:#2a3c4a;
 	position: fixed;
@@ -67,61 +67,9 @@ nav.menu {
 	padding: 0.4em;
 	padding-right: 2em;
 	padding-left: 2em;
-
 }
-.redes_impacta {
-	text-decoration: none;
-}
-
-a.link {
-	display: flex;
-	align-self: flex-start;
-	text-decoration: none;
-	width: 1em;
-	height: 1em;
-}
-a.link:link, a.link:visited {
-	color: #ffffff;
-}
-a.link:hover {
-	color: #afafaf;
-}
-a.link:active {
-	color: #7b7bff;
-}
-.dropmenu {
-	z-index: 1;
-	height: auto;
-	width: 10em;
-	display: none;
-	position: absolute;
-	background-color: #4e5b60;
-	margin-top:0px;
-	list-style: none;
-	padding:1em;
-	right: 0.1em;
-	top: 3.5em;
-	border-radius:5%;
-	line-height: 1.7em;
-}
-
+.redes_impacta {text-decoration: none;}
 .show{display: block;}
-
-.menuhidden {
-	display:inline-block;
-	position: relative;
-	height: auto;
-	width: 3em;
-	right:4em;
-	float:right;
-}
-.menuIcon{
-	height:2.7em;
-	width: 4.3em;
-	margin: 0.5em;
-	margin-bottom: 0.1em;
-	padding-top:0.3em;
-}
 footer {
 	background-color:#e4e4e4;
 	bottom: 0; 
@@ -140,9 +88,7 @@ h3.sigaImpacta {
 	padding-right: 0.7em;
 	-webkit-margin-after: 0.3em;
 }
-nav.siga {
-	margin-bottom:1em;
-}
+nav.siga {margin-bottom:1em;}
 div.copyright {
 	margin: 1em;
 	background-color: #c1c1c1;
@@ -150,64 +96,7 @@ div.copyright {
 	justify-content: center;
 	text-align: center;
 }
-	/* box de login */
-.userLogin{
-		display:inline-block;
-		position: relative;
-		height:auto;
-		width:20em;
-		background-color: #2a3c4a;
-}
-
-.userIcon{
-		width:2.3em;
-		height:2.3em;
-}
-
-.loginFrame{
-		position:relative;
-		height:auto;
-		display:none;
-		z-index: 1;
-}
-
-	.loginForm{
-		display:flex;
-		flex-flow:column wrap;
-		align-items: center;
-		width:80%;
-		margin-bottom: 1em;
-	}
-
-	.inputGroup{
-		display:flex;
-		justify-content: space-between;
-		align-items: center;
-		margin-top:1em;
-		color: white;
-		font-weight: bold;
-		width:100%;
-	}
-
-	.inputField{
-		width:75%;
-		height:2em;
-		border:none;
-		border-radius:5px;
-	}
-
-	.btnLogin{
-		margin-top:1.3em;
-		border-radius: 10px;
-		font-size: 1.2em;
-		width:40%;
-	}
 @media only screen and (min-width: 320px) and (max-width: 736px)
 {
-	h3.sigaImpacta {
-		display: none;
-	}
-	div.sigaImpacta {
-		padding-top: 1em;
-	}
+	div.sigaImpacta {padding-top: 1em;}
 }

@@ -14,48 +14,49 @@
 </head>
 
 <body>
-	<header>
+	<header class="motherNav">
 		<nav class="menu">
-			<a class="logo" href="/" title="Logo Faculdade Impacta">
+			<a href="/" title="Logo Faculdade Impacta">
 				<img class="img_logo" src="{% static '/' %}img/logo-novo.png" alt="Logo e link para a home" />
 			</a>
-			<div>
-				<div class="drop_login">
-					{% if not user.is_authenticated %}
-						<button class="user" title="{% if logado == False %}Sign In{% else %}Logged{% endif %}">
-							<a href='login.html'>
-								<img class="img_user" src="{% if logado == False %}{% static '/' %}img/img_user.png{% else %}{% static '/' %}img/img_user.png{% endif %}"
-								alt="{% if logado == False %}Sign In{% else %}Your Picture{% endif %}" />
-							</a>
-						</button>
-					{% else %}
-						<button class="user" onclick="login_function()" title="{% if logado == False %}Sign In{% else %}Logged{% endif %}">
-							<img class="img_user" src="{% if logado == False %}{% static '/' %}img/img_user.png{% else %}{% static '/' %}img/img_user.png{% endif %}"
-							alt="{% if logado == False %}Sign In{% else %}Your Picture{% endif %}" />
-						</button>
-						<nav>
-							{% if user.user_type == 'A' %}
-							<a href='area_aluno.html'>Área do aluno</a>
-							<a href = "/logout">Sair</a>
-							{% elif user.user_type == 'P' %}
-							<a href='area_professor.html'>Área do professor</a>
-							<a href = "/logout">Sair</a>
-							{% endif %}
-						</nav>
-					{% endif %}
-					<div class="drop_menu" title="Menu">
-						<button onclick="menu_function()" class="dropbtn">
-							<img src="{% static '/' %}img/menu_icons_bars.png" class="menu_icon" />
-						</button>
-						<div id="drop" class="conteudo_menu">
-							<a class="link" href="cursos.html" title="Cursos">Cursos</a>
-							<a class="link" href="noticias.html" title="Notícias">Notícias</a>
-						</div>
-					</div>
+			<div class='menus'>
+				{% if not user.is_authenticated %}
+				<button class="user" title="{% if not user.is_athenticated %}Entre{% else %}Logado{% endif %}">
+					<a href='login.html'>
+						<img class="img_user" src="{% if not user.is_athenticated %}{% static '/' %}img/img_user.png{% else %}{% static '/' %}img/img_user.png{% endif %}"
+						 alt="Usuario" />
+					</a>
+				</button>
+				{% else %}
+				<div>
+					<button class="user" onclick="login_function()" title="{% if not user.is_athenticated %}Entre{% else %}Logado{% endif %}">
+						<img class="img_user" src="{% if logado == False %}{% static '/' %}img/img_user.png{% else %}{% static '/' %}img/img_user.png{% endif %}"
+						 alt="Usuario" />
+					</button>
+					<nav id="drop_login" class="conteudo_login">
+						{% if user.user_type == 'A' %}
+						<a href='area_aluno.html'>Área do aluno</a>
+						<a href="/logout">Sair</a>
+						{% elif user.user_type == 'P' %}
+						<a href='area_professor.html'>Área do professor</a>
+						<a href="/logout">Sair</a>
+						{% endif %}
+					</nav>
 				</div>
+				{% endif %}
+				<div class="drop_menu" title="Menu">
+					<button onclick="menu_function()" class="dropbtn">
+						<img src="{% static '/' %}img/menu_icons_bars.png" class="menu_icon" />
+					</button>
+					<nav id="drop" class="conteudo_menu">
+						<a class="link" href="cursos.html" title="Cursos">Cursos</a>
+						<a class="link" href="noticias.html" title="Notícias">Notícias</a>
+					</nav>
+				</div>
+			</div>
 		</nav>
 	</header>
-	<main>
+	<main class='content'>
 		{% block main %}{% endblock %}
 	</main>
 	<footer>

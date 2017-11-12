@@ -10,30 +10,14 @@
 
 {% block main %}
     <form class="flexForm" method="POST">
-        {{ form.as_p }}
-        {% csrf_token %}
+    {% csrf_token %}
+    {% for field in form %}
+       <p>
+        {{ field.errors }}
+        {{ field.label_tag }} {{ field }}
+       </p>
+    {% endfor %}
         <button type="submit">Enviar</button>
         <a class="formLogin" href="recuperar_senha.html">Esqueci a senha.</a>
     </form>
 {% endblock %}
-
-<!--
-{% if logado == False %}
-<form class="flexForm" method="POST">
-    {% csrf_token %}
-    <label for="ra">RA: </label>
-    <input id="ra" class="informs" name="ra" required/>
-    <label for="senha" required>Senha: </label>
-    <input id="senha" class="informs" name="senha" type="password" required/>
-    <button type="submit">Enviar</button>
-    <a class="formLogin" href="recuperar_senha.html">Esqueci a senha.</a>
-</form>
-{% else %}
-<nav>
-    {% if tipo_user == 'Aluno' %}
-    <a href='area_aluno.html'>Área do aluno</a>
-    {% elif tipo_user == 'Professor' %}
-    <a href='area_professor.html'>Área do professor</a>
-    {% endif %}
-</nav>
-{% endif %}-->
