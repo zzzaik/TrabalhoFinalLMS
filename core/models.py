@@ -131,7 +131,7 @@ class Aluno(Usuario):
         Usuario, primary_key=True, db_column='user_id', parent_link=True)
     curso = models.ForeignKey(Cursos, blank=True, null=False)
     celular = models.CharField('Celular', max_length=11, null=False)
-    semestre_atual = models.IntegerField('semestre', null=False)
+    semestre = models.IntegerField('semestre', null=False)
 
     def __str__(self):
         return self.nome
@@ -202,7 +202,6 @@ class Turma(models.Model):
             ('nome_disciplina', 'ano_ofertado', 'semestre_ofertado'),)
 
     
-
 class Matricula(models.Model):
     ra_aluno = models.ForeignKey(
         Aluno, models.DO_NOTHING, db_column='ra_aluno', blank=True, null=True)
