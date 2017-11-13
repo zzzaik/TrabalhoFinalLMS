@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block estilo_unico %}{% static '/' %}css/login.css{% endblock %}
+
+{% block script_unico %}{% endblock %}
+	   
+{% block title %}Login{% endblock %}
+
+{% block main %}
+    <form class="flexForm" method="POST">
+    {% csrf_token %}
+    {% for field in form %}
+       <p>
+        {{ field.errors }}
+        {{ field.label_tag }} {{ field }}
+       </p>
+    {% endfor %}
+        <button type="submit">Enviar</button>
+        <a class="formLogin" href="recuperar_senha.html">Esqueci a senha.</a>
+    </form>
+{% endblock %}

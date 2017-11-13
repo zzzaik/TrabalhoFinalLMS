@@ -157,14 +157,46 @@ div.copyright {
 	justify-content: center;
 	text-align: center;
 }
-@media only screen and (min-width: 320px) and (max-width: 736px)
-{
+@media only screen and (min-width: 320px) and (max-width: 736px){
 	h3.sigaImpacta {
 		display: none;
 	}
 	div.sigaImpacta {
 		padding-top: 1em;
 	}
+	.img_logo {
+	width: 6em;
+	height: 2em;
+	padding-top: 0.25em;
+	padding-left: 1em;
+	margin-bottom: 0.1em;
+	}
+
+	a.link {
+	display: flex;
+	text-decoration: none;
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+	font-weight: bold;
+	}
+
+	.user{
+	display: flex;
+	align-self: flex-end;
+	width:2em;
+	height:2em;
+	background-color: #2a3c4a;
+	border:none;
+	}
+
+	.img_user{
+	width:2em;
+	height:2em;
+	}
+
+
+
+
 }
 /* index.html */
 .Banner {
@@ -211,8 +243,7 @@ h3.comentsAlunos {
 	color: #474747;
 }
 
-@media only screen and (min-width: 320px) and (max-width: 736px)
-{
+@media only screen and (min-width: 320px) and (max-width: 736px){
 	article.sobre {
 		display: flex;
 		align-items: center;
@@ -233,7 +264,7 @@ h3.comentsAlunos {
 }
 .listLinks{
 	width:15em;
-	height:9em;
+	height:min-content;
 	background-color: lightgray;
 	border-top-right-radius: 2%;
 	border-bottom-right-radius: 2%;
@@ -259,6 +290,7 @@ h3.comentsAlunos {
 }
 .msg{
 	width:97%;
+	height: min-content;
 	border-bottom: 1px solid black;
 	background-color: white;
 }
@@ -267,4 +299,54 @@ h3.comentsAlunos {
 }
 .texto{
 	margin-left:5px;
+}
+@media only screen and (min-width: 320px) and (max-width: 736px){
+
+.areaAluno{
+	display:flex;
+	flex-flow: column wrap;
+	justify-content: space-between;
+	align-content: flex-start;
+	position:relative;
+	width:100%;
+	top:10px;
+	padding-top:2em;
+}
+.listLinks{
+	display:flex;
+	width:95%;
+	height: min-content;
+	flex-flow:column wrap;
+	background-color: lightgray;
+	border-top-right-radius: 2%;
+	border-bottom-right-radius: 2%;
+}
+
+.flexList{
+	display:flex;
+	flex-flow:row wrap;
+	justify-content: space-around;
+}
+
+.liLink{
+	display:flex;
+	list-style: none;
+	font-family: arial;
+	font-size: 1em;
+	color:#ffffff;
+	font-weight: bold;
+	text-decoration: none;
+	line-height: 1em;
+}
+
+.msgPanel{
+	display: flex;
+	justify-content: center;
+	width:95%;
+	height:22em;
+	background-color: lightgrey;
+	margin-top: 1em;
+	margin-bottom: 2em;
+}
+
 }

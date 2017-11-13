@@ -23,41 +23,44 @@
 				<div class="linkBtn"><a class="link" href="cursos.html" title="Cursos">Cursos</a></div>
 				<div class="linkBtn"><a class="link" href="noticias.html" title="Notícias">Notícias</a></div>
 				<div class="containerLogin">
+					{% if not user.is_authenticated %}
+					<button class="user" title="{% if not user.is_authenticated %}Entre{% else %}Logado{% endif %}">
+						<a href="login.html">
+							<img class="img_user" src="{% if not user.is_athenticated %}{% static '/' %}img/img_user.png{% else %}{% static '/' %}img/img_user.png{% endif %}"
+						 	alt="Usuario" />
+						</a>
+					</button> {% else %}
 					<div class="drop_login">
-						<button class="user" onclick="login_function()" title="{% if logado == False %}Sign In{% else %}
-						Logged{% endif %}">
-							<img class="img_user"
-							src="{% if logado == False %}{% static '/' %}img/img_user.png
-						{% else %}{% static '/' %}img/img_user.png
-						{% endif %}"
-							alt="{% if logado == False %}Sign In
-								{% else %}Your Picture
-								{% endif %}" />
-							</button>
-							<div id="drop_login" class="conteudo_login">
-								<form class="flexForm" method="POST">
-									{% csrf_token %}
-									<div class="inputGroup">
-										<label for="ra">RA: </label>
-										<input id="ra" class="informs" name="ra" required/>
-									</div>
-									<div class="inputGroup">
-										<label for="senha" required>Senha: </label>
-										<input id="senha" class="informs" name="senha" type="password" required/>
-									</div>
-									<button class="btnLogin" type="submit">Enviar</button>
-									<a class="formLogin" href="#Esqueci_a_senha">Esqueci a senha.</a>
-								</form>
-							</div>
+						<button class="user" onclick="login_function()" title="{% if not user.is_athenticated %}Entre{% else %}Logado{% endif %}">
+							<img class="img_user" src="{% if logado == False %}{% static '/' %}img/img_user.png{% else %}{% static '/' %}img/img_user.png{% endif %}" alt="Usuario" />
+						</button>
+						<div id="drop_login" class="conteudo_login">
+							{% if user.user_type == 'A' %}
+							<a href='area_aluno.html'>Área do aluno</a>
+							<a href="/logout">Sair</a>
+							{% elif user.user_type == 'P' %}
+							<a href='area_professor.html'>Área do professor</a>
+							<a href="/logout">Sair</a>
+							{% endif %}
+					{% endif %}		
+
+							<!--<form class="flexForm" method="POST">
+								{% csrf_token %}
+								<div class="inputGroup">
+									<label for="ra">RA: </label>
+									<input id="ra" class="informs" name="ra" required/>
+								</div>
+								<div class="inputGroup">
+									<label for="senha" required>Senha: </label>
+									<input id="senha" class="informs" name="senha" type="password" required/>
+								</div>
+								<button class="btnLogin" type="submit">Enviar</button>
+								<a class="formLogin" href="#Esqueci_a_senha">Esqueci a senha.</a>
+							</form>-->
+						</div>
 					</div>
 				</div>
 			</nav>
-
-			<div>
-				{% if tipo_user == 'aluno' %}
-				<a href='areaAluno.html'>Área do aluno</a> {% elif tipo_user == 'professor' %}
-				<a href='#Professor'>Área do professor</a> {% endif %}
-			</div>
 		</div>
 	</header>
 	<main>
