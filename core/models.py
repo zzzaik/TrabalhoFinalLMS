@@ -131,7 +131,7 @@ class Aluno(Usuario):
         Usuario, primary_key=True, db_column='user_id', parent_link=True)
     curso = models.ForeignKey(Cursos, blank=True, null=False)
     celular = models.CharField('Celular', max_length=11, null=False)
-    semestre = models.IntegerField('semestre', null=False)
+    semestre = models.IntegerField('Semestre', null=False)
 
     def __str__(self):
         return self.nome
