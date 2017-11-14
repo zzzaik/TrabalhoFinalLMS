@@ -7,6 +7,10 @@ html {
 	box-sizing: border-box;
 }
 
+.content{
+	margin-top:1.1em;
+}
+
 .corpo {
 	margin: 0px;
 }
@@ -43,12 +47,21 @@ html {
 	display: flex;
 	justify-content: center;
 	height:100%;
-	width:6em;
+	width:9em;
+	color: #FFFFFF;
+	font-weight: bold;
+	background-color: #2a3c4a;
+	border: 0px black solid
 }
 
-.linkBtn:hover{
-	background-color: #8ba4b3;
+.dropbtn:hover, .user:hover, .linkBtn:hover {
+	background-color: #23313c;
 	transition: 0.3s;
+	box-shadow: 0 5px 5px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+}
+.dropbtn:focus, .user:focus, .linkBtn:focus {
+	border: 0 none;
+	outline: 0;
 }
 a.link {
 	display: flex;
@@ -67,10 +80,23 @@ a.link:active {
 	color: #7b7bff;
 }
 
+.menus, .menu_extenco{
+	display: flex;
+	justify-content: space-between;
+}
+
+.drop_menu, .dropbtn{
+	display: none;
+}
+
 /* box de login */
-.containerLogin{
-	display:block;
-	width:18em;
+.conteudo_menu, .conteudo_login {
+    display: none;
+    position: absolute;
+    background-color: #344a5b;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
 }
 .drop_login{
 	display:flex;
@@ -88,8 +114,9 @@ a.link:active {
 	border:none;
 }
 .img_user{
-	width:3em;
-	height:3em;
+	width:100%;
+	height:100%;
+	margin:0.2em;
 }
 .conteudo_login{
 	display:flex;
@@ -183,20 +210,12 @@ div.copyright {
 	.user{
 	display: flex;
 	align-self: flex-end;
-	width:2em;
-	height:2em;
+	width:4em;
+	height:4em;
+	margin:0.2em;
 	background-color: #2a3c4a;
 	border:none;
 	}
-
-	.img_user{
-	width:2em;
-	height:2em;
-	}
-
-
-
-
 }
 /* index.html */
 .Banner {
