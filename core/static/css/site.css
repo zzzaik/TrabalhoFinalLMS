@@ -5,10 +5,21 @@
 html {
 	font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
 }
-.contet{margin-top: 2em;}
-.menus{
+.content{margin-top: 1.1em;}
+.drop_menu, .dropbtn{
+	display: none;
+}
+.menus, .menu_extenco{
 	display: flex;
 	justify-content: space-between;
+}
+.linkBtn{
+	display: flex;
+	justify-content: center;
+	height:100%;
+	width:6em;
+}
+.link{	text-decoration: none;
 }
 .img_logo {
 	width: 12em;
@@ -19,17 +30,22 @@ html {
 	height: 3em;
 	margin: 0.5em;
 }
-.user, .dropbtn, .logo {
+.user, .dropbtn, .logo, .linkBtn {
 	width: 5em;
 	height: 4.5em;
 	background-color: #2a3c4a;
 	border: 0px black solid
 }
-.dropbtn:hover, .user:hover {
+.linkBtn{
+	width: 9em; 
+	color: #FFFFFF;
+	font-weight: bold;
+}
+.dropbtn:hover, .user:hover, .linkBtn:hover {
 	background-color: #23313c;
 	box-shadow: 0 5px 5px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
 }
-.dropbtn:focus, .user:focus {
+.dropbtn:focus, .user:focus, .linkBtn:focus {
 	border: 0 none;
 	outline: 0;
 }
@@ -99,4 +115,7 @@ div.copyright {
 @media only screen and (min-width: 320px) and (max-width: 736px)
 {
 	div.sigaImpacta {padding-top: 1em;}
+	.drop_menu, .dropbtn{display: block;}
+	.menu_extenco{display: none;}
+	.content{margin-top: 4.6em;}
 }

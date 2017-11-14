@@ -14,12 +14,18 @@
 	<script>check_codigo()</script>
 </head>
 
-<body>
+<body class = 'content'>
 	<header class="motherNav">
 		<nav class="menu">
-			<a href="/" title="Logo Faculdade Impacta">
-				<img class="img_logo" src="{% static '/' %}img/logo-novo.png" alt="Logo e link para a home" />
-			</a>
+			<div class = 'menus'>
+				<a href="/" title="Logo Faculdade Impacta">
+					<img class="img_logo" src="{% static '/' %}img/logo-novo.png" alt="Logo e link para a home" />
+				</a>
+				<nav class = 'menu_extenco'>
+					<a class = 'link' href="cursos.html" title="Cursos"><button class="linkBtn">Cursos</button></a>
+					<a class = 'link' href="noticias.html" title="Notícias"><button class="linkBtn" >Notícias</button></a>
+				</nav>
+			</div>
 			<div class='menus'>
 				{% if not user.is_authenticated %}
 				<button class="user" title="{% if not user.is_athenticated %}Entre{% else %}Logado{% endif %}">
@@ -50,8 +56,8 @@
 						<img src="{% static '/' %}img/menu_icons_bars.png" class="menu_icon" />
 					</button>
 					<nav id="drop" class="conteudo_menu">
-						<a class="link" href="cursos.html" title="Cursos">Cursos</a>
-						<a class="link" href="noticias.html" title="Notícias">Notícias</a>
+						<a href="cursos.html" title="Cursos">Cursos</a>
+						<a href="noticias.html" title="Notícias">Notícias</a>
 					</nav>
 				</div>
 			</div>
