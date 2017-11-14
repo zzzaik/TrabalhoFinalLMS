@@ -75,14 +75,6 @@ WSGI_APPLICATION = 'site_TFM.wsgi.application'
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
 
 DATABASES = {
-    'default': { # Banco no postgreSQL
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'DB_LMS',
-        'USER': 'postgres',
-        'PASSWORD': 'LMS_GP_Draco',
-        'HOST': 'localhost',
-        'PORT': '8000'
-    },
     #'default': { # Banco no MSSQL
     #    'ENGINE': "sql_server.pyodbc",
     #    'NAME': "DB_LMS_postgreSQL",
@@ -91,11 +83,22 @@ DATABASES = {
     #    'USER': "LMS_DB_admin@db-lms-draco",
     #    'PASSWORD': "P@ssw0rd",
     #},
-    #'default': { # Banco de testes sqlite 
-    #    'ENGINE': 'django.db.backends.sqlite3',
-    #    'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    #}
+    'default': { # Banco de testes sqlite 
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    }
 }
+
+'''
+'default': { # Banco no postgreSQL
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'DB_LMS',
+        'USER': 'postgres',
+        'PASSWORD': 'LMS_GP_Draco',
+        'HOST': 'localhost',
+        'PORT': '8000'
+    },
+'''
 
 # Password validation
 # https://docs.djangoproject.com/en/1.11/ref/settings/#auth-password-validators
