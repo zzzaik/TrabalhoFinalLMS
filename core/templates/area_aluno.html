@@ -6,7 +6,7 @@
 
 {% block script_unico %}{% endblock %}
 	   
-{% block title %}Area do aluno{% endblock %}
+{% block title %}Área do aluno{% endblock %}
 
 {% block main %}
 <section class="areaAluno">
@@ -24,6 +24,9 @@
             <p id="texto">mensagem modelo trolololololo</p>
             <span id="data">{{ data_agora }}</span>
         </div>
+        <form method = 'POST'>
+            <label for = 'msg'>Mensagem</label><textarea name = 'mensagem' id = 'msg' rows = '5' placeholder = "Digite sua mensagem aqui!"></textarea>
+        </form>
     </div>
 </section>
 {% endblock %}

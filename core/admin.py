@@ -3,6 +3,7 @@ from core.models import Usuario, Aluno, Professor, Cursos, Disciplina, GradeCurr
 from django.contrib.auth.admin import UserAdmin
 from django import forms
 
+
 class NovoAlunoForm(forms.ModelForm):
     class Meta:
         model = Aluno

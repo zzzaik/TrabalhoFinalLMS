@@ -2,8 +2,9 @@ from django.shortcuts import render
 from core.models import Usuario, CodigoMatricula
 from datetime import datetime
 from django.contrib.auth.decorators import login_required, user_passes_test
+from core.forms import mensagemForm
 
-now = datetime.now()
+
 def checa_aluno(user):
      return user.user_type == 'A'
 
@@ -25,8 +26,10 @@ def recuperar_senha(request):
 @login_required(login_url = '/login')
 @user_passes_test(checa_aluno, login_url = '/?erro=acesso', redirect_field_name = None)
 def area_aluno(request):
+    #msg = request.POST
+    #if 
     context = {
-        'data_agora': now
+        'data_agora': 'A'
     }
     return render(request, 'area_aluno.html', context)
 
@@ -34,7 +37,7 @@ def area_aluno(request):
 @user_passes_test(checa_professor, login_url = '/?erro=acesso', redirect_field_name = None)
 def area_professor(request):
     context = {
-    'data_agora': now
+    'data_agora': 'now'
     }
     return render(request, 'area_professor.html', context)
 

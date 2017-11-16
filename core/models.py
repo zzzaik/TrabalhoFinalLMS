@@ -52,7 +52,6 @@ class Usuario(AbstractBaseUser):
     REQUIRED_FIELDS = ['nome', 'email']
     objects = UsuarioManager()
 
-
 class Cursos(models.Model):
     sigla_curso = models.CharField(unique=True, max_length=5)
     nome_curso = models.CharField(unique=True, max_length=50)
@@ -62,7 +61,7 @@ class Cursos(models.Model):
         db_table = 'cursos'
 
     def __str__(self):
-        return self.nome_curso
+        return self.sigla_curso
 
 
 class Disciplina(models.Model):
@@ -125,6 +124,8 @@ class Periodo(models.Model):
         unique_together = (('sigla_curso', 'ano_grade',
                             'semestre_grade', 'numero_periodo'),)
 
+    def __str__(self):
+        return self.numero_periodo
 
 class Aluno(Usuario):
     parent_link = models.OneToOneField(
