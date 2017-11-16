@@ -22,7 +22,7 @@ Create table periodo (
 	sigla_curso int,
 	ano_grade int,
 	quantidade_semestres int,
-	numero_periodo smallint, --O que krls eh essa poha
+	numero_periodo smallint, --O que krls eh essa poha = seria o numero do semestre da grade curricular duas grades podem ter numeros diferentes de periodos
 	constraint pkPeriodo primary key (id),
 	constraint ucPeriodo unique (sigla_curso, ano_grade, quantidade_semestres, numero_periodo),
 	constraint fkPeriodo foreign key (sigla_curso) references cursos (id),
@@ -41,7 +41,7 @@ Create table disciplina (
 	habilidades_disciplina text,
 	conteudo_disciplina text,
 	bibliografia_basica_disciplina text,
-	bibliografia_complementar_disciplina text,
+	bibliografia_complementar_disciplina text,	
 	constraint pkDisciplina primary key (id),
 	constraint ucDisciplina unique (nome_disciplina)
 );
@@ -68,7 +68,7 @@ class Professor(Usuario):
     def __str__(self):
         return self.nome
 
---O que eh periodo??????????????????
+--O que eh periodo?????????????????? Periodo seria o Semestre
 Create table periodo_disciplina (
 	id serial not null,
 	sigla_curso int,
@@ -89,13 +89,13 @@ Create table disciplina_ofertada (
 	id serial not null,
 	nome_disciplina int,
 	ano_disciplina_ofertada smallint,
-	semestre_disciplina_ofertada char(1),
+	semestre_disciplina_ofertada char(1),	
 	constraint pkDisciplinaOfertada primary key (id),
 	constraint ucDisciplinaOfertada unique (nome_disciplina, ano_disciplina_ofertada, semestre_disciplina_ofertada),
 	constraint fkDisciplinaOfertada foreign key (nome_disciplina) references disciplina (id)
 );
 
-Create table turma (
+Create table turma ( ## = Turma talvez precise de um identificador Ex ADS 2A   	divisão de turma porque uma turma não pode ter mais de 30 alunos.
 	id serial not null,
 	nome_disciplina int,
 	ano_ofertado int,
