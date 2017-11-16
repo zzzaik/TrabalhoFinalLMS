@@ -1,6 +1,5 @@
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
-# Create your models here.
 
 class UsuarioManager(BaseUserManager):
     use_in_migrations = True
@@ -331,3 +330,15 @@ class ArquivoResposta(models.Model):
         db_table = 'arquivo_resposta'
         unique_together = (('nome_disciplina', 'ano_ofertado', 'semestre_ofertado',
                             'id_turma', 'numero_questao', 'ra_aluno', 'arquivo_resposta'),)
+
+
+class CodigoMatricula(models.Model):
+    id_aluno = models.ForeignKey('Aluno', models.DO_NOTHING, db_column='id_aluno')
+    sigla_curso = models.CharField(max_length=5)
+    codigo = models.CharField(max_length=10)
+    status = models.TextField(blank=True, null=True)  # This field type is a guess.
+
+    class Meta:
+        managed = False
+        db_table = 'codigo_matricula'
+        unique_together = (('id_aluno', 'sigla_curso', 'codigo'),)

@@ -1,27 +1,37 @@
 {% extends 'base.html' %}
-
 {% load static %}
-
-{% block estilo_unico %}{% static '/' %}css/redefinir.css{% endblock %}
-
-{% block script_unico %}{% endblock %}
-	   
+{% block estilo_unico %}{% static '/' %}css/site.css{% endblock %}
+{% block script_unico %}
+{% endblock %}
 {% block title %}Redefinir Senha{% endblock %}
-
 {% block main %}
-<section>
-    <form class="flexForm" method="POST">
-        <h2> Recupere sua senha Aqui<h2>
-        
-        <input id="email" class="informs" name="email" type="email" placeholder="E-mail" required/>
-        <input type="text" name"RA" placeholder="Informe seu RA" required/>
-        <input id="senha" class="informs" name="senha" type="password" placeholder="Nova Senha" required/>
-        <input id="Confirmasenha" class="informs" name="senha" type="password" placeholder="Confirme a Senha" required/>
-        
-        <textarea name="Duvida" placeholder="Em caso de Duvida
-        Deixe sua Sugestão aqui!"></textarea>
-        <input type="button" value="ENVIAR" id="boton">
-        <input type="button" value="SALVAR" id="boton">
-    </form>
+<section class="content">
+    <fieldset class="flexFieldSet">
+        <legend>Recuperação de Senha</legend>
+        <form class="flexForm" method="POST">
+            <div class="inputGroup">
+                <label for="email">Email:</label>
+                <input id="email" class="informs" name="email" type="email" placeholder="email..." required/>
+            </div>
+            <div class="inputGroup">
+                <label for="ra">RA:</label>
+                <input id="ra" class="informs" type="text" name="RA" placeholder="Informe seu RA" required/>
+            </div>
+            <div class="inputGroup">
+                <label for="senha">Senha:</label>
+                <input id="senha" class="informs" name="senha" type="password" placeholder="Nova Senha" required/>
+            </div>
+
+            <div class="inputGroup">
+                    <label for="confirmaSenha">Senha:</label>
+                    <input id="confirmaSenha" class="informs" name="confirmaSenha" type="password" placeholder="Confirme a Senha" required/>
+            </div>
+            <button type="submit" class="submitBtn" id="salvar">Salvar</button>
+        </form>
+        <form class="flexForm">  
+            <textarea name="Duvida" class="inputTextArea" placeholder="Em caso de Duvida Deixe sua Sugestão aqui!"></textarea>
+            <button type="submit" class="submitBtn" id="enviar">Enviar</button>
+        </form>
+    </fieldset>
 </section>
 {% endblock %}
