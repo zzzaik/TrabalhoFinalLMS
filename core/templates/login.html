@@ -2,22 +2,24 @@
 
 {% load static %}
 
-{% block estilo_unico %}{% static '/' %}css/login.css{% endblock %}
+{% block estilo_unico %}{% static '/' %}css/site.css{% endblock %}
 
 {% block script_unico %}{% endblock %}
 	   
 {% block title %}Login{% endblock %}
 
 {% block main %}
-    <form class="flexForm" method="POST">
-    {% csrf_token %}
-    {% for field in form %}
-       <p>
-        {{ field.errors }}
-        {{ field.label_tag }} {{ field }}
-       </p>
-    {% endfor %}
-        <button type="submit">Enviar</button>
-        <a class="formLogin" href="recuperar_senha.html">Esqueci a senha.</a>
-    </form>
+    <fieldset class="flexFieldSet">
+        <form class="flexForm" method="POST">
+        {% csrf_token %}
+        {% for field in form %}
+        <p class="inputGroup">
+            {{ field.errors }}
+            {{ field.label_tag }} {{ field }}
+        </p>
+        {% endfor %}
+            <button type="submit" class="linkBtn">Enviar</button>
+            <a href="recuperar_senha.html">Esqueci a senha</a>
+        </form>
+    </fieldset>
 {% endblock %}
