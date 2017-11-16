@@ -95,7 +95,7 @@ Create table disciplina_ofertada (
 	constraint fkDisciplinaOfertada foreign key (nome_disciplina) references disciplina (id)
 );
 
-Create table turma ( ## = Turma talvez precise de um identificador Ex ADS 2A   	divisão de turma porque uma turma não pode ter mais de 30 alunos.
+Create table turma ( ## = Turma talvez precise de um identificador Ex ADS 2A   	divisão de turma porque uma turma não pode ter mais de 30 alunos##
 	id serial not null,
 	nome_disciplina int,
 	ano_ofertado int,
