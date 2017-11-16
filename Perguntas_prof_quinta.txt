@@ -1,0 +1,150 @@
+CREATE TABLE curso (
+	id serial not null,
+	sigla_curso varchar(5) not null,
+	nome_curso varchar(50) not null,
+	constraint pkCurso PRIMARY KEY (id),
+	constraint ucCurso UNIQUE (sigla_curso),
+	constraint ucCurso_2 UNIQUE (nome_curso)
+);
+
+CREATE TABLE grade_curricular (
+	id serial not null,
+	sigla_curso int,
+	ano_grade smallint,
+	quantidade_semestres char(1),
+	constraint pk_GradeCurricular primary key (id),
+	constraint uc_GradeCurricular unique (sigla_curso, ano_grade, quantidade_semestres),
+	constraint fk_GradeCurricular foreign key (sigla_curso) references cursos (id)
+);
+
+Create table periodo (
+	id serial not null,
+	sigla_curso int,
+	ano_grade int,
+	quantidade_semestres int,
+	numero_periodo smallint, --O que krls eh essa poha
+	constraint pkPeriodo primary key (id),
+	constraint ucPeriodo unique (sigla_curso, ano_grade, quantidade_semestres, numero_periodo),
+	constraint fkPeriodo foreign key (sigla_curso) references cursos (id),
+	constraint fkPeriodo_2 foreign key (ano_grade) references grade_curricular (id),
+	constraint fkPeriodo_3 foreign key (quantidade_semestres) references grade_curricular (id)
+);
+
+Create table disciplina (
+	id serial not null,
+	nome_disciplina varchar(240) NOT NULL,
+	carga_horaria smallint NOT NULL,
+	teoria_disciplina decimal(3) NOT NULL,
+	pratica_disciplina decimal(3) NOT NULL,
+	ementa_disciplina text,
+	competencias_disciplina text,
+	habilidades_disciplina text,
+	conteudo_disciplina text,
+	bibliografia_basica_disciplina text,
+	bibliografia_complementar_disciplina text,
+	constraint pkDisciplina primary key (id),
+	constraint ucDisciplina unique (nome_disciplina)
+);
+
+class Aluno(Usuario):
+    parent_link = models.OneToOneField(
+        Usuario, primary_key=True, db_column='user_id', parent_link=True)
+    curso = models.ForeignKey(Cursos, blank=True, null=False)
+    celular = models.CharField('Celular', max_length=11, null=False)
+    semestre_atual = models.IntegerField('Semestre', null=False)
+	ano_ingresso = models.IntegerField('Ano', null=False)
+    
+    def __str__(self):
+        return self.nome
+
+
+class Professor(Usuario):
+    parent_link = models.OneToOneField(
+        Usuario, primary_key=True, db_column='user_id', parent_link=True)
+    celular = models.CharField('Celular', max_length=11, null=True)
+    apelido = models.CharField(
+        'Apelido', max_length=30, null=False, unique=True)
+
+    def __str__(self):
+        return self.nome
+
+--O que eh periodo??????????????????
+Create table periodo_disciplina (
+	id serial not null,
+	sigla_curso int,
+	ano_grade int,
+	semestre_grade int,
+	numero_periodo int,
+	nome_disciplina int,
+	constraint pkPeriodoDisciplina primary key (id),
+	constraint ucPeriodoDisciplina unique (sigla_curso, ano_grade, semestre_grade,
+numero_periodo, nome_disciplina),
+	constraint fkPeriodoDisciplina foreign key (sigla_curso) references cursos (id),
+	constraint fkPeriodoDisciplina_2 foreign key (ano_grade) references grade_curricular (id),
+	constraint fkPeriodoDisciplina_3 foreign key (semestre_grade) references grade_curricular (id),
+	constraint fkPeriodoDisciplina_4 foreign key (nome_disciplina) references disciplina (id)
+);
+
+Create table disciplina_ofertada (
+	id serial not null,
+	nome_disciplina int,
+	ano_disciplina_ofertada smallint,
+	semestre_disciplina_ofertada char(1),
+	constraint pkDisciplinaOfertada primary key (id),
+	constraint ucDisciplinaOfertada unique (nome_disciplina, ano_disciplina_ofertada, semestre_disciplina_ofertada),
+	constraint fkDisciplinaOfertada foreign key (nome_disciplina) references disciplina (id)
+);
+
+Create table turma (
+	id serial not null,
+	nome_disciplina int,
+	ano_ofertado int,
+	semestre_ofertado int,
+	id_turma char(1),
+	turno varchar(15),
+	ra_professor int,
+	constraint pkturma primary key (id),
+	constraint ucturma unique (nome_disciplina, ano_ofertado, semestre_ofertado),
+	constraint ucturma_2 unique (id_turma),
+	constraint fkturma foreign key (nome_disciplina) references disciplina (id),
+	constraint fkturma_2 foreign key (ano_ofertado) references disciplina_ofertada (id),
+	constraint fkturma_3 foreign key (semestre_ofertado) references disciplina_ofertada(id),
+	constraint fkturma_4 foreign key (ra_professor) references core_professor (user_id)
+);
+
+
+Create table matricula (
+	id serial not null,
+	ra_aluno int,
+	nome_disciplina int,
+	ano_ofertado int,
+	semestre_ofertado int,
+	id_turma int,
+	constraint pkmatricula primary key (id),
+	constraint ucmatricula unique (ra_aluno, nome_disciplina, ano_ofertado, semestre_ofertado, id_turma),
+	constraint fkmatricula foreign key (ra_aluno) references core_aluno (user_id),
+	constraint fkmatricula_2 foreign key (nome_disciplina) references disciplina (id),
+	constraint fkmatricula_3 foreign key (ano_ofertado) references disciplina_ofertada (id),	
+	constraint fkmatricula_4 foreign key (semestre_ofertado) references disciplina_ofertada (id),
+	constraint fkmatricula_5 foreign key (id_turma) references turma (id)
+);
+
+
+Create table curso_turma (
+	id serial not null,
+	sigla_curso int,
+	nome_disciplina int,
+	ano_ofertado int,
+	semestre_ofertado int,
+	id_turma int,
+	constraint pkCursoTurma primary key (id),
+	constraint ucCursoTurma unique (sigla_curso, nome_disciplina, ano_ofertado, semestre_ofertado, id_turma),
+	constraint fkCursoTurma foreign key (sigla_curso) references cursos (id),
+	constraint fkCursoTurma_2 foreign key (nome_disciplina) references disciplina (id),
+	constraint fkCursoTurma_3 foreign key (ano_ofertado) references disciplina_ofertada (id),
+	constraint fkCursoTurma_4 foreign key (semestre_ofertado) references disciplina_ofertada (id),
+	constraint fkCursoTurma_5 foreign key (id_turma) references turma (id)
+);
+
+
+
