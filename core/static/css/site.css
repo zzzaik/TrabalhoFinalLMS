@@ -367,7 +367,7 @@ h3.comentsAlunos {
 
 .areaAluno{
 	display:flex;
-	flex-flow: column wrap;
+	flex-flow: column nowrap;
 	justify-content: space-between;
 	align-content: flex-start;
 	position:relative;
@@ -377,7 +377,7 @@ h3.comentsAlunos {
 }
 .listLinks{
 	display:flex;
-	width:95%;
+	width:min-content;
 	height: min-content;
 	flex-flow:column wrap;
 	background-color: lightgray;
@@ -413,3 +413,18 @@ h3.comentsAlunos {
 }
 
 }
+
+/* area do professor */
+
+.areaProf{
+	display:flex;
+	flex-flow: column nowrap;
+	justify-content: space-between;
+	align-content: flex-start;
+	position:relative;
+	width:100%;
+	top:10px;
+	padding-top:2em;
+}
+
+/* Matricula */

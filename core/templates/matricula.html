@@ -1,18 +1,12 @@
 {% extends 'base.html' %}
 {% load static %}
-
-{% block estilo_unico %}{% static '/' %}css/matricula.css{% endblock %}
-
+{% block estilo_unico %}{% static '/' %}css/site.css{% endblock %}
 {% block script_unico %}static/src/matricula.js{% endblock %}
-
 {% block login %}{% endblock %}
-
 {% block img_user %}{% endblock %}
-
 {% block title %}Faculdade Impacta - Matricula{% endblock %}
-
 {% block main %}
-    <var class="flag">F</var>
+<!--<var class="flag">F</var>
     {% if flag == 'T' %}
         <section>
 		    </br>
@@ -23,6 +17,37 @@
            </br>
             <p>Codigo Inválido</p> 
             </br>
-    {% endif %}
+    {% endif %}-->
+<section class="content">
+    <fieldset class="flexFieldSet">
+        <form class="flexForm">
+            <div class="inputGroup">
+                <label for="curso">Curso:</label>
+                <select class="informs" name="curso" id="curso">
+                    <option>-- Curso --</option>
+                </select>
+            </div>
+            <div class="inputGroup">
+                <label for="disciplina">Disciplina:</label>
+                <select class="informs" name="disciplina" id="disciplina">
+                    <option>-- Disciplina --</option>
+                </select>
+                <label for="turma">Turma:</label>
+                <select class="informs" name="turma" id="turma">
+                    <option>-- Turma --</option>
+                </select>
+            </div>
+            <div class="inputGroup">
+                <label for="alunos">Alunos:</label>
+                <select class="informs" name="alunos" id="alunos" multiple>
+                    <option>-- Alunos --</option>
+                    <option>-- Luka --</option>
+                    <option>-- Daniel --</option>
+                    <option>-- João --</option>
+                    <option>-- Jhonatan --</option>
+                </select>
+            </div>
+        </form>
+    </fieldset>
+</section>
 {% endblock %}
-
