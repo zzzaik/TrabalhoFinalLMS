@@ -1,5 +1,4 @@
 from django.shortcuts import render
-from core.models import Usuario, CodigoMatricula
 from datetime import datetime
 from django.contrib.auth.decorators import login_required, user_passes_test
 from core.forms import mensagemForm

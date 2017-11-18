@@ -1,3 +1,26 @@
+CREATE TABLE curso (
+    id INT IDENTITY(1,. 1) NOT NULL,
+    sigla VARCHAR(5) NOT NULL,
+    nome VARCHAR(50) NOT NULL,
+    CONSTRAINT pkCurso PRIMARY KEY (id),
+    CONSTRAINT unkCurso UNIQUE (sigla),
+    CONSTRAINT unkCurso2 UNIQUE (nome)
+);
+
+CREATE TABLE disciplina (
+	id INT IDENTITY(1,. 1) NOT NULL,
+    nome VARCHAR(240) NOT NULL,
+    carga_horaria SMALLINT NOT NULL,
+    aula_teorica DECIMAL(10, 3) NOT NULL,
+    aula_pratica DECIMAL(10, 3) NOT NULL,
+    ementa TEXT,
+    competencias TEXT,
+	habilidades TEXT,
+    conteudo TEXT,
+    bibliografia_basica TEXT,
+    bibliografia_complementar TEXT
+);
+
 Use DB_LMS_postgreSQL
 GO
 

@@ -23,7 +23,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'ct00xjizk(-o!torlxai8*-^%eyxcux-_94e)dmjifyljmmo6y'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = []
 
@@ -75,30 +75,15 @@ WSGI_APPLICATION = 'site_TFM.wsgi.application'
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
 
 DATABASES = {
-    #'default': { # Banco no MSSQL
-    #    'ENGINE': "sql_server.pyodbc",
-    #    'NAME': "DB_LMS_postgreSQL",
-    #    'HOST': "db-lms-draco.database.windows.net",
-    #    'PORT': '1433',
-    #    'USER': "LMS_DB_admin@db-lms-draco",
-    #    'PASSWORD': "P@ssw0rd",
-    #},
-    'default': { # Banco no postgreSQL
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'DB_LMS',
-        'USER': 'postgres',
-        'PASSWORD': 'LMS_GP_Draco',
-        'HOST': 'localhost',
-        'PORT': '8000'
+    'default': { # Banco no MSSQL
+        'ENGINE': "sql_server.pyodbc",
+        'NAME': "db-lms-project",
+        'HOST': "db-lms-draco.database.windows.net",
+        'PORT': '1433',
+        'USER': "LMS_DB_admin@db-lms-draco",
+        'PASSWORD': "P@ssw0rd",
     }
 }
-
-'''
-    'default': { # Banco de testes sqlite 
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
-'''
 
 # Password validation
 # https://docs.djangoproject.com/en/1.11/ref/settings/#auth-password-validators
@@ -144,7 +129,8 @@ AUTH_USER_MODEL = 'core.Usuario'
 LOGIN_URL = 'login'
 LOGIN_REDIRECT_URL = 'home'
 LOGOUT_URL = 'logout'
-'''
+
 try:
-    from 
-    '''
+    from .local_settings import *
+except ImportError:
+    pass

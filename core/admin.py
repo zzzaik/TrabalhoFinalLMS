@@ -1,8 +1,8 @@
 from django.contrib import admin
-from core.models import Usuario, Aluno, Professor, Cursos, Disciplina, GradeCurricular, Periodo, DisciplinaOfertada, Turma
+#, GradeCurricular, Periodo, DisciplinaOfertada, Turma
+from core.models import Usuario, Aluno, Professor, Cursos, Disciplina
 from django.contrib.auth.admin import UserAdmin
 from django import forms
-
 
 class NovoAlunoForm(forms.ModelForm):
     class Meta:
@@ -108,7 +108,9 @@ admin.site.register(Usuario, CoordenadorAdmin)
 
 admin.site.register(Cursos)
 admin.site.register(Disciplina)
+'''
 admin.site.register(GradeCurricular)
 admin.site.register(Periodo)
 admin.site.register(DisciplinaOfertada)
 admin.site.register(Turma)
+'''
