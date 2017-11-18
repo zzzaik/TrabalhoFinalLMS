@@ -68,7 +68,8 @@ class Disciplina(models.Model):
         managed = False
         db_table = 'disciplina'
 
-
+    def __str__(self):
+        return self.nome
 
 class Curso(models.Model):
     sigla_curso = models.CharField(unique=True, max_length=5)
@@ -78,7 +79,8 @@ class Curso(models.Model):
         managed = False
         db_table = 'curso'
 
-
+    def __str__(self):
+        return self.sigla_curso
 
 class Aluno(Usuario):
     parent_link = models.OneToOneField(

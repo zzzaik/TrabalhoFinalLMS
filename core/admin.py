@@ -1,6 +1,6 @@
 from django.contrib import admin
 #, GradeCurricular, Periodo, DisciplinaOfertada, Turma
-from core.models import Usuario, Aluno, Professor, Cursos, Disciplina
+from core.models import Usuario, Aluno, Professor, Curso, Disciplina
 from django.contrib.auth.admin import UserAdmin
 from django import forms
 
@@ -106,7 +106,7 @@ class CoordenadorAdmin(UserAdmin):
     filter_horizontal = ()
 admin.site.register(Usuario, CoordenadorAdmin)
 
-admin.site.register(Cursos)
+admin.site.register(Curso)
 admin.site.register(Disciplina)
 '''
 admin.site.register(GradeCurricular)
