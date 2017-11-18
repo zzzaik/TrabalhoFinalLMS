@@ -14,7 +14,9 @@ html {
 	margin-top:1.1em;
 	width:98%;
 }
-
+li.show{
+	display:block;
+}
 .corpo {
 	margin: 0px;
 }
@@ -428,3 +430,22 @@ h3.comentsAlunos {
 }
 
 /* Matricula */
+.dropdownList{
+	flex-flow: column wrap;
+}
+.selectionBox{
+	position: relative;
+	width:100%;
+	height:max-content;
+	border-radius: 5px 5px 0px 0px;
+	background-color: #ffffff;
+}
+.selectionList{
+	display:none;
+	position: relative;
+	z-index:1;
+	height: max-content;
+	width:100%;
+	border-radius: 0px 0px 5px 5px;
+	background-color: #ffffff;
+}

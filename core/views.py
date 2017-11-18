@@ -43,4 +43,10 @@ def primeiro_login(request):
     return render(request, 'primeiro_login.html')
 
 def matricula(request):
+    alunos=request.POST.
+    # como passar um array pelo POST; django:
+    # https://stackoverflow.com/questions/4581114/django-questionhow-to-pass-a-list-parameter-using-post-method
+    context = {
+        'matriculas':""
+    }
     return render(request, 'matricula.html')

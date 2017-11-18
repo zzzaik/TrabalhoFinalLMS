@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block estilo_unico %}{% static '/' %}css/site.css{% endblock %}
-{% block script_unico %}static/src/matricula.js{% endblock %}
+{% block script_unico %}static/src/script.js{% endblock %}
 {% block login %}{% endblock %}
 {% block img_user %}{% endblock %}
 {% block title %}Faculdade Impacta - Matricula{% endblock %}
@@ -20,7 +20,8 @@
     {% endif %}-->
 <section class="content">
     <fieldset class="flexFieldSet">
-        <form class="flexForm">
+        <form class="flexForm" method="POST">
+        {% csrf_token %}
             <div class="inputGroup">
                 <label for="curso">Curso:</label>
                 <select class="informs" name="curso" id="curso">
@@ -37,16 +38,20 @@
                     <option>-- Turma --</option>
                 </select>
             </div>
-            <div class="inputGroup">
+            <div class="inputGroup dropdownList">
                 <label for="alunos">Alunos:</label>
-                <select class="informs" name="alunos" id="alunos" multiple>
-                    <option>-- Alunos --</option>
-                    <option>-- Luka --</option>
-                    <option>-- Daniel --</option>
-                    <option>-- João --</option>
-                    <option>-- Jhonatan --</option>
-                </select>
+                <div class="selectionBox" onclick="selection_list()">
+                    <span>-- Alunos --</span>
+                </div>
+                <!-- como passar um array pelo POST; django:
+                    https://stackoverflow.com/questions/4581114/django-questionhow-to-pass-a-list-parameter-using-post-method -->
+                <li class="selectionList" id="alunos">
+                    <ul><input type="checkbox" name="alunos"value="aluno1">Aluno 1</input></ul>
+                    <ul><input type="checkbox" name="alunos"value="aluno2">Aluno 2</input></ul>
+                    <ul><input type="checkbox" name="alunos"value="aluno3">Aluno 3</input></ul>
+                </li>
             </div>
+            <button type="submit" class="submitBtn">Matricular</button>
         </form>
     </fieldset>
 </section>
