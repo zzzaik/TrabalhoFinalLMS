@@ -34,6 +34,16 @@ window.onclick = function(event) {
   }
 }
 
+function selection_list() {
+    alunos=document.getElementById("alunos");
+    if (alunos.classList.contains('show')){
+        alunos.classList.remove('show');
+    } else{
+        alunos.classList.toggle('show');
+    }
+}
+
+
 function error_message() {
   alert('{{ form.error }}')  
 }

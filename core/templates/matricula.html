@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block estilo_unico %}{% static '/' %}css/site.css{% endblock %}
-{% block script_unico %}static/src/matricula.js{% endblock %}
+{% block script_unico %}static/src/script.js{% endblock %}
 {% block login %}{% endblock %}
 {% block img_user %}{% endblock %}
 {% block title %}Faculdade Impacta - Matricula{% endblock %}
@@ -19,34 +19,51 @@
             </br>
     {% endif %}-->
 <section class="content">
+    <div class="content left">
+        <a href="area_professor.html" class="link linkBtn">Voltar</a>
+    </div>
     <fieldset class="flexFieldSet">
-        <form class="flexForm">
+        <form class="flexForm" method="POST">
+        {% csrf_token %}
             <div class="inputGroup">
                 <label for="curso">Curso:</label>
                 <select class="informs" name="curso" id="curso">
                     <option>-- Curso --</option>
+                    {% for c in cursos %}
+                    <option value="{{ c.sigla_curso }}">{{ c.sigla_curso }}</option>
+                    {% endfor %}
                 </select>
             </div>
             <div class="inputGroup">
                 <label for="disciplina">Disciplina:</label>
                 <select class="informs" name="disciplina" id="disciplina">
                     <option>-- Disciplina --</option>
+                    {% for d in disciplinas %}
+                    <option value="{{ d.nome_disciplina }}">{{ d.nome_disciplina }}</option>
+                    {% endfor %}
                 </select>
                 <label for="turma">Turma:</label>
                 <select class="informs" name="turma" id="turma">
                     <option>-- Turma --</option>
+                    {% for t in turmas %}
+                    <option value="{{ t.id_turma }}">{{ t.id_turma }}</option>
+                    {% endfor %}
                 </select>
             </div>
-            <div class="inputGroup">
+            <div class="inputGroup dropdownList">
                 <label for="alunos">Alunos:</label>
-                <select class="informs" name="alunos" id="alunos" multiple>
-                    <option>-- Alunos --</option>
-                    <option>-- Luka --</option>
-                    <option>-- Daniel --</option>
-                    <option>-- João --</option>
-                    <option>-- Jhonatan --</option>
-                </select>
+                <div class="selectionBox" onclick="selection_list()">
+                    <span>-- Alunos --</span>
+                </div>
+                <!-- como passar um array pelo POST; django:
+                    https://stackoverflow.com/questions/4581114/django-questionhow-to-pass-a-list-parameter-using-post-method -->
+                <li class="selectionList" id="alunos">
+                    {% for a in alunos %}
+                    <ul><input type="checkbox" name="ra_aluno"value="{{ a.ra }}">{{ a.nome }}</input></ul>
+                    {% endfor %}
+                </li>
             </div>
+            <button type="submit" class="submitBtn">Matricular</button>
         </form>
     </fieldset>
 </section>

@@ -14,7 +14,9 @@ html {
 	margin-top:1.1em;
 	width:98%;
 }
-
+li.show{
+	display:block;
+}
 .corpo {
 	margin: 0px;
 }
@@ -76,9 +78,7 @@ a.link {
 a.link:link, a.link:visited {
 	color: #ffffff;
 }
-a.link:hover {
-	color:#2a3c4a;
-}
+
 a.link:active {
 	color: #7b7bff;
 }
@@ -380,7 +380,7 @@ h3.comentsAlunos {
 	width:min-content;
 	height: min-content;
 	flex-flow:column wrap;
-	background-color: lightgray;
+	background-color: #757575;
 	border-top-right-radius: 2%;
 	border-bottom-right-radius: 2%;
 }
@@ -400,6 +400,9 @@ h3.comentsAlunos {
 	font-weight: bold;
 	text-decoration: none;
 	line-height: 1em;
+}
+.liLink:hover{
+	background-color: #757575;
 }
 
 .msgPanel{
@@ -428,3 +431,26 @@ h3.comentsAlunos {
 }
 
 /* Matricula */
+.dropdownList{
+	flex-flow: column wrap;
+}
+.selectionBox{
+	position: relative;
+	width:100%;
+	height:max-content;
+	border-radius: 5px 5px 0px 0px;
+	background-color: #ffffff;
+}
+.selectionList{
+	display:none;
+	position: relative;
+	z-index:1;
+	height: max-content;
+	width:100%;
+	border-radius: 0px 0px 5px 5px;
+	background-color: #ffffff;
+}
+
+.left{
+	align-items: flex-start;
+}

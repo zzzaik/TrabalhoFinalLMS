@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from core.models import Usuario, CodigoMatricula
+from core.models import Usuario
 from datetime import datetime
 from django.contrib.auth.decorators import login_required, user_passes_test
 
@@ -43,4 +43,14 @@ def primeiro_login(request):
     return render(request, 'primeiro_login.html')
 
 def matricula(request):
-    return render(request, 'matricula.html')
+    ra_alunos=request.POST.getlist('ra_alunos')
+    # como passar um array pelo POST; django:
+    # https://stackoverflow.com/questions/4581114/django-questionhow-to-pass-a-list-parameter-using-post-method
+    context = {
+        'cursos':'lista de cursos',#query em função do RA do prof
+        'disciplinas':'lista de disciplinas',#disciplinas do curso selecionado
+        'turmas':'lista de turmas',#turmas da disciplina selecionada
+        'alunos':'lista de alunos',#alunos sem turma
+        'matriculas':ra_alunos#vem na forma de um array
+    }
+    return render(request, 'matricula.html',context)
