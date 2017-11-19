@@ -1,6 +1,6 @@
 from django.contrib import admin
-#, GradeCurricular, Periodo, DisciplinaOfertada, Turma
-from core.models import Usuario, Aluno, Professor, Curso, Disciplina
+#, GradeCurricular, Periodo
+from core.models import Usuario, Aluno, Professor, Curso, Disciplina, DisciplinaOfertada, Turma
 from django.contrib.auth.admin import UserAdmin
 from django import forms
 
@@ -108,9 +108,10 @@ admin.site.register(Usuario, CoordenadorAdmin)
 
 admin.site.register(Curso)
 admin.site.register(Disciplina)
+admin.site.register(DisciplinaOfertada)
+admin.site.register(Turma)
+
 '''
 admin.site.register(GradeCurricular)
 admin.site.register(Periodo)
-admin.site.register(DisciplinaOfertada)
-admin.site.register(Turma)
 '''

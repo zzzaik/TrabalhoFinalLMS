@@ -18,7 +18,7 @@ class UsuarioManager(BaseUserManager):
 
     def create_superuser(self, ra, password, **extra_fields):
         return self._create_user(ra, password, **extra_fields)
-    
+
 
 class Usuario(AbstractBaseUser):
     nome = models.CharField('Nome', max_length=100, blank=True)
@@ -52,17 +52,24 @@ class Usuario(AbstractBaseUser):
     REQUIRED_FIELDS = ['nome', 'email']
     objects = UsuarioManager()
 
+
 class Disciplina(models.Model):
     nome = models.CharField(max_length=240)
     carga_horaria = models.SmallIntegerField()
     aula_teorica = models.DecimalField(max_digits=10, decimal_places=3)
     aula_pratica = models.DecimalField(max_digits=10, decimal_places=3)
-    ementa = models.TextField(blank=True, null=True)  # This field type is a guess.
-    competencias = models.TextField(blank=True, null=True)  # This field type is a guess.
-    habilidades = models.TextField(blank=True, null=True)  # This field type is a guess.
-    conteudo = models.TextField(blank=True, null=True)  # This field type is a guess.
-    bibliografia_basica = models.TextField(blank=True, null=True)  # This field type is a guess.
-    bibliografia_complementar = models.TextField(blank=True, null=True)  # This field type is a guess.
+    # This field type is a guess.
+    ementa = models.TextField(blank=True, null=True)
+    # This field type is a guess.
+    competencias = models.TextField(blank=True, null=True)
+    # This field type is a guess.
+    habilidades = models.TextField(blank=True, null=True)
+    # This field type is a guess.
+    conteudo = models.TextField(blank=True, null=True)
+    # This field type is a guess.
+    bibliografia_basica = models.TextField(blank=True, null=True)
+    # This field type is a guess.
+    bibliografia_complementar = models.TextField(blank=True, null=True)
 
     class Meta:
         managed = False
@@ -71,9 +78,50 @@ class Disciplina(models.Model):
     def __str__(self):
         return self.nome
 
+class Professor(Usuario):
+    parent_link = models.OneToOneField(
+        Usuario, primary_key=True, db_column='user_id', parent_link=True)
+    celular = models.CharField('Celular', max_length=11, null=True)
+    apelido = models.CharField(
+        'Apelido', max_length=30, null=False, unique=True)
+
+    def __str__(self):
+        return self.nome
+
+class DisciplinaOfertada(models.Model):
+    nome_disciplina = models.ForeignKey(
+        Disciplina, models.DO_NOTHING, db_column='nome_disciplina')
+    ano = models.SmallIntegerField()
+    semestre = models.CharField(max_length=1)
+
+    class Meta:
+        managed = False
+        db_table = 'disciplina_ofertada'
+        unique_together = (('nome_disciplina', 'ano', 'semestre'),)
+
+
+class Turma(models.Model):
+    num_turma = models.CharField(max_length=2)
+    ra_professor = models.ForeignKey(
+        'Professor', models.DO_NOTHING, db_column='ra_professor')
+    nome_disciplina = models.ForeignKey(
+        'DisciplinaOfertada', models.DO_NOTHING, db_column='nome_disciplina')
+    ano_ofertado = models.ForeignKey(
+        'DisciplinaOfertada', models.DO_NOTHING, db_column='ano_ofertado', related_name = '+')
+    semestre_ofertado = models.ForeignKey(
+        'DisciplinaOfertada', models.DO_NOTHING, db_column='semestre_ofertado', related_name = '+')
+    turno = models.CharField(max_length=15)
+
+    class Meta:
+        managed = False
+        db_table = 'Turma'
+        unique_together = (('num_turma', 'nome_disciplina',
+                            'ano_ofertado', 'semestre_ofertado'),)
+
 class Curso(models.Model):
     sigla_curso = models.CharField(unique=True, max_length=5)
     nome_curso = models.CharField(unique=True, max_length=50)
+    turma = models.ManyToManyField(to = Turma, through='CursoTurma')
 
     class Meta:
         managed = False
@@ -88,18 +136,58 @@ class Aluno(Usuario):
     curso = models.ForeignKey(Curso, blank=True, null=False)
     celular = models.CharField('Celular', max_length=11, null=False)
     semestre = models.IntegerField('Semestre', null=False)
+    turma = models.ManyToManyField(to = Turma, through = 'Matricula')
 
     def __str__(self):
         return self.nome
 
 
+class Nota(models.Model):
+    nome_aluno = models.CharField(max_length=240)
+    nome_disciplina = models.CharField(max_length=240)
+    n1 = models.DecimalField(max_digits=4, decimal_places=2)
+    n2 = models.DecimalField(max_digits=4, decimal_places=2)
+    nf = models.DecimalField(
+        max_digits=9, decimal_places=6, blank=True, null=True)
 
-class Professor(Usuario):
-    parent_link = models.OneToOneField(
-        Usuario, primary_key=True, db_column='user_id', parent_link=True)
-    celular = models.CharField('Celular', max_length=11, null=True)
-    apelido = models.CharField(
-        'Apelido', max_length=30, null=False, unique=True)
+    class Meta:
+        managed = False
+        db_table = 'Nota'
 
-    def __str__(self):
-        return self.nome
+
+class Matricula(models.Model):
+    ra_aluno = models.ForeignKey(
+        'Aluno', models.DO_NOTHING, db_column='ra_aluno', blank=True, null=True)
+    nome_disciplina = models.ForeignKey(
+        'Disciplina', models.DO_NOTHING, db_column='nome_disciplina', blank=True, null=True)
+    ano_ofertado = models.ForeignKey(
+        'DisciplinaOfertada', models.DO_NOTHING, db_column='ano_ofertado', blank=True, null=True, related_name='+')
+    semestre_ofertado = models.ForeignKey(
+        'DisciplinaOfertada', models.DO_NOTHING, db_column='semestre_ofertado', blank=True, null=True, related_name='+')
+    id_turma = models.ForeignKey(
+        'Turma', models.DO_NOTHING, db_column='id_turma', blank=True, null=True, related_name = '+')
+
+    class Meta:
+        managed = False
+        db_table = 'matricula'
+        unique_together = (('ra_aluno', 'nome_disciplina',
+                            'ano_ofertado', 'semestre_ofertado', 'id_turma'),)
+
+
+class CursoTurma(models.Model):
+    sigla_curso = models.ForeignKey(
+        'Curso', models.DO_NOTHING, db_column='sigla_curso', blank=True, null=True)
+    nome_disciplina = models.ForeignKey(
+        'Disciplina', models.DO_NOTHING, db_column='nome_disciplina', blank=True, null=True)
+    ano_ofertado = models.ForeignKey(
+        'DisciplinaOfertada', models.DO_NOTHING, db_column='ano_ofertado', blank=True, null=True, related_name='+')
+    semestre_ofertado = models.ForeignKey(
+        'DisciplinaOfertada', models.DO_NOTHING, db_column='semestre_ofertado', blank=True, null=True, related_name='+')
+    id_turma = models.ForeignKey(
+        'Turma', models.DO_NOTHING, db_column='id_turma', blank=True, null=True, related_name = '+')
+
+    class Meta:
+        managed = False
+        db_table = 'curso_turma'
+        unique_together = (('sigla_curso', 'nome_disciplina',
+                            'ano_ofertado', 'semestre_ofertado', 'id_turma'),)

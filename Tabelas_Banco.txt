@@ -5,10 +5,10 @@ CREATE TABLE curso (
     CONSTRAINT pkCurso PRIMARY KEY (id),
     CONSTRAINT unkCurso UNIQUE (sigla),
     CONSTRAINT unkCurso2 UNIQUE (nome)
-);
+)
 
 CREATE TABLE disciplina (
-	id INT IDENTITY(1,. 1) NOT NULL,
+	id INT IDENTITY(1, 1) NOT NULL,
     nome VARCHAR(240) NOT NULL,
     carga_horaria SMALLINT NOT NULL,
     aula_teorica DECIMAL(10, 3) NOT NULL,
@@ -18,8 +18,37 @@ CREATE TABLE disciplina (
 	habilidades TEXT,
     conteudo TEXT,
     bibliografia_basica TEXT,
-    bibliografia_complementar TEXT
-);
+    bibliografia_complementar TEXT,
+	CONSTRAINT pkDisciplina PRIMARY KEY (id),
+	CONSTRAINT unkDisciplina UNIQUE (nome)
+)
+
+CREATE TABLE disciplina_ofertada (
+	id INT IDENTITY(1, 1) NOT NULL,
+	nome_disciplina INT NOT NULL,
+	ano SMALLINT NOT NULL,
+	semestre CHAR(1) NOT NULL,
+	CONSTRAINT pkDisciplinaOfertada PRIMARY KEY (id),
+	CONSTRAINT fkDisciplinaOfertada FOREIGN KEY (nome_disciplina) REFERENCES disciplina (id),
+	CONSTRAINT unkDisciplinaOfertada UNIQUE (nome_disciplina, ano, semestre)
+)
+
+CREATE TABLE Turma (
+	id INT IDENTITY(1, 1) NOT NULL,
+	num_turma CHAR(2) NOT NULL,
+	ra_professor INT NOT NULL,
+	nome_disciplina INT NOT NULL,
+	ano_ofertado INT NOT NULL,
+	semestre_ofertado INT NOT NULL,
+	turno VARCHAR(15) NOT NULL,
+	CONSTRAINT pkTurma PRIMARY KEY (id),
+	CONSTRAINT fkTurma FOREIGN KEY (ra_professor) REFERENCES core_professor (user_id),
+	CONSTRAINT fkTurma2 FOREIGN KEY (nome_disciplina) REFERENCES disciplina_ofertada (id),
+	CONSTRAINT fkTurma3 FOREIGN KEY (ano_ofertado) REFERENCES disciplina_ofertada (id),
+	CONSTRAINT fkTurma4 FOREIGN KEY (semestre_ofertado)  REFERENCES disciplina_ofertada (id),
+	CONSTRAINT unkTurma UNIQUE (num_turma, nome_disciplina, ano_ofertado, semestre_ofertado)
+)
+
 
 Use DB_LMS_postgreSQL
 GO
