@@ -10,6 +10,8 @@ urlpatterns = patterns('',
    url(r'^contato/', 'views.contato', name='contato'),
    url(r'^obrigado/','views.obrigado', name='obrigado'),
    
-   
-   
-   )
+   url(r'^contatomail/','views.contatomail', name='contatomail'),
+
+          
+          
+)
