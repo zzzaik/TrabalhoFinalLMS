@@ -1,16 +1,16 @@
 from django.conf.urls import *
 
-from views import contato
-from views import obrigado,contatomail
+from Email.views import contato,arquivo
+from Email.views import obrigado,contatomail
 
 urlpatterns = patterns('',
 
    url(url(r'^$,arquivo),
    
-   url(r'^contato/', 'views.contato', name='contato'),
-   url(r'^obrigado/','views.obrigado', name='obrigado'),
+   url(r'^contato/', 'Email.views.contato', name='contato'),
+   url(r'^obrigado/','Email.views.obrigado', name='obrigado'),
    
-   url(r'^contatomail/','views.contatomail', name='contatomail'),
+   url(r'^contatomail/','Email.views.contatomail', name='contatomail'),
 
           
           
