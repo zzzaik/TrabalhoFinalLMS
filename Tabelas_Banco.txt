@@ -264,6 +264,17 @@ create table codigo_matricula(
 	constraint fkcodigo_matricula foreign key (id_aluno) references core_aluno (user_id)
 )
 
+CREATE TABLE Nota (
+	id INT IDENTITY (1,1) NOT NULL,
+	nome_aluno varchar (240) NOT NULL,
+	nome_disciplina varchar(240) NOT NULL,
+	n1 decimal (4,2) NOT NULL,
+	n2 decimal (4,2) NOT NULL,
+	nf AS ((n1 + n2) / 2),
+
+	CONSTRAINT pkNota PRIMARY KEY (id)
+)
+
 SELECT * FROM cursos
 SELECT * FROM disciplina
 SELECT * FROM matricula
