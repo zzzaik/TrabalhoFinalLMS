@@ -45,3 +45,10 @@ def primeiro_login(request):
 
 def matricula(request):
     return render(request, 'matricula.html')
+
+#Atividade LPII
+def nota(request):
+    contexto = {
+        "Notas":Nota.objects.all()
+    }
+    return render(resquest, 'nota.html')
