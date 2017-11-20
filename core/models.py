@@ -191,3 +191,20 @@ class CursoTurma(models.Model):
         db_table = 'curso_turma'
         unique_together = (('sigla_curso', 'nome_disciplina',
                             'ano_ofertado', 'semestre_ofertado', 'id_turma'),)
+        
+        
+        
+#Atividade LPII
+class Nota(models.Model):
+    nome_aluno = models.CharField(max_length = 240)
+	nome_disciplina = models.CharField(max_length = 240)
+	n1 = models.DecimalField(max_digits=4,decimal_places=2)
+	n2 = models.DecimalField(max_digits=4,decimal_places=2)
+	nf = models.DecimalField(max_digits=4,decimal_places=2)
+
+    class Meta:
+        managed = False
+        db_table = 'Nota'
+
+    def __str__(self):
+        return self.nome_aluno
