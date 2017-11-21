@@ -45,7 +45,7 @@ function selection_list() {
 
 
 function error_message() {
-  alert('{{ form.error }}')  
+  alert('{{ form.error }}');
 }
 
 
@@ -69,6 +69,12 @@ function check_codigo() {
         alert("Código Invalido")
         check_codigo();
     }
+
+function filtrarAlunos() {
+    var getCurso=document.getElementById("filtroCurso").value;
+    var getTurma=document.getElementById("filtroTurma").value;
+    return getCurso,getTurma;
+}
    /*//var flag = false;
     Do{
         var codigo = prompt("Digite o codigo de acesso", "");

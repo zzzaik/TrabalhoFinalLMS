@@ -54,3 +54,27 @@ def matricula(request):
         'matriculas':ra_alunos#vem na forma de um array
     }
     return render(request, 'matricula.html',context)
+
+def msg_aluno(request):
+    context = {
+        'user':['aluno 1','aluno 2','aluno 3','aluno 4'],
+        'mensagem':'texto\ntexto\ntexto',
+        'data_agora':now
+    }
+    return render(request, 'msg_aluno.html',context)
+
+def msg_professor(request):
+    context = {
+        'cursos':['ADS','BD'],
+        'turmas':['2A','2B'],
+        'alunos':{
+            'aluno1':['ADS','2A'],
+            'aluno2':['ADS','2B'],
+            'aluno3':['BD','2A'],
+            'aluno4':['BD','2B'],
+            },
+        'mensagem':'texto\ntexto\ntexto',
+        'data_agora':now
+
+    }
+    return render(request, 'msg_professor.html',context)

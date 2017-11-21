@@ -1,0 +1,32 @@
+{% extends 'area_aluno.html' %}
+{% load static %}
+
+{% block conteudoAluno %}
+<div class="content maxHeight">
+<div class="msgPanel">
+    {% for m in user %}
+    <div class="msg">
+        <p class="remetente">{% if m in user %}{{ m }}{% endif %}</p>
+        <p class="texto">{{ mensagem }}</p>
+        <span>{{ data_agora }}</span>
+    </div>
+    {% endfor %}
+</div>
+
+<div class="maxWidth">
+    <fieldset class="flexFieldSet">
+        <form class="flexForm" method="POST">
+        {% csrf_token %}
+            <input type="hidden" name="ra_remetente" value="ra_remetente"></input>
+            <input type="hidden" name="data_envio" value="{{ data_agora }}"></input>
+            <div class="inputGroup">
+                <label for="destinatario">Para:</label>
+                <input class="informs" name="destinatario" id="destinatario"></input>
+            </div>
+            <textarea class="inputTextArea" name="msg"></textarea>
+            <button type="submit" class="submitBtn">Enviar</button>
+        </form>
+    </fieldset>
+</div>
+</div>
+{% endblock %}

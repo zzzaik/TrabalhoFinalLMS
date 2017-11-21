@@ -1,11 +1,6 @@
-{% extends 'base.html' %}
+{% extends 'area_professor.html' %}
 {% load static %}
-{% block estilo_unico %}{% static '/' %}css/site.css{% endblock %}
-{% block script_unico %}static/src/script.js{% endblock %}
-{% block login %}{% endblock %}
-{% block img_user %}{% endblock %}
-{% block title %}Faculdade Impacta - Matricula{% endblock %}
-{% block main %}
+{% block conteudoProf %}
 <!--<var class="flag">F</var>
     {% if flag == 'T' %}
         <section>
@@ -18,10 +13,7 @@
             <p>Codigo Inválido</p> 
             </br>
     {% endif %}-->
-<section class="content">
-    <div class="content left">
-        <a href="area_professor.html" class="link linkBtn">Voltar</a>
-    </div>
+<div class="maxWidth">
     <fieldset class="flexFieldSet">
         <form class="flexForm" method="POST">
         {% csrf_token %}
@@ -66,5 +58,5 @@
             <button type="submit" class="submitBtn">Matricular</button>
         </form>
     </fieldset>
-</section>
+</div>
 {% endblock %}

@@ -12,18 +12,11 @@
         <div class="listLinks">
             
             <ul class=flexList>
-                <li class="liLink"><a class="liLink" href="mensagem.html">Mensagens</a></li>
+                <li class="liLink"><a class="liLink" href="msg_aluno.html">Mensagens</a></li>
                 <li class="liLink"><a class="liLink"href="#">Trabalhos</a></li>
                 <li class="liLink"><a class="liLink"href="#">Exercícios</a></li>
             </ul>
         </div>
-
-        <div class="msgPanel">
-            <div class="msg">
-                <p class="remetente">{{ user.nome }}</p>
-                <p id="texto">mensagem modelo trolololololo</p>
-                <span id="data">{{ data_agora }}</span>
-            </div>
-        </div>
+        {% block conteudoAluno %}{% endblock %}
     </section>
 {% endblock %}
