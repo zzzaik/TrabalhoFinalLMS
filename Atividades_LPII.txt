@@ -1,7 +1,7 @@
-** O sistema não pode deixar um aluno ser matriculado duas vezes na mesma disciplina (Característica 15 - Matrícula online) **
+*1* O sistema não pode deixar um aluno ser matriculado duas vezes na mesma disciplina (Característica 15 - Matrícula online) *1*
 O proprio banco de dados faz essa validação pois os campo aluno e disciplina (na tabela de matrícula) são campos unicos, ou seja, só pode haver um determinado aluno matriculado em uma disciplina.
 
-** O sistema deverá mostrar uma mensagem caso a quantidade de matriculados seja maior que a quantidade máxima de alunos na turma, mas não impedir a matrícula (Característica 15 - Matrícula online) **
+*2* O sistema deverá mostrar uma mensagem caso a quantidade de matriculados seja maior que a quantidade máxima de alunos na turma, mas não impedir a matrícula (Característica 15 - Matrícula online) *2*
 Ao confirmar a matricula na pagina html usamos o arquivo views.py para fazer esta verificação, por exemplo:
 
 //views.py//
@@ -10,17 +10,17 @@ Ao confirmar a matricula na pagina html usamos o arquivo views.py para fazer est
 />def matricula(request):
 />	if request.method == POST:
 />		form_data = request.POST
-/>    #request.POST devolve um dicionario contendo as informações passadas no formulario de matricula
+/>    		#request.POST devolve um dicionario contendo as informações passadas no formulario de matricula
 />		matriculas = Matricula.objects.filter(id_turma = form_data['turma'], nome_disciplina = form_data['disciplina']) 
 /> 		#no comando acima obtemos uma lista de dicionarios contendo todos os alunos matriculados na turma e disciplina informados no cadastro de matricula (pelos campos do dicionario form_data) '''
-/>	  turma = Turma.objects.get(nome_disciplina = form_data['disciplina'], ano_ofertado = form_data['ano'], semestre_ofertado = form_data['semestre']) 
-/>    #pegamos a turma em que o aluno esta se matriculando.
-/>	  if len(matriculas) >= turma.qtd_max_alunos: 
-/>    #No modelo de banco que recebemos não temos nenhum campo em que é guardado a informação de quantos alunos cada turma pode ter ao máximo então criamos o campo "qtd_max_alunos" na tabela "Turma"
-/>		  messages.info(request, 'Esta turma contem mais alunos do que a quantidade máxima permitida.') 
-/>      #geração da mensagem de alerta, ela não vai impedir que a matricula seja feita.
+/>	  	turma = Turma.objects.get(nome_disciplina = form_data['disciplina'], ano_ofertado = form_data['ano'], semestre_ofertado = form_data['semestre']) 
+/>    		#pegamos a turma em que o aluno esta se matriculando.
+/>	  	if len(matriculas) >= turma.qtd_max_alunos: 
+/>    		#No modelo de banco que recebemos não temos nenhum campo em que é guardado a informação de quantos alunos cada turma pode ter ao máximo então criamos o campo "qtd_max_alunos" na tabela "Turma"
+/>			messages.info(request, 'Esta turma contem mais alunos do que a quantidade máxima permitida.') 
+/>      		#geração da mensagem de alerta, ela não vai impedir que a matricula seja feita.
 
-** O sistema deve fazer uma classificação dos alunos para mostrar se ele pode ou não confirmar a matrícula, baseado nas seguintes regras (em ordem) (Característica 16 - Confirmação de matrícula): **
+*3* O sistema deve fazer uma classificação dos alunos para mostrar se ele pode ou não confirmar a matrícula, baseado nas seguintes regras (em ordem) (Característica 16 - Confirmação de matrícula): *3*
 		* Média do histórico de notas (alunos com maior média tem maior prioridade) *
 		* Ordem de matrícula (alunos matriculados antes tem maior prioridade) *
 		
