@@ -131,7 +131,7 @@ class Curso(models.Model):
         db_table = 'curso'
 
     def __str__(self):
-        return self.sigla
+        return self.nome
 
 
 class Aluno(Usuario):
@@ -195,18 +195,3 @@ class CursoTurma(models.Model):
         db_table = 'curso_turma'
         unique_together = (('sigla_curso', 'nome_disciplina',
                             'ano_ofertado', 'semestre_ofertado', 'id_turma'),)
-
-
-class CodigoMatricula(models.Model):
-    id_aluno = models.ForeignKey(
-        'Aluno', models.DO_NOTHING, db_column='id_aluno')
-    codigo = models.CharField(max_length=10)
-    stat = models.BooleanField()
-
-    class Meta:
-        managed = False
-        db_table = 'codigo_matricula'
-        unique_together = (('id_aluno', 'codigo'),)
-
-    def __str__(self):
-        return self.id_aluno

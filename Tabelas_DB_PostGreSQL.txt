@@ -9,25 +9,25 @@ Create table cursos (
 
 Create table grade_curricular (
 	id serial not null,
-	sigla_curso int,
-	ano_grade smallint,
-	semestre_grade char(1),
+	sigla_curso int not null,
+	ano_grade smallint not null,
+	quantidade_semestres char(1) not null,
 	constraint pk_GradeCurricular primary key (id),
-	constraint uc_GradeCurricular unique (sigla_curso, ano_grade, semestre_grade),
-	constraint fk_GradeCurricular foreign key (sigla_curso) references cursos (id)
+	constraint uc_GradeCurricular unique (sigla_curso, ano_grade, quantidade_semestres),
+	constraint fk_GradeCurricular foreign key (sigla_curso) references curso (id)
 );
 
 Create table periodo (
 	id serial not null,
-	sigla_curso int,
-	ano_grade int,
-	semestre_grade int,
-	numero_periodo smallint,
+	sigla_curso int not null,
+	ano_grade int not null,
+	quantidade_semestres_grade int not null,
+	numero_periodo smallint not null,
 	constraint pkPeriodo primary key (id),
-	constraint ucPeriodo unique (sigla_curso, ano_grade, semestre_grade, numero_periodo),
+	constraint ucPeriodo unique (sigla_curso, ano_grade, quantidade_semestres_grade, numero_periodo),
 	constraint fkPeriodo foreign key (sigla_curso) references cursos (id),
 	constraint fkPeriodo_2 foreign key (ano_grade) references grade_curricular (id),
-	constraint fkPeriodo_3 foreign key (semestre_grade) references grade_curricular (id)
+	constraint fkPeriodo_3 foreign key (quantidade_semestres_grade) references grade_curricular (id)
 );
 
 Create table disciplina (

@@ -2,8 +2,7 @@ from django.shortcuts import render
 from datetime import datetime
 from django.contrib.auth.decorators import login_required, user_passes_test
 from core.forms import mensagemForm
-from core.models import Usuario, CodigoMatricula, Aluno
-from core.codes import gera_senha
+from core.models import Usuario, Aluno, Curso
 
 
 def checa_aluno(user):
@@ -19,7 +18,11 @@ def index(request):
 
 
 def cursos(request):
-    return render(request, 'cursos.html')
+    curso = Curso.objects.all()
+    context = {
+        "cursos":curso,
+    }
+    return render(request, "cursos.html", context)
 
 
 def noticias(request):
@@ -30,34 +33,16 @@ def recuperar_senha(request):
     return render(request, 'recuperar_senha.html')
 
 
-@login_required(login_url='/login')
+@login_required(login_url='/entrar')
 @user_passes_test(checa_aluno, login_url='/?erro=acesso', redirect_field_name=None)
 def area_aluno(request):
     return render(request, 'area_aluno.html')
 
 
-@login_required(login_url='/login')
+@login_required(login_url='/entrar')
 @user_passes_test(checa_professor, login_url='/?erro=acesso', redirect_field_name=None)
 def area_professor(request):
     return render(request, 'area_professor.html')
-
-@login_required(login_url='/login')
-@user_passes_test(checa_professor, login_url='/?erro=acesso', redirect_field_name=None)
-def gerar_codigo(request):
-    if request.POST:
-        user = Usuario.objects.filter(user_type='A')
-        for aluno in request.POST.keys():
-            if aluno != 'csrfmiddlewaretoken':
-                x = Aluno.objects.get(ra=int(aluno))
-                if x.id not in CodigoMatricula.objects.all():
-                    codigo = CodigoMatricula.objects.create(
-                        id_aluno=Aluno.objects.get(ra=int(aluno)), codigo=gera_senha(10), stat='1')
-    else:
-        user = Usuario.objects.filter(user_type='A')
-    context = {
-        'alunos': user
-    }
-    return render(request, 'gerar_codigo.html', context)
 
 
 def primeiro_login(request):
@@ -66,3 +51,10 @@ def primeiro_login(request):
 
 def matricula(request):
     return render(request, 'matricula.html')
+
+def pag_curso(request, sigla):
+    curso = Curso.objects.get(sigla=sigla.upper())
+    contexto = {
+        "cursos":curso,
+    }
+    return render(request,"pag_curso.html",contexto)

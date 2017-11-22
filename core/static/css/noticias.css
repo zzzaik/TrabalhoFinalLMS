@@ -1,7 +1,4 @@
-* {
-	box-sizing: border-box;
-}
-
+section.margin{margin-top: 5em;}
 article.conteudo {
 	display: grid;
 	grid-template: 10% 10% 35% 10% 35% / 1fr;

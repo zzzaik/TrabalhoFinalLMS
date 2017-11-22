@@ -123,7 +123,9 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+# FileUpload
 MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 #Login
 AUTH_USER_MODEL = 'core.Usuario'

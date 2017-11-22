@@ -1,12 +1,9 @@
-* {
-	box-sizing: border-box;
-}
 .section {
 	display: grid;
-	grid-template: 10% 1fr / 1fr ;
+	grid-template: 1fr 1fr 1fr;
 }
+section.margin{margin-top: 5em;;}
 .cursos {
-	display: grid;
 	gird-row-start: 2;
 	display: flex;
 	justify-content: center;
@@ -19,14 +16,9 @@
 	text-align: center;
 }
 .it{
+	text-align: center;
 	font-family:italic;
 	width: 60%;
-}
-
-.margin {
-	margin: 1em;
-	margin-top: 3.53em;
-	margin-bottom: 3em;
 }
 button.it{
 	padding: 5px 15px;
