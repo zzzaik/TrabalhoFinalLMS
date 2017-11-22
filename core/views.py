@@ -43,15 +43,14 @@ def primeiro_login(request):
     return render(request, 'primeiro_login.html')
 
 def matricula(request):
-    ra_alunos=request.POST.getlist('ra_alunos')
+    disciplinas=request.POST.getlist('disciplinas')
     # como passar um array pelo POST; django:
     # https://stackoverflow.com/questions/4581114/django-questionhow-to-pass-a-list-parameter-using-post-method
     context = {
-        'cursos':'lista de cursos',#query em função do RA do prof
-        'disciplinas':'lista de disciplinas',#disciplinas do curso selecionado
+        'cursos':'lista de cursos',#query em função do RA do aluno
+        'disciplinas':disciplinas,#disciplinas selecionadas p/ matrícula
         'turmas':'lista de turmas',#turmas da disciplina selecionada
-        'alunos':'lista de alunos',#alunos sem turma
-        'matriculas':ra_alunos#vem na forma de um array
+        'matricula':'ra_aluno'#pego na sessão
     }
     return render(request, 'matricula.html',context)
 
