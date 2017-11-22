@@ -49,6 +49,16 @@ CREATE TABLE Turma (
 	CONSTRAINT unkTurma UNIQUE (num_turma, nome_disciplina, ano_ofertado, semestre_ofertado)
 )
 
+create table codigo_matricula(
+	id int identity (1, 1) not null,
+	id_aluno integer not null,     
+	codigo varchar(10) not null,
+	stat bit NOT NULL,
+	constraint unkCodigoMatricula unique (id_aluno, codigo),
+	constraint fkCodigoMatricula foreign key (id_aluno) references core_aluno (user_id)
+)
+
+
 
 Use DB_LMS_postgreSQL
 GO

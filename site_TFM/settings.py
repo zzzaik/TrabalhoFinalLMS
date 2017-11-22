@@ -123,6 +123,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+MEDIA_URL = '/media/'
 
 #Login
 AUTH_USER_MODEL = 'core.Usuario'

@@ -1,7 +1,6 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
 	<meta charset="UTF-8" />
 	<meta name="viewport" content="width = device-width, initial-scale = 1.0" />
@@ -11,9 +10,7 @@
 	<script src="{% static '/' %}src/site.js"></script>
 	<script src="{% block script_unico %}{% endblock %}"></script>
 	<title>{% block title %}{% endblock %}</title>
-	<script>check_codigo()</script>
 </head>
-
 <body class = 'content'>
 	<header class="motherNav">
 		<nav class="menu">
@@ -46,6 +43,9 @@
 						<a href="/logout">Sair</a>
 						{% elif user.user_type == 'P' %}
 						<a href='area_professor.html'>Área do professor</a>
+						<a href="/logout">Sair</a>
+						{% elif user.user_type == 'C' %}
+						<a href='/admin'>Área do coordenador</a>
 						<a href="/logout">Sair</a>
 						{% endif %}
 					</nav>
@@ -93,5 +93,4 @@
 		</div>
 	</footer>
 </body>
-
 </html>

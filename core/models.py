@@ -78,6 +78,7 @@ class Disciplina(models.Model):
     def __str__(self):
         return self.nome
 
+
 class Professor(Usuario):
     parent_link = models.OneToOneField(
         Usuario, primary_key=True, db_column='user_id', parent_link=True)
@@ -87,6 +88,7 @@ class Professor(Usuario):
 
     def __str__(self):
         return self.nome
+
 
 class DisciplinaOfertada(models.Model):
     nome_disciplina = models.ForeignKey(
@@ -107,9 +109,9 @@ class Turma(models.Model):
     nome_disciplina = models.ForeignKey(
         'DisciplinaOfertada', models.DO_NOTHING, db_column='nome_disciplina')
     ano_ofertado = models.ForeignKey(
-        'DisciplinaOfertada', models.DO_NOTHING, db_column='ano_ofertado', related_name = '+')
+        'DisciplinaOfertada', models.DO_NOTHING, db_column='ano_ofertado', related_name='+')
     semestre_ofertado = models.ForeignKey(
-        'DisciplinaOfertada', models.DO_NOTHING, db_column='semestre_ofertado', related_name = '+')
+        'DisciplinaOfertada', models.DO_NOTHING, db_column='semestre_ofertado', related_name='+')
     turno = models.CharField(max_length=15)
 
     class Meta:
@@ -118,30 +120,32 @@ class Turma(models.Model):
         unique_together = (('num_turma', 'nome_disciplina',
                             'ano_ofertado', 'semestre_ofertado'),)
 
+
 class Curso(models.Model):
-    sigla_curso = models.CharField(unique=True, max_length=5)
-    nome_curso = models.CharField(unique=True, max_length=50)
-    turma = models.ManyToManyField(to = Turma, through='CursoTurma')
+    sigla = models.CharField(unique=True, max_length=5)
+    nome = models.CharField(unique=True, max_length=50)
+    turma = models.ManyToManyField(to=Turma, through='CursoTurma')
 
     class Meta:
         managed = False
         db_table = 'curso'
 
     def __str__(self):
-        return self.sigla_curso
+        return self.sigla
+
 
 class Aluno(Usuario):
     parent_link = models.OneToOneField(
         Usuario, primary_key=True, db_column='user_id', parent_link=True)
     curso = models.ForeignKey(Curso, blank=True, null=False)
     celular = models.CharField('Celular', max_length=11, null=False)
-    semestre = models.IntegerField('Semestre', null=False)
-    turma = models.ManyToManyField(to = Turma, through = 'Matricula')
+    semestre = models.IntegerField('Semestre', null=False, default=1)
+    turma = models.ManyToManyField(to=Turma, through='Matricula')
 
     def __str__(self):
         return self.nome
 
-
+'''
 class Nota(models.Model):
     nome_aluno = models.CharField(max_length=240)
     nome_disciplina = models.CharField(max_length=240)
@@ -154,7 +158,7 @@ class Nota(models.Model):
         managed = False
         db_table = 'Nota'
 
-
+'''
 class Matricula(models.Model):
     ra_aluno = models.ForeignKey(
         'Aluno', models.DO_NOTHING, db_column='ra_aluno', blank=True, null=True)
@@ -165,7 +169,7 @@ class Matricula(models.Model):
     semestre_ofertado = models.ForeignKey(
         'DisciplinaOfertada', models.DO_NOTHING, db_column='semestre_ofertado', blank=True, null=True, related_name='+')
     id_turma = models.ForeignKey(
-        'Turma', models.DO_NOTHING, db_column='id_turma', blank=True, null=True, related_name = '+')
+        'Turma', models.DO_NOTHING, db_column='id_turma', blank=True, null=True, related_name='+')
 
     class Meta:
         managed = False
@@ -184,10 +188,25 @@ class CursoTurma(models.Model):
     semestre_ofertado = models.ForeignKey(
         'DisciplinaOfertada', models.DO_NOTHING, db_column='semestre_ofertado', blank=True, null=True, related_name='+')
     id_turma = models.ForeignKey(
-        'Turma', models.DO_NOTHING, db_column='id_turma', blank=True, null=True, related_name = '+')
+        'Turma', models.DO_NOTHING, db_column='id_turma', blank=True, null=True, related_name='+')
 
     class Meta:
         managed = False
         db_table = 'curso_turma'
         unique_together = (('sigla_curso', 'nome_disciplina',
                             'ano_ofertado', 'semestre_ofertado', 'id_turma'),)
+
+
+class CodigoMatricula(models.Model):
+    id_aluno = models.ForeignKey(
+        'Aluno', models.DO_NOTHING, db_column='id_aluno')
+    codigo = models.CharField(max_length=10)
+    stat = models.BooleanField()
+
+    class Meta:
+        managed = False
+        db_table = 'codigo_matricula'
+        unique_together = (('id_aluno', 'codigo'),)
+
+    def __str__(self):
+        return self.id_aluno
