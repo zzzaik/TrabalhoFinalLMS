@@ -4,7 +4,7 @@ from django.contrib.auth.decorators import login_required, user_passes_test
 from core.forms import mensagemForm
 from core.models import Usuario, Aluno, Curso
 
-
+now = datetime.now()
 def checa_aluno(user):
     return user.user_type == 'A'
 
@@ -36,7 +36,10 @@ def recuperar_senha(request):
 @login_required(login_url='/entrar')
 @user_passes_test(checa_aluno, login_url='/?erro=acesso', redirect_field_name=None)
 def area_aluno(request):
-    return render(request, 'area_aluno.html')
+    context = {
+        'data_agora': now
+    }
+    return render(request, 'area_aluno.html',context)
 
 
 @login_required(login_url='/entrar')
@@ -50,7 +53,16 @@ def primeiro_login(request):
 
 
 def matricula(request):
-    return render(request, 'matricula.html')
+    disciplinas=request.POST.getlist('disciplinas')
+    # como passar um array pelo POST; django:
+    # https://stackoverflow.com/questions/4581114/django-questionhow-to-pass-a-list-parameter-using-post-method
+    context = {
+        'cursos':'lista de cursos',#query em função do RA do aluno
+        'disciplinas':disciplinas,#disciplinas selecionadas p/ matrícula
+        'turmas':'lista de turmas',#turmas da disciplina selecionada
+        'matricula':'ra_aluno'#pego na sessão
+    }
+    return render(request, 'matricula.html',context)
 
 def pag_curso(request, sigla):
     curso = Curso.objects.get(sigla=sigla.upper())
@@ -58,3 +70,27 @@ def pag_curso(request, sigla):
         "cursos":curso,
     }
     return render(request,"pag_curso.html",contexto)
+
+def msg_aluno(request):
+    context = {
+        'user':['aluno 1','aluno 2','aluno 3','aluno 4'],
+        'mensagem':'texto\ntexto\ntexto',
+        'data_agora':now
+    }
+    return render(request, 'msg_aluno.html',context)
+
+def msg_professor(request):
+    context = {
+        'cursos':['ADS','BD'],
+        'turmas':['2A','2B'],
+        'alunos':{
+            'aluno1':['ADS','2A'],
+            'aluno2':['ADS','2B'],
+            'aluno3':['BD','2A'],
+            'aluno4':['BD','2B'],
+            },
+        'mensagem':'texto\ntexto\ntexto',
+        'data_agora':now
+
+    }
+    return render(request, 'msg_professor.html',context)

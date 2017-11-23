@@ -1,0 +1,34 @@
+{% extends 'area_aluno.html' %}
+{% load static %}
+
+{% block conteudoAluno %}
+<div class="maxWidth">
+    <fieldset class="flexFieldSet">
+    <legend>Upload de Arquivos</legend>
+    <form class="flexForm" method="POST" enctype="multipart/form-data">
+        <div class="inputGroup">
+            <label for="curso">Curso: </label>
+            <select  class="informs" name="curso" id="curso">
+                <option>-- Curso --</option>
+                {% for c in cursos %}
+                <option>{{ c.sigla_curso }}</option>
+                {% endfor %}
+            </select>
+
+            <label for="disciplina">Disciplina: </label>
+            <select  class="informs" name="disciplina" id="disciplina">
+                <option>-- Disciplina --</option>
+                {% for d in disciplinas %}
+                <option>{{ s.nome_disciplina }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="inputGroup">
+            <label for="arquivo">Selecionar Arquivo: </label>
+            <input type="file" class="informs" name="arquivo" id="arquivo"></input>
+        </div>
+    </form>
+    </fieldset>
+</div>
+{% endblock %}

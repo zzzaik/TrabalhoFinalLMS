@@ -7,11 +7,11 @@
 	<link rel="icon" href="{% static '/' %}img/icone.ico" type="image/x-icon" />
 	<link rel="stylesheet" href="{% static '/' %}css/site.css" />
 	<link rel="stylesheet" href='{% block estilo_unico %}{% endblock %}' />
-	<script src="{% static '/' %}src/site.js"></script>
+	<script src="{% static '/' %}src/script.js"></script>
 	<script src="{% block script_unico %}{% endblock %}"></script>
 	<title>{% block title %}{% endblock %}</title>
 </head>
-<body>
+<body class="content">
 	<header class="motherNav">
 		<nav class="menu">
 			<div class = 'menus'>
@@ -25,7 +25,7 @@
 			</div>
 			<div class='menus'>
 				{% if not user.is_authenticated %}
-				<button class="user" title="Entre">
+				<button class="user" title="{% if not user.is_authenticated %}Entre{% else %}Logado{% endif %}">
 					<a href="{% url 'entrar' %}">
 						<img class="img_user" src="{% if not user.is_athenticated %}{% static '/' %}img/img_user.png{% else %}{% static '/' %}img/img_user.png{% endif %}"
 						 alt="Usuario" />
@@ -33,7 +33,7 @@
 				</button>
 				{% else %}
 				<div>
-					<button class="user" onclick="login_function()" title="Logado">
+					<button class="user" onclick="login_function()" title="{% if not user.is_athenticated %}Entre{% else %}Logado{% endif %}">
 						<img class="img_user" src="{% if logado == False %}{% static '/' %}img/img_user.png{% else %}{% static '/' %}img/img_user.png{% endif %}"
 						 alt="Usuario" />
 					</button>
