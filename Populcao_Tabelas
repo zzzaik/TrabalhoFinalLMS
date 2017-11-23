@@ -1,1 +1,10 @@
+--CURSO
+insert into curso (sigla_curso, nome_curso)
+values ('SI', 'Sistemas da informação'),('BD', 'Banco de Dados')
 
+
+--DISCIPLINA
+insert into disciplina(nome, carga_horaria, aula_teorica, aula_pratica, ementa, competencias, habilidades, conteudo, bibliografia_basica, bibliografia_complementar)
+values ('Banco de dados',20,5.0,5.0,'Emenda1','SQL avançado','Desenvolver Banco de dados','SQL','Professor X','Professsor Y'),
+('LPI',25,7.0,7.0,'Emenda1','Programação Python','Desenvolver sistemas em Python','Python','Professor R','Professsor J'),
+('TecWeb',25,7.0,7.0,'Emenda1','Tecnologias WEB','Desenvolver sistemas WEB','Djangoo','Professor R','Professsor J')
