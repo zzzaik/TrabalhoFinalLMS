@@ -8,3 +8,28 @@ insert into disciplina(nome, carga_horaria, aula_teorica, aula_pratica, ementa, 
 values ('Banco de dados',20,5.0,5.0,'Emenda1','SQL avançado','Desenvolver Banco de dados','SQL','Professor X','Professsor Y'),
 ('LPI',25,7.0,7.0,'Emenda1','Programação Python','Desenvolver sistemas em Python','Python','Professor R','Professsor J'),
 ('TecWeb',25,7.0,7.0,'Emenda1','Tecnologias WEB','Desenvolver sistemas WEB','Djangoo','Professor R','Professsor J')
+
+
+--DISCIPLINA OFERTADA
+insert into disciplina_ofertada (nome_disciplina, ano, semestre)
+values(1,'2017',1),(2,'2017',1),(3,'2017',1)
+
+
+--TURMA
+insert into Turma (num_turma, ra_professor, nome_disciplina, ano_ofertado, semestre_ofertado, turno)
+values('1',3,1,1,1,'Manhã'),('2',3,2,2,2,'Tarde'),('3',3,3,3,3,'Noite')
+
+
+--GRADE CURRICULAR
+insert into grade_curricular (sigla_curso, ano_grade,quantidade_semestres)
+values(1,2017,4),(2,2017,4),(3,2017,4)
+
+
+--PERIODO
+insert into periodo(sigla_curso, ano_grade, quantidade_semestres_grade, numero_periodo)
+values(1,1,1,'1')(2,2,2,'2')(3,3,3,'3')
+
+
+--PERIODO DISCIPLINAS
+insert into periodo_disciplina (sigla_curso, ano_grade, quantidade_semestres_grade, numero_periodo, nome_disciplina)
+values(1,1,1,1,1),(2,2,2,2,2),(3,3,3,3,3)
