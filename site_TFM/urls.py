@@ -24,13 +24,13 @@ urlpatterns = [
     url(r'^cursos', cursos, name='cursos'),
     url(r'^noticias', noticias, name='noticias'),
     url(r'^recuperar_senha', recuperar_senha, name='recuperar_senha'),
-    url(r'^area_aluno', area_aluno,name='area_aluno'),
-    url(r'^area_professor', area_professor, name='area_professor'),
+    url(r'^area_aluno$', area_aluno,name='area_aluno'),
+    url(r'^area_professor$', area_professor, name='area_professor'),
     url(r'^primeiro_login', primeiro_login, name='primeiro_login'),
     url(r'^login', login, {'template_name':'login.html'}),
     url(r'^logout', logout, {'next_page':'/'}),
-    url(r'^matricula', matricula, name='matricula'),
-    url(r'msg_aluno',msg_aluno,name='area_aluno'),
-    url(r'msg_professor',msg_professor,name='area_professor')
+    url(r'^area_aluno/matricula', matricula, name='matricula'),
+    url(r'area_aluno/msg_aluno',msg_aluno,name='msg_aluno'),
+    url(r'area_professor/msg_professor',msg_professor,name='msg_professor')
 ]
 

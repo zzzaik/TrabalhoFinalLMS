@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block conteudoAluno %}
-<div class="content maxHeight">
+<div class="maxWidth">
 <div class="msgPanel">
     {% for m in user %}
     <div class="msg">
@@ -13,8 +13,8 @@
     {% endfor %}
 </div>
 
-<div class="maxWidth">
     <fieldset class="flexFieldSet">
+    <legend>Enviar Mensagem</legend>
         <form class="flexForm" method="POST">
         {% csrf_token %}
             <input type="hidden" name="ra_remetente" value="ra_remetente"></input>
@@ -27,6 +27,5 @@
             <button type="submit" class="submitBtn">Enviar</button>
         </form>
     </fieldset>
-</div>
 </div>
 {% endblock %}

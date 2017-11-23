@@ -1,6 +1,6 @@
-{% extends 'area_professor.html' %}
+{% extends 'area_aluno.html' %}
 {% load static %}
-{% block conteudoProf %}
+{% block conteudoAluno %}
 <!--<var class="flag">F</var>
     {% if flag == 'T' %}
         <section>
@@ -15,47 +15,78 @@
     {% endif %}-->
 <div class="maxWidth">
     <fieldset class="flexFieldSet">
+    <legend>Criar Matrícula</legend>
         <form class="flexForm" method="POST">
         {% csrf_token %}
             <div class="inputGroup">
-                <label for="curso">Curso:</label>
-                <select class="informs" name="curso" id="curso">
-                    <option>-- Curso --</option>
+                <label for="ano">Ano: </label>
+                <select class="informs" name="ano" id="ano">
+                    <option>-- Ano --</option>
                     {% for c in cursos %}
                     <option value="{{ c.sigla_curso }}">{{ c.sigla_curso }}</option>
                     {% endfor %}
                 </select>
-            </div>
-            <div class="inputGroup">
-                <label for="disciplina">Disciplina:</label>
-                <select class="informs" name="disciplina" id="disciplina">
-                    <option>-- Disciplina --</option>
-                    {% for d in disciplinas %}
-                    <option value="{{ d.nome_disciplina }}">{{ d.nome_disciplina }}</option>
-                    {% endfor %}
+                <label for="semestre">Semestre: </label>
+                <select class="informs" name="semestre" id="semestre">
+                    <option>-- Semestre --</option>
+                    <option>1</option>
+                    <option>1</option>                    
                 </select>
-                <label for="turma">Turma:</label>
+                <label for="turma">Turma: </label>
                 <select class="informs" name="turma" id="turma">
                     <option>-- Turma --</option>
                     {% for t in turmas %}
                     <option value="{{ t.id_turma }}">{{ t.id_turma }}</option>
-                    {% endfor %}
+                    {% endfor %}                   
                 </select>
             </div>
             <div class="inputGroup dropdownList">
-                <label for="alunos">Alunos:</label>
+                <label for="disciplina">Disciplinas:</label>
                 <div class="selectionBox" onclick="selection_list()">
-                    <span>-- Alunos --</span>
+                    <span>-- Disciplinas --</span>
                 </div>
                 <!-- como passar um array pelo POST; django:
                     https://stackoverflow.com/questions/4581114/django-questionhow-to-pass-a-list-parameter-using-post-method -->
-                <li class="selectionList" id="alunos">
-                    {% for a in alunos %}
-                    <ul><input type="checkbox" name="ra_aluno"value="{{ a.ra }}">{{ a.nome }}</input></ul>
+                <li class="selectionList" id="disciplinas">
+                    {% for d in disciplinas %}
+                    <ul><input type="checkbox" name="disciplinas"value="{{ a.nome_disciplina }}">{{ a.nome_disciplina }}</input></ul>
                     {% endfor %}
                 </li>
             </div>
             <button type="submit" class="submitBtn">Matricular</button>
+        </form>
+    </fieldset>
+    <fieldset class="flexFieldSet">
+    <legend>Histórico</legend>
+        <form class="flexForm" method="POST">
+            <div class="inputGroup">
+            <label for="buscaAno">Ano: </label>
+            <select class="informs" name="buscaAno" id="buscaAno">
+                <option>-- Ano --</option>
+                {% for c in curso %}
+                <option value="{{ c.ano }}">{{ c.ano }}</option>
+                {% endfor %}
+            </select>
+            <label for="buscaSemestre">Semestre: </label>
+            <select class="informs" name="buscaSemestre" id="buscaSemestre">
+                <option>-- Semestre --</option>
+                <option>1</option>
+                <option>2</option>
+            </select>
+            <button type="submit" class="submitBtn">Buscar</button>
+            </div>
+            <table>
+                <tr>
+                    <th>Disciplina</th>
+                    <th>Turma</th>
+                </tr>
+                {% for m in matricula %}
+                <tr>
+                    <td>m.nome_disciplina</td>
+                    <td>m.id_turma</td>
+                </tr>
+                {% endfor %}
+            </table>
         </form>
     </fieldset>
 </div>

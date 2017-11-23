@@ -35,11 +35,11 @@ window.onclick = function(event) {
 }
 
 function selection_list() {
-    alunos=document.getElementById("alunos");
-    if (alunos.classList.contains('show')){
-        alunos.classList.remove('show');
+    disciplinas=document.getElementById("disciplinas");
+    if (disciplinas.classList.contains('show')){
+        disciplinas.classList.remove('show');
     } else{
-        alunos.classList.toggle('show');
+        disciplinas.classList.toggle('show');
     }
 }
 
