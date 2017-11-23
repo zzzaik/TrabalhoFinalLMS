@@ -54,7 +54,7 @@ class Usuario(AbstractBaseUser):
 
 
 class Disciplina(models.Model):
-    nome = models.CharField(max_length=240)
+    nome = models.CharField(unique=True, max_length=240)
     carga_horaria = models.SmallIntegerField()
     aula_teorica = models.DecimalField(max_digits=10, decimal_places=3)
     aula_pratica = models.DecimalField(max_digits=10, decimal_places=3)
@@ -122,8 +122,8 @@ class Turma(models.Model):
 
 
 class Curso(models.Model):
-    sigla = models.CharField(unique=True, max_length=5)
-    nome = models.CharField(unique=True, max_length=50)
+    sigla_curso = models.CharField(unique=True, max_length=5)
+    nome_curso = models.CharField(unique=True, max_length=50)
     turma = models.ManyToManyField(to=Turma, through='CursoTurma')
 
     class Meta:
@@ -131,7 +131,7 @@ class Curso(models.Model):
         db_table = 'curso'
 
     def __str__(self):
-        return self.nome
+        return self.nome_curso
 
 
 class Aluno(Usuario):
@@ -145,31 +145,18 @@ class Aluno(Usuario):
     def __str__(self):
         return self.nome
 
-'''
-class Nota(models.Model):
-    nome_aluno = models.CharField(max_length=240)
-    nome_disciplina = models.CharField(max_length=240)
-    n1 = models.DecimalField(max_digits=4, decimal_places=2)
-    n2 = models.DecimalField(max_digits=4, decimal_places=2)
-    nf = models.DecimalField(
-        max_digits=9, decimal_places=6, blank=True, null=True)
 
-    class Meta:
-        managed = False
-        db_table = 'Nota'
-
-'''
 class Matricula(models.Model):
     ra_aluno = models.ForeignKey(
-        'Aluno', models.DO_NOTHING, db_column='ra_aluno', blank=True, null=True)
+        Aluno, models.DO_NOTHING, db_column='ra_aluno', blank=True, null=True)
     nome_disciplina = models.ForeignKey(
-        'Disciplina', models.DO_NOTHING, db_column='nome_disciplina', blank=True, null=True)
+        Disciplina, models.DO_NOTHING, db_column='nome_disciplina', blank=True, null=True)
     ano_ofertado = models.ForeignKey(
-        'DisciplinaOfertada', models.DO_NOTHING, db_column='ano_ofertado', blank=True, null=True, related_name='+')
+        DisciplinaOfertada, models.DO_NOTHING, db_column='ano_ofertado', blank=True, null=True, related_name='+')
     semestre_ofertado = models.ForeignKey(
-        'DisciplinaOfertada', models.DO_NOTHING, db_column='semestre_ofertado', blank=True, null=True, related_name='+')
+        DisciplinaOfertada, models.DO_NOTHING, db_column='semestre_ofertado', blank=True, null=True, related_name='+')
     id_turma = models.ForeignKey(
-        'Turma', models.DO_NOTHING, db_column='id_turma', blank=True, null=True, related_name='+')
+        Turma, models.DO_NOTHING, db_column='id_turma', blank=True, null=True)
 
     class Meta:
         managed = False
@@ -180,7 +167,7 @@ class Matricula(models.Model):
 
 class CursoTurma(models.Model):
     sigla_curso = models.ForeignKey(
-        'Curso', models.DO_NOTHING, db_column='sigla_curso', blank=True, null=True)
+        Curso, models.DO_NOTHING, db_column='sigla_curso', blank=True, null=True)
     nome_disciplina = models.ForeignKey(
         'Disciplina', models.DO_NOTHING, db_column='nome_disciplina', blank=True, null=True)
     ano_ofertado = models.ForeignKey(
@@ -188,10 +175,147 @@ class CursoTurma(models.Model):
     semestre_ofertado = models.ForeignKey(
         'DisciplinaOfertada', models.DO_NOTHING, db_column='semestre_ofertado', blank=True, null=True, related_name='+')
     id_turma = models.ForeignKey(
-        'Turma', models.DO_NOTHING, db_column='id_turma', blank=True, null=True, related_name='+')
+        Turma, models.DO_NOTHING, db_column='id_turma', blank=True, null=True)
 
     class Meta:
         managed = False
         db_table = 'curso_turma'
         unique_together = (('sigla_curso', 'nome_disciplina',
                             'ano_ofertado', 'semestre_ofertado', 'id_turma'),)
+
+
+class GradeCurricular(models.Model):
+    sigla_curso = models.ForeignKey(
+        Curso, models.DO_NOTHING, db_column='sigla_curso')
+    ano_grade = models.SmallIntegerField()
+    quantidade_semestres = models.CharField(max_length=1)
+
+    class Meta:
+        managed = False
+        db_table = 'grade_curricular'
+        unique_together = (
+            ('sigla_curso', 'ano_grade', 'quantidade_semestres'),)
+
+
+class Periodo(models.Model):
+    sigla_curso = models.ForeignKey(
+        Curso, models.DO_NOTHING, db_column='sigla_curso')
+    ano_grade = models.ForeignKey(
+        GradeCurricular, models.DO_NOTHING, db_column='ano_grade', related_name='+')
+    quantidade_semestres_grade = models.ForeignKey(
+        GradeCurricular, models.DO_NOTHING, db_column='quantidade_semestres_grade', related_name='+')
+    numero_periodo = models.SmallIntegerField()
+
+    class Meta:
+        managed = False
+        db_table = 'periodo'
+        unique_together = (('sigla_curso', 'ano_grade',
+                            'quantidade_semestres_grade', 'numero_periodo'),)
+
+
+class PeriodoDisciplina(models.Model):
+    sigla_curso = models.ForeignKey(
+        'Curso', models.DO_NOTHING, db_column='sigla_curso')
+    ano_grade = models.ForeignKey(
+        'GradeCurricular', models.DO_NOTHING, db_column='ano_grade', related_name='+')
+    quantidade_semestres_grade = models.ForeignKey(
+        'GradeCurricular', models.DO_NOTHING, db_column='quantidade_semestres_grade', related_name='+')
+    numero_periodo = models.ForeignKey(
+        'Periodo', models.DO_NOTHING, db_column='numero_periodo')
+    nome_disciplina = models.ForeignKey(
+        'Disciplina', models.DO_NOTHING, db_column='nome_disciplina')
+
+    class Meta:
+        managed = False
+        db_table = 'periodo_disciplina'
+        unique_together = (('sigla_curso', 'ano_grade',
+                            'quantidade_semestres_grade', 'numero_periodo', 'nome_disciplina'),)
+
+
+class Questao(models.Model):
+    nome_disciplina = models.ForeignKey(
+        Disciplina, models.DO_NOTHING, db_column='nome_disciplina')
+    ano_ofertado = models.ForeignKey(
+        DisciplinaOfertada, models.DO_NOTHING, db_column='ano_ofertado', related_name='+')
+    semestre_ofertado = models.ForeignKey(
+        DisciplinaOfertada, models.DO_NOTHING, db_column='semestre_ofertado', related_name='+')
+    id_turma = models.ForeignKey(
+        Turma, models.DO_NOTHING, db_column='id_turma')
+    numero_questao = models.IntegerField()
+    data_limite_entrega = models.CharField(max_length=10)
+    # This field type is a guess.
+    descricao = models.TextField(blank=True, null=True)
+    data_questao = models.CharField(max_length=10)
+
+    class Meta:
+        managed = False
+        db_table = 'questao'
+        unique_together = (('nome_disciplina', 'ano_ofertado',
+                            'semestre_ofertado', 'id_turma', 'numero_questao'),)
+
+
+class Resposta(models.Model):
+    nome_disciplina = models.ForeignKey(
+        Disciplina, models.DO_NOTHING, db_column='nome_disciplina')
+    ano_ofertado = models.ForeignKey(
+        DisciplinaOfertada, models.DO_NOTHING, db_column='ano_ofertado', related_name='+')
+    semestre_ofertado = models.ForeignKey(
+        DisciplinaOfertada, models.DO_NOTHING, db_column='semestre_ofertado', related_name='+')
+    id_turma = models.ForeignKey(
+        Turma, models.DO_NOTHING, db_column='id_turma')
+    numero_questao = models.ForeignKey(
+        Questao, models.DO_NOTHING, db_column='numero_questao')
+    ra_aluno = models.IntegerField()
+    data_avaliacao = models.CharField(max_length=10)
+    nota = models.DecimalField(max_digits=4, decimal_places=2)
+    avaliacao = models.TextField()  # This field type is a guess.
+    descricao = models.TextField()  # This field type is a guess.
+    data_de_envio = models.CharField(max_length=10)
+
+    class Meta:
+        managed = False
+        db_table = 'resposta'
+        unique_together = (('nome_disciplina', 'ano_ofertado',
+                            'semestre_ofertado', 'id_turma', 'numero_questao', 'ra_aluno'),)
+
+
+class ArquivoQuestao(models.Model):
+    nome_disciplina = models.ForeignKey(
+        'Disciplina', models.DO_NOTHING, db_column='nome_disciplina')
+    ano_ofertado = models.ForeignKey(
+        'DisciplinaOfertada', models.DO_NOTHING, db_column='ano_ofertado', related_name='+')
+    semestre_ofertado = models.ForeignKey(
+        'DisciplinaOfertada', models.DO_NOTHING, db_column='semestre_ofertado', related_name='+')
+    id_turma = models.ForeignKey(
+        Turma, models.DO_NOTHING, db_column='id_turma')
+    numero_questao = models.ForeignKey(
+        'Questao', models.DO_NOTHING, db_column='numero_questao')
+    arquivo_questao = models.CharField(max_length=500)
+
+    class Meta:
+        managed = False
+        db_table = 'arquivo_questao'
+        unique_together = (('nome_disciplina', 'ano_ofertado', 'semestre_ofertado',
+                            'id_turma', 'numero_questao', 'arquivo_questao'),)
+
+
+class ArquivoResposta(models.Model):
+    nome_disciplina = models.ForeignKey(
+        'Disciplina', models.DO_NOTHING, db_column='nome_disciplina')
+    ano_ofertado = models.ForeignKey(
+        'DisciplinaOfertada', models.DO_NOTHING, db_column='ano_ofertado', related_name='+')
+    semestre_ofertado = models.ForeignKey(
+        'DisciplinaOfertada', models.DO_NOTHING, db_column='semestre_ofertado', related_name='+')
+    id_turma = models.ForeignKey(
+        Turma, models.DO_NOTHING, db_column='id_turma')
+    numero_questao = models.ForeignKey(
+        'Questao', models.DO_NOTHING, db_column='numero_questao')
+    ra_aluno = models.ForeignKey(
+        'Aluno', models.DO_NOTHING, db_column='ra_aluno')
+    arquivo_resposta = models.CharField(max_length=500)
+
+    class Meta:
+        managed = False
+        db_table = 'arquivo_resposta'
+        unique_together = (('nome_disciplina', 'ano_ofertado', 'semestre_ofertado',
+                            'id_turma', 'numero_questao', 'ra_aluno', 'arquivo_resposta'),)
