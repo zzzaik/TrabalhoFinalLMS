@@ -213,6 +213,8 @@ SELECT * FROM disciplina_ofertada
 SELECT * FROM periodo
 SELECT * FROM periodo_disciplina
 SELECT * FROM turma
+SELECT * FROM codigo_matricula
+
 
 select carga_horaria, count(*)
 from disciplina
@@ -261,7 +263,6 @@ from core_usuario as U
 JOIN core_aluno AS A
 ON U.user_type = 'A' AND A.curso_id = 1
 GROUP BY U.nome, U.email, U.ra, A.curso_id 
-
 
 SELECT D.nome
 FROM disciplina_ofertada as DO
