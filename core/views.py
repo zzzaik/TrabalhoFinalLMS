@@ -150,3 +150,19 @@ def upload_prof(request):
         
     }
     return render(request,'upload_prof.html',contexto)
+
+def exibir_boletim(request):
+    notas = []
+    contador = 0
+
+    Aluno.objects.get(ra=request.user.id)
+    aluno = Aluno.objects.get(ra=1234567)
+
+    for nota in Resposta.objects.filter(ra_aluno=aluno):
+        contador = contador + 1
+        notas.append(nota.nota)
+        
+        media = notas/contador
+
+
+
