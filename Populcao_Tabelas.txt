@@ -1,13 +1,26 @@
 --CURSO
 insert into curso (sigla_curso, nome_curso)
-values ('SI', 'Sistemas da informação'),('BD', 'Banco de Dados')
-
+values ('SI', 'Sistemas da informação'),
+       ('BD', 'Banco de Dados'),
+       ('AD','Administração'),
+	     ('CONT','Contabilidade'),
+	     ('RH','Recursos Humanos'),
+	     ('CC','Ciências da Computação'),
+	     ('ER','Engenharia de Redes'),
+go
 
 --DISCIPLINA
 insert into disciplina(nome, carga_horaria, aula_teorica, aula_pratica, ementa, competencias, habilidades, conteudo, bibliografia_basica, bibliografia_complementar)
 values ('Banco de dados',20,5.0,5.0,'Emenda1','SQL avançado','Desenvolver Banco de dados','SQL','Professor X','Professsor Y'),
 ('LPI',25,7.0,7.0,'Emenda1','Programação Python','Desenvolver sistemas em Python','Python','Professor R','Professsor J'),
-('TecWeb',25,7.0,7.0,'Emenda1','Tecnologias WEB','Desenvolver sistemas WEB','Djangoo','Professor R','Professsor J')
+('TecWeb',25,7.0,7.0,'Emenda1','Tecnologias WEB','Desenvolver sistemas WEB','Djangoo','Professor R','Professsor J'),
+('Ciências da Computação',150,9.000,8.000,'Emenda2','Software Avançado','Criação de SoftWare','SoftWare','Professor C','ProfessorJ'),
+('Engenharia de Redes',100,5.000,5.000,'Emenda3','redes e servidores','Criação de Redes e servidores','Redes','Professor D','Professor B'),
+('Recursos Humanos',80,4.000,4.000,'Emenda4','Contratação','Pagamentos','recursos','Professor M','Professor N'),
+('Contabilidade',70,3.000,3.000,'Emenda5','Admin Contabeis','Composição fical','Imposto','Professor I','Professor R'),
+('Administração',70,3.000,3.000,'Emenda6','admministração','administração de relatorios','administração','Professor Z','Professor W'),
+
+go
 
 
 --DISCIPLINA OFERTADA
@@ -38,3 +51,24 @@ values(1,1,1,6,1),(2,2,2,7,3),(3,3,3,8,4)
 --MATRICULA
 insert into matricula (ra_aluno, nome_disciplina, ano_ofertado, semestre_ofertado, id_turma)
 values (2, 1, 1, 1, 1), (4, 3, 4, 4, 8), (5, 4, 5, 5, 1), (6, 3, 4, 4, 9), (7, 1, 1, 1, 8), (8, 4, 5, 5, 9)
+
+--TABELA CORE_ALUNO
+insert into dbo.core_aluno(user_id,celular,semestre,curso_id)
+values(1,'11949187645',1,4)
+	 ,(3,'1167584930',1,5)
+	 ,(11,'11084932754',1,7)
+	 
+go
+
+--TABEL CORE_PROFESSOR
+--- Lembrando que os proximos  cadastros no usuario tem que ser professor
+--- assim ele vai gerar o id 13,14,15,16,17
+insert into dbo.core_professor(user_id,celular,apelido)
+values(13,'11949187698','Prof_J')
+	 ,(14,'1167584976','Prof_A')
+	 ,(15,'11084872754','Prof_M')
+	 ,(16,'1167584954','Prof_T')
+	 ,(17,'11876932754','Prof_F')
+	 (
+go
+
