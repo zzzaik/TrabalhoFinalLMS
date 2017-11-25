@@ -150,3 +150,14 @@ def upload_prof(request):
         
     }
     return render(request,'upload_prof.html',contexto)
+
+#def exibir_boletim(request):
+#    notas = []
+#
+#    Aluno.objects.get(rs=request.user.id)
+#    aluno = Aluno.objects.get(ra=1601603)
+#
+#    for nota in Resposta.objects.filter(rs_aluno=aluno):
+#        notas.append(nota.nota)
+
+
