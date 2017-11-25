@@ -1,9 +1,0 @@
-.areaProf{
-	display:flex;
-	justify-content: space-between;
-	align-content: flex-start;
-	position:relative;
-	width:100%;
-	top:10px;
-	padding-top:2em;
-}

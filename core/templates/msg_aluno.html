@@ -2,16 +2,17 @@
 {% load static %}
 
 {% block conteudoAluno %}
-<div class="maxWidth">
-<div class="msgPanel">
-    {% for m in user %}
-    <div class="msg">
-        <p class="remetente">{% if m in user %}{{ m }}{% endif %}</p>
-        <p class="texto">{{ mensagem }}</p>
-        <span>{{ data_agora }}</span>
+<div class="width80 maxHeight content">
+    <div class="msgPanel">
+        <h2 class="maxWidth centerText">Avisos</h2>
+        {% for m in user %}
+        <div class="msg">
+            <p class="remetente">{% if m in user %}{{ m }}{% endif %}</p>
+            <p class="texto">{{ mensagem }}</p>
+            <span>{{ data_agora }}</span>
+        </div>
+        {% endfor %}
     </div>
-    {% endfor %}
-</div>
 
     <fieldset class="flexFieldSet">
     <legend>Enviar Mensagem</legend>

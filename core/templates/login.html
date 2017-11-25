@@ -2,14 +2,15 @@
 
 {% load static %}
 
-{% block estilo_unico %}{% static '/' %}css/Login.css{% endblock %}
+{% block estilo_unico %}{% static '/' %}css/site.css{% endblock %}
 
 {% block script_unico %}{% endblock %}
 	   
 {% block title %}Login{% endblock %}
 
 {% block main %}
-<fieldset class="flexFieldSet thirdWidth">
+<div class="content">
+<fieldset class="flexFieldSet width20">
     <form class="flexForm" method="POST">
     {% csrf_token %}
     {% for field in form %}
@@ -18,8 +19,9 @@
         {{ field.label_tag }} {{ field }}
     </p>
     {% endfor %}
-        <button type="submit" class="linkBtn">Enviar</button>
+        <button type="submit" class="submitBtn">Enviar</button>
         <a href="{% url 'recuperar_senha' %}">Esqueci a senha</a>
     </form>
 </fieldset>
+</div>
 {% endblock %}

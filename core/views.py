@@ -138,7 +138,7 @@ def upload_prof(request):
     if request.POST:
         arquivo = ArquivoQuestao()
         form = fileUploadProf(request.POST,request.FILES)
-        if form.is_valid()
+        if form.is_valid():
             form.save()
     else:
         form = fileUploadProf()

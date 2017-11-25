@@ -17,10 +17,8 @@
 				<a href="/" title="Logo Faculdade Impacta">
 					<img class="img_logo" src="{% static '/' %}img/logo-novo.png" alt="Logo e link para a home" />
 				</a>
-				<nav class = 'menu_extenco'>
-					<a class = 'linkBtn' href="{% url 'cursos' %}" title="Cursos"><button class="linkBtn">Cursos</button></a>
-					<a class = 'linkBtn' href="{% url 'noticias' %}" title="Notícias"><button class="linkBtn" >Notícias</button></a>
-				</nav>
+				<a class = 'linkBtn' href="{% url 'cursos' %}" title="Cursos">Cursos</a>
+				<a class = 'linkBtn' href="{% url 'noticias' %}" title="Notícias">Notícias</a>
 			</div>
 			<div class='menus'>
 				{% if not user.is_authenticated %}
@@ -31,21 +29,21 @@
 					</a>
 				</button>
 				{% else %}
-				<div>
+				<div class='menus'>
 					<button class="user" onclick="login_function()" title="Logado">
 						<img class="img_user" src="{% static '/' %}img/img_user.png"
 						 alt="Usuario" />
 					</button>
 					<nav id="drop_login" class="conteudo_login">
 						{% if user.user_type == 'A' %}
-						<a class="linkBtn" href="{% url 'area_aluno' %}">Área do aluno</a>
-						<a class="linkBtn" href="{% url 'sair' %}">Sair</a>
+						<a class="linkBtn maxHeight" href="{% url 'area_aluno' %}">Área do aluno</a>
+						<a class="linkBtn maxHeight" href="{% url 'sair' %}">Sair</a>
 						{% elif user.user_type == 'P' %}
-						<a class="linkBtn" href="{% url 'area_professor' %}">Área do professor</a>
-						<a class="linkBtn" href="{% url 'sair' %}">Sair</a>
+						<a class="linkBtn maxHeight" href="{% url 'area_professor' %}">Área do professor</a>
+						<a class="linkBtn maxHeight" href="{% url 'sair' %}">Sair</a>
 						{% elif user.user_type == 'C' %}
-						<a class="linkBtn" href="/admin">Área do coordenador</a>
-						<a class="linkBtn" href="{% url 'sair' %}">Sair</a>
+						<a class="linkBtn maxHeight" href="/admin">Área do coordenador</a>
+						<a class="linkBtn maxHeight" href="{% url 'sair' %}">Sair</a>
 						{% endif %}
 					</nav>
 				</div>
@@ -53,7 +51,7 @@
 			</div>
 		</nav>
 	</header>
-	<main>
+	<main class="marginTop5">
 		{% block main %}{% endblock %}
 	</main>
 	<footer>

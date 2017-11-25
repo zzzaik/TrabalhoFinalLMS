@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block estilo_unico %}{% static '/' %}css/site.css{% endblock %} 
+{% block script_unico %}{% endblock %}
+{% block login %}{% endblock %}
+{% block img_user %}{% endblock %}
+{% block title %}Cursos - Impacta{% endblock %} 
+{% block main %}
+<section class = 'content width40 maxHeight'>
+    <h1 class="maxWidth centerText">{{ curso }}</h1>
+    <table>
+        {% for g in grade %}
+        <div>
+            <tr>
+                <th rowspan="4">{{ semestre }}</th>
+            </tr>
+            <tr>
+                <th>Disciplina</th>
+                <th>Carga Horária</th>
+                <th>Competências</th>
+                <th>Habilidades</th>
+            </tr>
+            <tr>
+                <td>{{ disciplinas }}</td>
+                <td>{{ carga_horaria }}</td>
+                <td>{{ competencias }}</td>
+                <td>{{ habilidades }}</td>
+            </tr>
+        </div>
+        {% endfor %}
+    </table>
+</section>
+{% endblock %}

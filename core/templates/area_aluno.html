@@ -1,16 +1,16 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block estilo_unico %}{% static '/' %}css/a_aluno.css{% endblock %}
+{% block estilo_unico %}{% static '/' %}css/site.css{% endblock %}
 
 {% block script_unico %}{% endblock %}
 	   
 {% block title %}Área do aluno{% endblock %}
 
 {% block main %}
-<section class="areaAluno">
+<section class="content">
+    <div class="areaAluno">
     <div class="listLinks">
-        
         <ul class=flexList>
             <li class="liLink" onclick="dropDown('liDrop')">Matrículas
                 <div class="selectionList flexColumn" id="liDrop">
@@ -23,5 +23,6 @@
         </ul>
     </div>
     {% block conteudoAluno %}{% endblock %}
+    </div>
 </section>
 {% endblock %}
