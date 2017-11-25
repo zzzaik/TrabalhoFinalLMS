@@ -131,22 +131,21 @@ def upload_aluno(request):
 
 def upload_prof(request):
     prof = Professor.objects.get(ra=request.user.ra)
-    #matriculas = []
-    #for m in Matricula.objects.filter(ra_aluno=aluno):
-    #    matriculas.append(m)
+    turmas = []
+    for t in Turma.objects.filter(ra_professor=prof):
+        turmas.append(t)
     
-    #if request.POST:
-    #    arquivo = ArquivoResposta(ra_aluno=aluno)
-    #    form = fileUploadAluno(request.POST,request.FILES,instance=aluno)
-    #    if form.is_valid():
-     #       form.ra_aluno=aluno.ra
-     #       form.save()
-    #else:
-        
-    form = fileUploadProf()
+    if request.POST:
+        arquivo = ArquivoQuestao()
+        form = fileUploadProf(request.POST,request.FILES)
+        if form.is_valid()
+            form.save()
+    else:
+        form = fileUploadProf()
 
     contexto = {
         "form":form,
+        "turmas":turmas
         
     }
     return render(request,'upload_prof.html',contexto)

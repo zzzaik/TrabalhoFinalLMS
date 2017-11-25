@@ -10,7 +10,7 @@
             <div class="inputGroup">
                 <label for="disciplina">Disciplina: </label>
                 <select  class="informs" name="disciplina" id="disciplina">
-                    {% for d in matriculas.nome_disciplina %}
+                    {% for d in turmas.nome_disciplina %}
                     <option>{{ d }}</option>
                     {% endfor %}
                     <option>ADS</option>
@@ -18,7 +18,7 @@
     
                 <label for="ano_ofertado">Ano: </label>
                 <select  class="informs" name="ano_ofertado" id="ano_ofertado">
-                    {% for ano in matriculas.ano_ofertado %}
+                    {% for ano in turmas.ano_ofertado %}
                     <option>{{ ano }}</option>
                     {% endfor %}
                     <option>2017</option>
@@ -26,7 +26,7 @@
     
                 <label for="semestre_ofertado">Semestre: </label>
                 <select  class="informs" name="semestre_ofertado" id="semestre_ofertado">
-                    {% for sem in matriculas.semestre_ofertado %}
+                    {% for sem in turmas.semestre_ofertado %}
                     <option>{{ sem }}</option>
                     {% endfor %}
                     <option>2</option>
@@ -34,7 +34,7 @@
     
                 <label for="id_turma">Turma: </label>
                 <select  class="informs" name="id_turma" id="id_turma">
-                    {% for turma in matriculas.id_turma %}
+                    {% for turma in turmas.id_turma %}
                     <option>{{ turma }}</option>
                     {% endfor %}
                     <option>b</option>
@@ -44,7 +44,7 @@
                 <label for="questao">Número da Questão</label>
                 <input class="informs" name="questao" id="questao" type="number"></input>
                 <label for="arquivo">Selecionar Arquivo: </label>
-                <div id="arquivo">{{ form.arquivo_resposta }}</div>
+                <div id="arquivo">{{ form.arquivo_questao }}</div>
             </div>
             <button class="submitBtn"type="submit">Enviar</button>
         </form>
