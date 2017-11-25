@@ -23,7 +23,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'ct00xjizk(-o!torlxai8*-^%eyxcux-_94e)dmjifyljmmo6y'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = []
 
@@ -84,6 +84,19 @@ DATABASES = {
         'PASSWORD': "P@ssw0rd",
     }
 }
+
+#DATABASES = {
+#   'default': {
+#       'ENGINE': "django_pyodbc",
+#       'HOST': "127.0.0.1,1433",
+#       'USER': "sa",
+#       'PASSWORD': "union",
+#       'NAME': "LMS",
+#       'OPTIONS': {
+#           'host_is_server': True
+#      },
+#  }
+#}
 
 # Password validation
 # https://docs.djangoproject.com/en/1.11/ref/settings/#auth-password-validators
