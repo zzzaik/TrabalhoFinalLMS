@@ -1,8 +1,8 @@
 from django.shortcuts import render
 from datetime import datetime
 from django.contrib.auth.decorators import login_required, user_passes_test
-from core.forms import mensagemForm
-from core.models import Usuario, Aluno, Curso
+from core.forms import mensagemForm, fileUploadAluno, fileUploadProf
+from core.models import *
 
 now = datetime.now()
 def checa_aluno(user):
@@ -64,6 +64,18 @@ def matricula(request):
     }
     return render(request, 'matricula.html',context)
 
+def historico(request):
+    disciplinas=request.POST.getlist('disciplinas')
+    # como passar um array pelo POST; django:
+    # https://stackoverflow.com/questions/4581114/django-questionhow-to-pass-a-list-parameter-using-post-method
+    context = {
+        'cursos':'lista de cursos',#query em função do RA do aluno
+        'disciplinas':disciplinas,#disciplinas selecionadas p/ matrícula
+        'turmas':'lista de turmas',#turmas da disciplina selecionada
+        'matricula':'ra_aluno'#pego na sessão
+    }
+    return render(request, 'historico.html',context)
+
 def pag_curso(request, sigla):
     curso = Curso.objects.get(sigla=sigla.upper())
     contexto = {
@@ -94,3 +106,47 @@ def msg_professor(request):
 
     }
     return render(request, 'msg_professor.html',context)
+
+def upload_aluno(request):
+    aluno = Aluno.objects.get(ra=request.user.ra)
+    matriculas = []
+    for m in Matricula.objects.filter(ra_aluno=aluno):
+        matriculas.append(m)
+    
+    if request.POST:
+        arquivo = ArquivoResposta(ra_aluno=aluno)
+        form = fileUploadAluno(request.POST,request.FILES,instance=aluno)
+        if form.is_valid():
+            form.ra_aluno=aluno.ra
+            form.save()
+    else:
+        
+        form = fileUploadAluno()
+
+    contexto = {
+        "form":form,
+        "matriculas":matriculas,
+    }
+    return render(request,'upload_aluno.html',contexto)
+
+def upload_prof(request):
+    prof = Professor.objects.get(ra=request.user.ra)
+    #matriculas = []
+    #for m in Matricula.objects.filter(ra_aluno=aluno):
+    #    matriculas.append(m)
+    
+    #if request.POST:
+    #    arquivo = ArquivoResposta(ra_aluno=aluno)
+    #    form = fileUploadAluno(request.POST,request.FILES,instance=aluno)
+    #    if form.is_valid():
+     #       form.ra_aluno=aluno.ra
+     #       form.save()
+    #else:
+        
+    form = fileUploadProf()
+
+    contexto = {
+        "form":form,
+        
+    }
+    return render(request,'upload_prof.html',contexto)

@@ -1,0 +1,39 @@
+{% extends 'area_aluno.html' %}
+{% load static %}
+{% block conteudoAluno %}
+<div class="maxWidth">
+<fieldset class="flexFieldSet">
+        <legend>Histórico</legend>
+            <form class="flexForm" method="POST">
+                <div class="inputGroup">
+                <label for="buscaAno">Ano: </label>
+                <select class="informs" name="buscaAno" id="buscaAno">
+                    <option>-- Ano --</option>
+                    {% for c in curso %}
+                    <option value="{{ c.ano }}">{{ c.ano }}</option>
+                    {% endfor %}
+                </select>
+                <label for="buscaSemestre">Semestre: </label>
+                <select class="informs" name="buscaSemestre" id="buscaSemestre">
+                    <option>-- Semestre --</option>
+                    <option>1</option>
+                    <option>2</option>
+                </select>
+                <button type="submit" class="submitBtn">Buscar</button>
+                </div>
+                <table>
+                    <tr>
+                        <th>Disciplina</th>
+                        <th>Turma</th>
+                    </tr>
+                    {% for m in matricula %}
+                    <tr>
+                        <td>m.nome_disciplina</td>
+                        <td>m.id_turma</td>
+                    </tr>
+                    {% endfor %}
+                </table>
+            </form>
+        </fieldset>
+    </div>
+{% endblock %}

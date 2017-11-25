@@ -19,8 +19,8 @@
 					<img class="img_logo" src="{% static '/' %}img/logo-novo.png" alt="Logo e link para a home" />
 				</a>
 				<nav class = 'menu_extenco'>
-					<a class = 'link' href="{% url 'cursos' %}" title="Cursos"><button class="linkBtn">Cursos</button></a>
-					<a class = 'link' href="{% url 'noticias' %}" title="Notícias"><button class="linkBtn" >Notícias</button></a>
+					<a class = 'linkBtn' href="{% url 'cursos' %}" title="Cursos"><button class="linkBtn">Cursos</button></a>
+					<a class = 'linkBtn' href="{% url 'noticias' %}" title="Notícias"><button class="linkBtn" >Notícias</button></a>
 				</nav>
 			</div>
 			<div class='menus'>
@@ -32,34 +32,25 @@
 					</a>
 				</button>
 				{% else %}
-				<div>
-					<button class="user" onclick="login_function()" title="{% if not user.is_athenticated %}Entre{% else %}Logado{% endif %}">
+				<div class="menus">
+					<button class="user" onclick="login_function('drop_login')" title="{% if not user.is_athenticated %}Entre{% else %}Logado{% endif %}">
 						<img class="img_user" src="{% if logado == False %}{% static '/' %}img/img_user.png{% else %}{% static '/' %}img/img_user.png{% endif %}"
 						 alt="Usuario" />
 					</button>
 					<nav id="drop_login" class="conteudo_login">
 						{% if user.user_type == 'A' %}
-						<a href="{% url 'aluno' %}">Área do aluno</a>
-						<a href="{% url 'sair' %}">Sair</a>
+						<a class="linkBtn" href="{% url 'area_aluno' %}">Área do aluno</a>
+						<a class="linkBtn" href="{% url 'sair' %}">Sair</a>
 						{% elif user.user_type == 'P' %}
-						<a href="{% url 'professor' %}">Área do professor</a>
-						<a href="{% url 'sair' %}">Sair</a>
+						<a class="linkBtn" href="{% url 'area_professor' %}">Área do professor</a>
+						<a class="linkBtn" href="{% url 'sair' %}">Sair</a>
 						{% elif user.user_type == 'C' %}
-						<a href="/admin">Área do coordenador</a>
-						<a href="{% url 'sair' %}">Sair</a>
+						<a class="linkBtn" href="/admin">Área do coordenador</a>
+						<a class="linkBtn" href="{% url 'sair' %}">Sair</a>
 						{% endif %}
 					</nav>
 				</div>
 				{% endif %}
-				<div class="drop_menu" title="Menu">
-					<button onclick="menu_function()" class="dropbtn">
-						<img src="{% static '/' %}img/menu_icons_bars.png" class="menu_icon" />
-					</button>
-					<nav id="drop" class="conteudo_menu">
-						<a href="{% url 'cursos' %}" title="Cursos">Cursos</a>
-						<a href="{% url 'noticias' %}" title="Notícias">Notícias</a>
-					</nav>
-				</div>
 			</div>
 		</nav>
 	</header>

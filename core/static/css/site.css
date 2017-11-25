@@ -14,15 +14,7 @@ html {
 	margin-top:1.1em;
 	width:98%;
 }
-.maxHeight{
-	height:max-content;
-}
-.maxWidth{
-	width:80%;
-}
-li.show{
-	display:block;
-}
+
 .corpo {
 	margin: 0px;
 }
@@ -75,17 +67,17 @@ li.show{
 	border: 0 none;
 	outline: 0;
 }
-a.link {
+a {
 	display: flex;
 	text-decoration: none;
 	height: 100%;
 	font-weight: bold;
 }
-a.link:link, a.link:visited {
+a:link, a:visited {
 	color: #ffffff;
 }
 
-a.link:active {
+a:active {
 	color: #7b7bff;
 }
 
@@ -101,10 +93,9 @@ a.link:active {
 
 /* box de login */
 .conteudo_menu, .conteudo_login {
-    display: none;
-    position: absolute;
-    background-color: #344a5b;
-    min-width: 160px;
+	display:flex;
+	flex-flow: column;
+	background-color: #344a5b;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     z-index: 1;
 }
@@ -127,15 +118,6 @@ a.link:active {
 	width:100%;
 	height:100%;
 	margin:0.2em;
-}
-.conteudo_login{
-	display:flex;
-	position:absolute;
-	top:107%;
-	justify-content: center;
-	z-index:1;
-	background-color: #4e5b60;
-	width:100%;
 }
 
 /* Forms */
@@ -477,4 +459,28 @@ h3.comentsAlunos {
 
 .left{
 	align-items: flex-start;
+}
+
+
+
+
+
+/* modifiers */
+.maxHeight{
+	height:max-content;
+}
+.maxWidth{
+	width:80%;
+}
+.thirdWidth{
+	width:30%;
+}
+.flexColumn{
+	flex-flow: column;
+}
+*.show{
+	display:flex;
+}
+.centerText{
+	text-align: center;
 }

@@ -1,5 +1,5 @@
-function menu_function() {
-  document.getElementById("drop").classList.toggle("show");
+function dropDown(id) {
+  document.getElementById(id).classList.toggle("show");
 }
 
 window.onclick = function(event) {
@@ -14,10 +14,6 @@ if (!event.target.matches('.dropbtn')) {
     }
   }
 }
-}
-
-function login_function() {
-document.getElementById("drop_login").classList.toggle("show");
 }
 
 window.onclick = function(event) {
@@ -70,11 +66,8 @@ function check_codigo() {
       check_codigo();
   }
 
-function filtrarAlunos() {
-  var getCurso=document.getElementById("filtroCurso").value;
-  var getTurma=document.getElementById("filtroTurma").value;
-  return getCurso,getTurma;
-}
+
+
  /*//var flag = false;
   Do{
       var codigo = prompt("Digite o codigo de acesso", "");
