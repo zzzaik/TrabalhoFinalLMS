@@ -1,0 +1,3 @@
+- Liberar a porta 1433 para uso do SQL Server.
+- Escolher a conexão (local ou azure) no arquivo settings.py
+- Alterar NAME, USER e PASSWORD da database dependendo do banco do usuario.
