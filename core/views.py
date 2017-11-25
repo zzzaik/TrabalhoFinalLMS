@@ -77,7 +77,7 @@ def historico(request):
     return render(request, 'historico.html',context)
 
 def pag_curso(request, sigla):
-    curso = Curso.objects.get(sigla=sigla.upper())
+    curso = Curso.objects.get(sigla_curso=sigla.upper())
     contexto = {
         "cursos":curso,
     }

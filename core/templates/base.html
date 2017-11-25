@@ -8,10 +8,9 @@
 	<link rel="stylesheet" href="{% static '/' %}css/site.css" />
 	<link rel="stylesheet" href='{% block estilo_unico %}{% endblock %}' />
 	<script src="{% static '/' %}js/script.js"></script>
-	<script src="{% block script_unico %}{% endblock %}"></script>
 	<title>{% block title %}{% endblock %}</title>
 </head>
-<body class="content">
+<body>
 	<header class="motherNav">
 		<nav class="menu">
 			<div class = 'menus'>
@@ -25,16 +24,16 @@
 			</div>
 			<div class='menus'>
 				{% if not user.is_authenticated %}
-				<button class="user" title="{% if not user.is_authenticated %}Entre{% else %}Logado{% endif %}">
+				<button class="user" title="Entre">
 					<a href="{% url 'entrar' %}">
-						<img class="img_user" src="{% if not user.is_athenticated %}{% static '/' %}img/img_user.png{% else %}{% static '/' %}img/img_user.png{% endif %}"
+						<img class="img_user" src="{% static '/' %}img/img_user.png"
 						 alt="Usuario" />
 					</a>
 				</button>
 				{% else %}
-				<div class="menus">
-					<button class="user" onclick="login_function('drop_login')" title="{% if not user.is_athenticated %}Entre{% else %}Logado{% endif %}">
-						<img class="img_user" src="{% if logado == False %}{% static '/' %}img/img_user.png{% else %}{% static '/' %}img/img_user.png{% endif %}"
+				<div>
+					<button class="user" onclick="login_function()" title="Logado">
+						<img class="img_user" src="{% static '/' %}img/img_user.png"
 						 alt="Usuario" />
 					</button>
 					<nav id="drop_login" class="conteudo_login">
@@ -54,7 +53,7 @@
 			</div>
 		</nav>
 	</header>
-	<main class='content'>
+	<main>
 		{% block main %}{% endblock %}
 	</main>
 	<footer>

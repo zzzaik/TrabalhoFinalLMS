@@ -44,15 +44,6 @@ function error_message() {
 alert('{{ form.error }}');
 }
 
-
-function chkView(){
-  width=document.documentElement.clientWidth;
-  if (width <= 736){
-      document.getElementById("bannerIndex").src = "/static/img/bannerCell.png";
-      document.getElementById("bannerIndex").class = "BannerCell";
-  }
-}
-
 function check_codigo() {
   var flag = document.getElementsByClassName("flag");
   var codigo = prompt("Digite o codigo de acesso", "");

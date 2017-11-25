@@ -79,22 +79,22 @@ DATABASES = {
         'ENGINE': "sql_server.pyodbc",
         'NAME': "db-lms-project",
         'HOST': "db-lms-draco.database.windows.net",
-        'PORT': '1433',
-        'USER': "LMS_DB_admin@db-lms-draco",
+       'PORT': '1433',
+       'USER': "LMS_DB_admin@db-lms-draco",
         'PASSWORD': "P@ssw0rd",
-    }
+   }
 }
 
+#Conexão com Banco local SQL Server
+
 #DATABASES = {
-#   'default': {
-#       'ENGINE': "django_pyodbc",
-#       'HOST': "127.0.0.1,1433",
-#       'USER': "sa",
-#       'PASSWORD': "union",
-#       'NAME': "LMS",
-#       'OPTIONS': {
-#           'host_is_server': True
-#      },
+#    'default': {
+#        'ENGINE': "sql_server.pyodbc",
+#        'NAME': "teste",
+#        'HOST': "localhost",
+#      'PORT': '1433',
+#      'USER': "sa",
+#        'PASSWORD': "union",
 #  }
 #}
 
