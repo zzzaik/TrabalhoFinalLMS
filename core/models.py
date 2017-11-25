@@ -167,7 +167,7 @@ class Matricula(models.Model):
         db_table = 'matricula'
         unique_together = (('ra_aluno', 'nome_disciplina',
                             'ano_ofertado', 'semestre_ofertado', 'id_turma'),)
-
+    
 
 class CursoTurma(models.Model):
     sigla_curso = models.ForeignKey(
@@ -298,7 +298,7 @@ class ArquivoQuestao(models.Model):
         Turma, models.DO_NOTHING, db_column='id_turma')
     numero_questao = models.ForeignKey(
         'Questao', models.DO_NOTHING, db_column='numero_questao')
-    arquivo_questao = models.CharField(max_length=500)
+    arquivo_questao = models.FileField(upload_to='questoes/')
 
     class Meta:
         managed = False
@@ -320,7 +320,7 @@ class ArquivoResposta(models.Model):
         'Questao', models.DO_NOTHING, db_column='numero_questao')
     ra_aluno = models.ForeignKey(
         'Aluno', models.DO_NOTHING, db_column='ra_aluno')
-    arquivo_resposta = models.CharField(max_length=500)
+    arquivo_resposta = models.FileField(upload_to='respostas/')
 
     class Meta:
         managed = False

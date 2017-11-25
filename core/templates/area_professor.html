@@ -14,8 +14,7 @@
             
             <ul class=flexList>
                 <li class="liLink"><a class="liLink" href="{% url 'msg_professor' %}">Mensagens</a></li>
-                <li class="liLink"><a class="liLink" href="#">Trabalhos</a></li>
-                <li class="liLink"><a class="liLink" href="#">Exercícios</a></li>
+                <li class="liLink"><a class="liLink" href="{% url 'upload_prof' %}">Trabalhos e Exercícios</a></li>
             </ul>
         </div>
         {% block conteudoProf %}{% endblock %}

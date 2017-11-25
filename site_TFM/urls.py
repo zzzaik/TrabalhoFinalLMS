@@ -18,7 +18,7 @@ from django.contrib import admin
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib.auth.views import login, logout
-from core.views import *
+from core.views import index,cursos,pag_curso,noticias,area_aluno,area_professor,primeiro_login,recuperar_senha,matricula,msg_aluno,msg_professor,upload_aluno,upload_prof,historico
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls, name='coordenador'),
@@ -33,8 +33,11 @@ urlpatterns = [
     url(r'^entrar/recuperar_senha', recuperar_senha, name='recuperar_senha'),
     url(r'^sair', logout, {'next_page':'/'}, name='sair'),
     url(r'^area_aluno/matricula', matricula, name='matricula'),
+    url(r'^area_aluno/historico', historico, name='historico'),
     url(r'^area_aluno/msg_aluno',msg_aluno,name='msg_aluno'),
-    url(r'^area_professor/msg_professor',msg_professor,name='msg_professor')
+    url(r'^area_professor/msg_professor',msg_professor,name='msg_professor'),
+    url(r'^area_aluno/upload_aluno',upload_aluno,name='upload_aluno'),
+    url(r'^area_professor/upload_prof',upload_prof,name='upload_prof')
 ]
 
 if settings.DEBUG:

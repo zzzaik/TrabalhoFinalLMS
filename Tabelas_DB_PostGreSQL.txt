@@ -213,3 +213,4 @@ SELECT * FROM disciplina_ofertada;
 SELECT * FROM periodo;
 SELECT * FROM periodo_disciplina;
 SELECT * FROM turma;
+SELECT * FROM codigo_matricula;

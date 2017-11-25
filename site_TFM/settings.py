@@ -23,7 +23,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'ct00xjizk(-o!torlxai8*-^%eyxcux-_94e)dmjifyljmmo6y'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = []
 
@@ -79,11 +79,24 @@ DATABASES = {
         'ENGINE': "sql_server.pyodbc",
         'NAME': "db-lms-project",
         'HOST': "db-lms-draco.database.windows.net",
-        'PORT': '1433',
-        'USER': "LMS_DB_admin@db-lms-draco",
+       'PORT': '1433',
+       'USER': "LMS_DB_admin@db-lms-draco",
         'PASSWORD': "P@ssw0rd",
-    }
+   }
 }
+
+#Conexão com Banco local SQL Server
+
+#DATABASES = {
+#    'default': {
+#        'ENGINE': "sql_server.pyodbc",
+#        'NAME': "teste",
+#        'HOST': "localhost",
+#      'PORT': '1433',
+#      'USER': "sa",
+#        'PASSWORD': "union",
+#  }
+#}
 
 # Password validation
 # https://docs.djangoproject.com/en/1.11/ref/settings/#auth-password-validators

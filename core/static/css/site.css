@@ -8,6 +8,7 @@ html {
 }
 .drop_menu, .dropbtn{
 	display: none;
+
 }
 .motherNav{
 	display: flex;
@@ -57,12 +58,12 @@ html {
 .drop_menu, drop_login {
     position: relative;
     display: inline-block;
+
 }
 .conteudo_menu, .conteudo_login {
-    display: none;
-    position: absolute;
-    background-color: #344a5b;
-    min-width: 160px;
+	display:flex;
+	flex-flow: column;
+	background-color: #344a5b;
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     z-index: 1;
 }
@@ -124,7 +125,6 @@ div.copyright {
 	.menu_extenco{display: none;}
 	.content{margin-top: 4.5em;}
 }
-
 .flexFieldSet{
 	display:flex;
 	flex-flow:column wrap;
@@ -139,7 +139,6 @@ div.copyright {
 	margin-top: 5em;
 	border-radius: 2em;
 }
-
 .flexForm{
 	display:flex;
 	flex-flow:column wrap;
@@ -166,14 +165,12 @@ div.copyright {
 	border:none;
 	border-radius:5px;
 }
-
 .inputTextArea{
 	width:90%;
 	border:none;
 	height: 10em;
 	max-width: 900px;
 }
-
 .submitBtn{
 	display: flex;
 	justify-content: center;

@@ -12,10 +12,14 @@
     <div class="listLinks">
         
         <ul class=flexList>
-            <li class="liLink"><a class="liLink" href="{% url 'matricula' %}">Matrículas</a></li>
+            <li class="liLink" onclick="dropDown('liDrop')">Matrículas
+                <div class="selectionList flexColumn" id="liDrop">
+                    <a class="linkBtn" href="{% url 'matricula' %}">Criar Matrícula</a>
+                    <a class="linkBtn" href="{% url 'historico' %}">Histórico</a>
+                </div>
+            </li>
             <li class="liLink"><a class="liLink" href="{% url 'msg_aluno' %}">Mensagens</a></li>
-            <li class="liLink"><a class="liLink"href="#">Trabalhos</a></li>
-            <li class="liLink"><a class="liLink"href="#">Exercícios</a></li>
+            <li class="liLink"><a class="liLink" href="{% url 'upload_aluno' %}">Trabalhos e Exercícios</a></li>
         </ul>
     </div>
     {% block conteudoAluno %}{% endblock %}
