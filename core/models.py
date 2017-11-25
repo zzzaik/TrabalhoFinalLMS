@@ -287,6 +287,12 @@ class Resposta(models.Model):
                             'semestre_ofertado', 'id_turma', 'numero_questao', 'ra_aluno'),)
 
 
+def monta_arquivo_questao(questao, nome_arquivo):
+    return '{}/{}/{}/{}'.format('questoes', questao.curso.sigla_curso, questao.numero_questao, nome_arquivo)
+    
+def monta_arquivo_resposta(resposta, nome_arquivo):
+    return '{}/{}/{}/{}'.format('questoes', resposta.curso.sigla_curso, resposta.numero_questao, nome_arquivo)
+
 class ArquivoQuestao(models.Model):
     nome_disciplina = models.ForeignKey(
         'Disciplina', models.DO_NOTHING, db_column='nome_disciplina')
@@ -298,7 +304,7 @@ class ArquivoQuestao(models.Model):
         Turma, models.DO_NOTHING, db_column='id_turma')
     numero_questao = models.ForeignKey(
         'Questao', models.DO_NOTHING, db_column='numero_questao')
-    arquivo_questao = models.FileField(upload_to='questoes/')
+    arquivo_questao = models.FileField(upload_to=monta_arquivo_questao)
 
     class Meta:
         managed = False
@@ -320,7 +326,7 @@ class ArquivoResposta(models.Model):
         'Questao', models.DO_NOTHING, db_column='numero_questao')
     ra_aluno = models.ForeignKey(
         'Aluno', models.DO_NOTHING, db_column='ra_aluno')
-    arquivo_resposta = models.FileField(upload_to='respostas/')
+    arquivo_resposta = models.FileField(upload_to=monta_arquivo_resposta)
 
     class Meta:
         managed = False

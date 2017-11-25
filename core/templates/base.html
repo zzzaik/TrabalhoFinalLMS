@@ -1,6 +1,7 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
 	<meta charset="UTF-8" />
 	<meta name="viewport" content="width = device-width, initial-scale = 1.0" />
@@ -13,7 +14,7 @@
 <body>
 	<header class="motherNav">
 		<nav class="menu">
-			<div class = 'menus'>
+			<div class='menus'>
 				<a href="/" title="Logo Faculdade Impacta">
 					<img class="img_logo" src="{% static '/' %}img/logo-novo.png" alt="Logo e link para a home" />
 				</a>
@@ -24,15 +25,13 @@
 				{% if not user.is_authenticated %}
 				<button class="user" title="Entre">
 					<a href="{% url 'entrar' %}">
-						<img class="img_user" src="{% static '/' %}img/img_user.png"
-						 alt="Usuario" />
+						<img class="img_user" src="{% static '/' %}img/img_user.png" alt="Usuario" />
 					</a>
 				</button>
 				{% else %}
 				<div class='menus'>
 					<button class="user" onclick="login_function()" title="Logado">
-						<img class="img_user" src="{% static '/' %}img/img_user.png"
-						 alt="Usuario" />
+						<img class="img_user" src="{% static '/' %}img/img_user.png" alt="Usuario" />
 					</button>
 					<nav id="drop_login" class="conteudo_login">
 						{% if user.user_type == 'A' %}
@@ -48,6 +47,15 @@
 					</nav>
 				</div>
 				{% endif %}
+				<div class="drop_menu" title="Menu">
+					<button onclick="menu_function()" class="dropbtn">
+						<img src="{% static '/' %}img/menu_icons_bars.png" class="menu_icon" />
+					</button>
+					<nav id="drop" class="conteudo_menu">
+						<a href="{% url 'cursos' %}" title="Cursos">Cursos</a>
+						<a href="{% url 'noticias' %}" title="Notícias">Notícias</a>
+					</nav>
+				</div>
 			</div>
 		</nav>
 	</header>
@@ -81,4 +89,5 @@
 		</div>
 	</footer>
 </body>
+
 </html>

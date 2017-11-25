@@ -173,6 +173,7 @@ div.copyright {
 	height: max-content;
 	border: none;
 }
+
 .flexForm{
 	display:flex;
 	flex-flow:column wrap;
@@ -199,12 +200,14 @@ div.copyright {
 	border:none;
 	border-radius:5px;
 }
+
 .inputTextArea{
 	width:90%;
 	border:none;
 	height: 10em;
 	max-width: 900px;
 }
+
 .submitBtn{
 	display: flex;
 	justify-content: center;

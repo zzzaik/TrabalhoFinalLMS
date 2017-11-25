@@ -1,5 +1,5 @@
-function dropDown(id) {
-  document.getElementById(id).classList.toggle("show");
+function menu_function() {
+  document.getElementById("drop").classList.toggle("show");
 }
 
 window.onclick = function(event) {
@@ -14,6 +14,10 @@ if (!event.target.matches('.dropbtn')) {
     }
   }
 }
+}
+
+function login_function() {
+document.getElementById("drop_login").classList.toggle("show");
 }
 
 window.onclick = function(event) {
@@ -39,10 +43,6 @@ function selection_list() {
   }
 }
 
-
-function error_message() {
-alert('{{ form.error }}');
-}
 
 function check_codigo() {
   var flag = document.getElementsByClassName("flag");
