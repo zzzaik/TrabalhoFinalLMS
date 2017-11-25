@@ -101,6 +101,8 @@ class DisciplinaOfertada(models.Model):
         db_table = 'disciplina_ofertada'
         unique_together = (('nome_disciplina', 'ano', 'semestre'),)
 
+    def __str__(self):
+        return '{}  {}  {}'.format(self.ano, self.nome_disciplina, self.semestre)
 
 class Turma(models.Model):
     num_turma = models.CharField(max_length=2)
@@ -116,10 +118,12 @@ class Turma(models.Model):
 
     class Meta:
         managed = False
-        db_table = 'Turma'
+        db_table = 'turma'
         unique_together = (('num_turma', 'nome_disciplina',
                             'ano_ofertado', 'semestre_ofertado'),)
 
+    def __str__(self):
+        return self.num_turma
 
 class Curso(models.Model):
     sigla_curso = models.CharField(unique=True, max_length=5)
@@ -196,22 +200,8 @@ class GradeCurricular(models.Model):
         unique_together = (
             ('sigla_curso', 'ano_grade', 'quantidade_semestres'),)
 
-
-class Periodo(models.Model):
-    sigla_curso = models.ForeignKey(
-        Curso, models.DO_NOTHING, db_column='sigla_curso')
-    ano_grade = models.ForeignKey(
-        GradeCurricular, models.DO_NOTHING, db_column='ano_grade', related_name='+')
-    quantidade_semestres_grade = models.ForeignKey(
-        GradeCurricular, models.DO_NOTHING, db_column='quantidade_semestres_grade', related_name='+')
-    numero_periodo = models.SmallIntegerField()
-
-    class Meta:
-        managed = False
-        db_table = 'periodo'
-        unique_together = (('sigla_curso', 'ano_grade',
-                            'quantidade_semestres_grade', 'numero_periodo'),)
-
+    def __str__(self):
+        return self.ano_grade
 
 class PeriodoDisciplina(models.Model):
     sigla_curso = models.ForeignKey(
@@ -231,6 +221,24 @@ class PeriodoDisciplina(models.Model):
         unique_together = (('sigla_curso', 'ano_grade',
                             'quantidade_semestres_grade', 'numero_periodo', 'nome_disciplina'),)
 
+
+class Periodo(models.Model):
+    sigla_curso = models.ForeignKey(
+        Curso, models.DO_NOTHING, db_column='sigla_curso')
+    ano_grade = models.ForeignKey(
+        GradeCurricular, models.DO_NOTHING, db_column='ano_grade', related_name='+')
+    quantidade_semestres_grade = models.ForeignKey(
+        GradeCurricular, models.DO_NOTHING, db_column='quantidade_semestres_grade', related_name='+')
+    numero_periodo = models.SmallIntegerField()
+    Disciplina = models.ManyToManyField(to=Disciplina, through=PeriodoDisciplina)
+
+    class Meta:
+        managed = False
+        db_table = 'periodo'
+        unique_together = (('sigla_curso', 'ano_grade',
+                            'quantidade_semestres_grade', 'numero_periodo'),)
+
+    
 
 class Questao(models.Model):
     nome_disciplina = models.ForeignKey(
