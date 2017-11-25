@@ -2,7 +2,7 @@
 
 {% load static %}
 
-{% block estilo_unico %}{% static '/' %}css/site.css{% endblock %}
+{% block estilo_unico %}{% static '/' %}css/Login.css{% endblock %}
 
 {% block script_unico %}{% endblock %}
 	   
@@ -19,7 +19,7 @@
     </p>
     {% endfor %}
         <button type="submit" class="linkBtn">Enviar</button>
-        <a href="recuperar_senha.html">Esqueci a senha</a>
+        <a href="{% url 'recuperar_senha' %}">Esqueci a senha</a>
     </form>
 </fieldset>
 {% endblock %}

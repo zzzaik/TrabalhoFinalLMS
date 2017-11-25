@@ -65,7 +65,7 @@ def matricula(request):
     return render(request, 'matricula.html',context)
 
 def pag_curso(request, sigla):
-    curso = Curso.objects.get(sigla=sigla.upper())
+    curso = Curso.objects.get(sigla_curso=sigla.upper())
     contexto = {
         "cursos":curso,
     }

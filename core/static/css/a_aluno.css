@@ -5,14 +5,25 @@
 	position:relative;
 	width:100%;
 	top:50px;
-	padding-top:2em;
+	margin: 2em;
+	margin-left: 0em;
+	margin-top:4em;
 }
 .listLinks{
-	width:15em;
-	height:9em;
-	background-color: lightgray;
-	border-top-right-radius: 2%;
-	border-bottom-right-radius: 2%;
+	display:flex;
+	width:max-content;
+	height: min-content;
+	flex-flow:column wrap;
+	background-color: #9c9c9c;
+	border-top-right-radius: 30px;
+	border-bottom-right-radius: 30px;
+}
+.flexList{
+	display:flex;
+	flex-flow:column wrap;
+	justify-content: space-around;
+	margin:1em;
+	padding: 0px;
 }
 .liLink{
 	list-style: none;
@@ -22,19 +33,31 @@
 	font-weight: bold;
 	text-decoration: none;
 	line-height: 1.4em;
+	margin-right: 0.5em;
+	border-top-right-radius: 30px;
+	border-bottom-right-radius: 30px;
 }
-
+.liLink:hover{
+	background-color: #757575;
+}
 .msgPanel{
 	display: flex;
-	justify-content: center;
-	width:40em;
-	height:30em;
+	flex-flow: column;
+	justify-content: flex-start;
+	width:98%;
+	height:max-content;
+	max-height: 250px;
 	background-color: lightgrey;
-	margin-right: 5em;
 	margin-bottom: 5em;
+	overflow: scroll;
 }
 .msg{
-	width:97%;
+	display:flex;
+	flex-flow:column;
+	width:95%;
+	margin-left: 1em;
+	padding-left: 1em;
+	min-height: min-content;
 	border-bottom: 1px solid black;
 	background-color: white;
 }
@@ -43,4 +66,47 @@
 }
 .texto{
 	margin-left:5px;
+}
+@media only screen and (min-width: 320px) and (max-width: 736px){
+.areaAluno{
+	display:flex;
+	flex-flow: column nowrap;
+	justify-content: space-between;
+	align-content: flex-start;
+	position:relative;
+	width:100%;
+	top:10px;
+	padding-top:2em;
+}
+.listLinks{
+	display:flex;
+	min-width:min-content;
+	height: min-content;
+	flex-flow:column wrap;
+	background-color: #757575;
+}
+.flexList{
+	display:flex;
+	flex-flow:row wrap;
+	justify-content: space-around;
+}
+.liLink{
+	display:flex;
+	list-style: none;
+	font-family: arial;
+	font-size: 1em;
+	color:#ffffff;
+	font-weight: bold;
+	text-decoration: none;
+	line-height: 1em;
+}
+.msgPanel{
+	display: flex;
+	justify-content: center;
+	width:95%;
+	height:22em;
+	background-color: lightgrey;
+	margin-top: 1em;
+	margin-bottom: 2em;
+}
 }
