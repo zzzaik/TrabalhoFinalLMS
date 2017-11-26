@@ -130,22 +130,20 @@ def upload_aluno(request):
 
 def upload_prof(request):
     prof = Professor.objects.get(ra=request.user.ra)
-    matriculas = []
-    #for m in Matricula.objects.filter(ra_aluno=aluno):
-    #    matriculas.append(m)
-    
-    #if request.POST:
-    #    arquivo = ArquivoResposta(ra_aluno=aluno)
-    #    form = fileUploadAluno(request.POST,request.FILES,instance=aluno)
-    #    if form.is_valid():
-     #       form.ra_aluno=aluno.ra
-     #       form.save()
-    #else:
-        
-    form = fileUploadProf()
+    turmas = []
+    for t in Turma.objects.filter(ra_professor=prof):
+        turmas.append(t)    
+    if request.POST:
+        arquivo = ArquivoQuestao()
+        form = fileUploadProf(request.POST,request.FILES)
+        if form.is_valid():
+            form.save()
+    else:
+        form = fileUploadProf()
 
     contexto = {
         "form":form,
+        "turmas":turmas
         
     }
     return render(request,'upload_prof.html',contexto)
@@ -153,13 +151,22 @@ def upload_prof(request):
 def exibir_boletim(request):
     notas = []
     contador = 0
+    aluno = Aluno.objects.get(parent_link=request.user.id)
+    matriculas = Matricula.objects.filter(ra_aluno=aluno)
+    boletim = {}
 
-    Aluno.objects.get(ra=request.user.id)
-    aluno = Aluno.objects.get(ra=1234567)
-
-    for nota in Resposta.objects.filter(ra_aluno=aluno):
-        contador = contador + 1
-        notas.append(nota.nota)
+    for disciplinas in matriculas.Matricula.nome_disciplina:
+        boletim = {disciplinas.nome_diciplina}
+        for notas in Resposta.objects.filter(ra_aluno=aluno,nome_disciplina=disciplinas.nome_disciplina):
+            contador += 1
+            notas.append(nota.nota)
         
         media = notas/contador
-
+        boletim[disciplinas.nome_diciplina] = media
+        contadod = 0
+        
+        contexto = {
+            "boletim":boletim,
+            "matriculas":matriculas
+        }
+    return render(request,'boletim.html',contexto)

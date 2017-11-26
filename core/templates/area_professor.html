@@ -9,14 +9,15 @@
 {% block title %}Faculdade Impacta - Home{% endblock %}
 
 {% block main %}
-    <section class="areaProf">
+    <section class="content">
+        <div class="areaProf">
         <div class="listLinks">
-            
             <ul class=flexList>
                 <li class="liLink"><a class="liLink" href="{% url 'msg_professor' %}">Mensagens</a></li>
                 <li class="liLink"><a class="liLink" href="{% url 'upload_prof' %}">Trabalhos e Exercícios</a></li>
             </ul>
         </div>
         {% block conteudoProf %}{% endblock %}
+        </div>
     </section>
 {% endblock %}
