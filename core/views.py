@@ -14,6 +14,7 @@ def checa_professor(user):
 
 
 def index(request):
+    print 
     return render(request, 'index.html')
 
 
@@ -149,6 +150,7 @@ def upload_prof(request):
     return render(request,'upload_prof.html',contexto)
 
 def exibir_boletim(request):
+
     notas = []
     contador = 0
     aluno = Aluno.objects.get(parent_link=request.user.id)
