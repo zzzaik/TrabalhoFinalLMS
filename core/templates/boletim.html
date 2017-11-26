@@ -1,0 +1,25 @@
+{% extends 'area_aluno.html' %}
+{% load static %}
+{% block conteudoAluno %}
+<div class="content">
+    <table>
+        <div>
+            {% for disciplina in matriculas %}
+            <tr>
+                <th rowspan="{{ len(matriculas) }}">{{ disciplinas.semestre_ofertado }}</th>
+            </tr>
+            <tr>
+                <th>Disciplina</th>
+                <th>Media</th>
+            </tr>
+            {% for nota in boletim %}
+            <tr>
+                <td>{{ nota.key() }}</td>
+                <td>{{ nota.value() }}</td>
+            </tr>
+            {% endfor %}
+            {% endfor %}
+        </div>
+    </table>
+</div>
+{% endblock %}

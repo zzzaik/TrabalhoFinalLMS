@@ -153,15 +153,22 @@ def upload_prof(request):
 def exibir_boletim(request):
     notas = []
     contador = 0
+    aluno = Aluno.objects.get(parent_link=request.user.id)
+    matriculas = Matricula.objects.filter(ra_aluno=aluno)
+    boletim = {}
 
-    Aluno.objects.get(ra=request.user.id)
-    aluno = Aluno.objects.get(ra=1234567)
-
-    for nota in Resposta.objects.filter(ra_aluno=aluno):
-        contador = contador + 1
-        notas.append(nota.nota)
+    for disciplinas in matriculas.Matricula.nome_disciplina:
+        boletim = {disciplinas.nome_diciplina}
+        for notas in Resposta.objects.filter(ra_aluno=aluno,nome_disciplina=disciplinas.nome_disciplina):
+            contador += 1
+            notas.append(nota.nota)
         
         media = notas/contador
-
-
-
+        boletim[disciplinas.nome_diciplina] = media
+        contadod = 0
+        
+        contexto = {
+            "boletim":boletim,
+            "matriculas":matriculas
+        }
+    return render(request,'boletim.html',contexto)

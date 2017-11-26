@@ -18,7 +18,7 @@ from django.contrib import admin
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib.auth.views import login, logout
-from core.views import index,cursos,pag_curso,noticias,area_aluno,area_professor,primeiro_login,recuperar_senha,matricula,msg_aluno,msg_professor,upload_aluno,upload_prof,historico
+from core.views import index,cursos,pag_curso,noticias,area_aluno,area_professor,primeiro_login,recuperar_senha,matricula,msg_aluno,msg_professor,upload_aluno,upload_prof,historico,exibir_boletim
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls, name='coordenador'),
@@ -37,7 +37,8 @@ urlpatterns = [
     url(r'^area_aluno/msg_aluno',msg_aluno,name='msg_aluno'),
     url(r'^area_professor/msg_professor',msg_professor,name='msg_professor'),
     url(r'^area_aluno/upload_aluno',upload_aluno,name='upload_aluno'),
-    url(r'^area_professor/upload_prof',upload_prof,name='upload_prof')
+    url(r'^area_professor/upload_prof',upload_prof,name='upload_prof'),
+    url(r'^area_aluno/boletim',exibir_boletim,name="boletim")
 ]
 
 if settings.DEBUG:
