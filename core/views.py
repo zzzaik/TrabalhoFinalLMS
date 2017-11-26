@@ -120,7 +120,6 @@ def upload_aluno(request):
             form.ra_aluno=aluno.ra
             form.save()
     else:
-        
         form = fileUploadAluno()
 
     contexto = {
@@ -131,7 +130,7 @@ def upload_aluno(request):
 
 def upload_prof(request):
     prof = Professor.objects.get(ra=request.user.ra)
-    #matriculas = []
+    matriculas = []
     #for m in Matricula.objects.filter(ra_aluno=aluno):
     #    matriculas.append(m)
     
@@ -163,6 +162,4 @@ def exibir_boletim(request):
         notas.append(nota.nota)
         
         media = notas/contador
-
-
 

@@ -1,200 +1,212 @@
+CREATE DATABASE db_lms
+
+USE db_lms
+
 CREATE TABLE curso (
-    id INT IDENTITY(1,. 1) NOT NULL,
-    sigla VARCHAR(5) NOT NULL,
-    nome VARCHAR(50) NOT NULL,
-    CONSTRAINT pkCurso PRIMARY KEY (id),
-    CONSTRAINT unkCurso UNIQUE (sigla),
-    CONSTRAINT unkCurso2 UNIQUE (nome)
+	id INT IDENTITY(1, 1) NOT NULL
+	,sigla_curso VARCHAR(5) NOT NULL
+	,nome_curso VARCHAR(50) NOT NULL
+	,CONSTRAINT pk_curso PRIMARY KEY (id)
+	,CONSTRAINT un_curso UNIQUE (sigla_curso)
+	,CONSTRAINT un_curso_2 UNIQUE (nome_curso)
 )
 
 CREATE TABLE disciplina (
-	id INT IDENTITY(1, 1) NOT NULL,
-    nome VARCHAR(240) NOT NULL,
-    carga_horaria SMALLINT NOT NULL,
-    aula_teorica DECIMAL(10, 3) NOT NULL,
-    aula_pratica DECIMAL(10, 3) NOT NULL,
-    ementa TEXT,
-    competencias TEXT,
-	habilidades TEXT,
-    conteudo TEXT,
-    bibliografia_basica TEXT,
-    bibliografia_complementar TEXT,
-	CONSTRAINT pkDisciplina PRIMARY KEY (id),
-	CONSTRAINT unkDisciplina UNIQUE (nome)
+	id INT IDENTITY(1, 1) NOT NULL
+	,nome_disciplina VARCHAR(240) NOT NULL
+	,carga_horaria TINYINT NOT NULL
+	,aula_teorica DECIMAL(3) NOT NULL
+	,aula_pratica DECIMAL(3) NOT NULL
+	,ementa TEXT
+	,competencias TEXT
+	,habilidades TEXT
+	,conteudo TEXT
+	,bibliografia_basica TEXT
+	,bibliografia_complementar TEXT
+	,CONSTRAINT pk_disciplina PRIMARY KEY (id)
+	,CONSTRAINT un_disciplina UNIQUE (nome_disciplina)
+)
+
+
+CREATE TABLE grade_curricular (
+	id INT IDENTITY(1, 1) NOT NULL
+	,sigla_curso INT NOT NULL
+	,ano TINYINT NOT NULL
+	,quantidade_semestre CHAR(1) NOT NULL
+	,CONSTRAINT pk_grade_curricular PRIMARY KEY (id)
+	,CONSTRAINT fk_grade_curricular FOREIGN KEY (sigla_curso) REFERENCES curso (id)
+	,CONSTRAINT un_grade_curricular UNIQUE (sigla_curso, ano, quantidade_semestre)
+	,CONSTRAINT ck_grade_curricular CHECK (quantidade_semestre >= 1)
+)
+
+
+CREATE TABLE periodo (
+	id INT IDENTITY(1, 1) NOT NULL
+	,sigla_curso INT NOT NULL
+	,ano_grade INT NOT NULL
+	,quantidade_semestre INT NOT NULL
+	,numero_periodo INT NOT NULL
+	,CONSTRAINT pk_periodo PRIMARY KEY (id)
+	,CONSTRAINT fk_periodo FOREIGN KEY (sigla_curso) REFERENCES curso (id)
+	,CONSTRAINT fk_periodo_2 FOREIGN KEY (ano_grade) REFERENCES grade_curricular (id)
+	,CONSTRAINT fk_periodo_3 FOREIGN KEY (quantidade_semestre) REFERENCES grade_curricular (id)
+	,CONSTRAINT un_periodo UNIQUE (sigla_curso, ano_grade, quantidade_semestre, numero_periodo)
+	,CONSTRAINT ck_periodo CHECK (numero_periodo >= 1)
+)
+
+
+CREATE TABLE periodo_disciplina (
+	id INT IDENTITY(1, 1) NOT NULL
+	,sigla_curso INT NOT NULL
+	,ano_grade INT NOT NULL
+	,quantidade_semestre INT NOT NULL
+	,numero_periodo INT NOT NULL
+	,nome_disciplina INT NOT NULL
+	,CONSTRAINT pk_periodo_disciplina PRIMARY KEY (id)
+	,CONSTRAINT fk_periodo_disciplina FOREIGN KEY (sigla_curso) REFERENCES curso (id)
+	,CONSTRAINT fk_periodo_disciplina_2 FOREIGN KEY (ano_grade) REFERENCES grade_curricular (id)
+	,CONSTRAINT fk_periodo_disciplina_3 FOREIGN KEY (quantidade_semestre) REFERENCES grade_curricular (id)
+	,CONSTRAINT fk_periodo_disciplina_4 FOREIGN KEY (numero_periodo) REFERENCES periodo (id)
+	,CONSTRAINT fk_periodo_disciplina_5 FOREIGN KEY (nome_disciplina) REFERENCES disciplina (id)
+	,CONSTRAINT un_periodo_disciplina UNIQUE (sigla_curso, ano_grade, quantidade_semestre, numero_periodo, nome_disciplina)
 )
 
 CREATE TABLE disciplina_ofertada (
-	id INT IDENTITY(1, 1) NOT NULL,
-	nome_disciplina INT NOT NULL,
-	ano SMALLINT NOT NULL,
-	semestre CHAR(1) NOT NULL,
-	CONSTRAINT pkDisciplinaOfertada PRIMARY KEY (id),
-	CONSTRAINT fkDisciplinaOfertada FOREIGN KEY (nome_disciplina) REFERENCES disciplina (id),
-	CONSTRAINT unkDisciplinaOfertada UNIQUE (nome_disciplina, ano, semestre)
-)
-
-CREATE TABLE Turma (
-	id INT IDENTITY(1, 1) NOT NULL,
-	num_turma CHAR(2) NOT NULL,
-	ra_professor INT NOT NULL,
-	nome_disciplina INT NOT NULL,
-	ano_ofertado INT NOT NULL,
-	semestre_ofertado INT NOT NULL,
-	turno VARCHAR(15) NOT NULL,
-	CONSTRAINT pkTurma PRIMARY KEY (id),
-	CONSTRAINT fkTurma FOREIGN KEY (ra_professor) REFERENCES core_professor (user_id),
-	CONSTRAINT fkTurma2 FOREIGN KEY (nome_disciplina) REFERENCES disciplina_ofertada (id),
-	CONSTRAINT fkTurma3 FOREIGN KEY (ano_ofertado) REFERENCES disciplina_ofertada (id),
-	CONSTRAINT fkTurma4 FOREIGN KEY (semestre_ofertado)  REFERENCES disciplina_ofertada (id),
-	CONSTRAINT unkTurma UNIQUE (num_turma, nome_disciplina, ano_ofertado, semestre_ofertado)
-)
-
-Create table grade_curricular (
-	id INT IDENTITY(1, 1) not null,
-	sigla_curso int not null,
-	ano_grade smallint not null,
-	quantidade_semestres char(1) not null,
-	constraint pk_GradeCurricular primary key (id),
-	constraint uc_GradeCurricular unique (sigla_curso, ano_grade, quantidade_semestres),
-	constraint fk_GradeCurricular foreign key (sigla_curso) references curso (id)
-)
-
-Create table periodo (
-	id INT IDENTITY(1, 1) not null,
-	sigla_curso int not null,
-	ano_grade int not null,
-	quantidade_semestres_grade int not null,
-	numero_periodo smallint not null,
-	constraint pkPeriodo primary key (id),
-	constraint ucPeriodo unique (sigla_curso, ano_grade, quantidade_semestres_grade, numero_periodo),
-	constraint fkPeriodo foreign key (sigla_curso) references curso (id),
-	constraint fkPeriodo_2 foreign key (ano_grade) references grade_curricular (id),
-	constraint fkPeriodo_3 foreign key (quantidade_semestres_grade) references grade_curricular (id)
-)
-
-Create table periodo_disciplina (
-	id INT IDENTITY(1, 1) not null,
-	sigla_curso int not null,
-	ano_grade int not null,
-	quantidade_semestres_grade int not null,
-	numero_periodo int not null,
-	nome_disciplina int not null,
-	constraint pkPeriodoDisciplina primary key (id),
-	constraint ucPeriodoDisciplina unique (sigla_curso, ano_grade, quantidade_semestres_grade ,numero_periodo, nome_disciplina),
-	constraint fkPeriodoDisciplina foreign key (sigla_curso) references curso (id),
-	constraint fkPeriodoDisciplina_2 foreign key (ano_grade) references grade_curricular (id),
-	constraint fkPeriodoDisciplina_3 foreign key (quantidade_semestres_grade) references grade_curricular (id),
-	constraint fkPeriodoDisciplina_4 foreign key (nome_disciplina) references disciplina (id),
-	CONSTRAINT fkPeriodoDisciplina_5 foreign key (numero_periodo) references periodo (id)
+	id INT IDENTITY(1, 1) NOT NULL
+	,nome_disciplina INT NOT NULL
+	,ano TINYINT NOT NULL
+	,semestre CHAR(1) NOT NULL
+	,CONSTRAINT pk_disciplina_ofertada PRIMARY KEY (id)
+	,CONSTRAINT fk_disciplina_ofertada FOREIGN KEY (nome_disciplina) REFERENCES disciplina (id)
+	,CONSTRAINT un_disciplina_ofertada UNIQUE (nome_disciplina, ano, semestre)
+	,CONSTRAINT ck_disciplina_ofertada CHECK (semestre >= 1)
 )
 
 
-Create table questao (
-	id INT IDENTITY(1, 1) not null,
-	nome_disciplina int not null,
-	ano_ofertado int not null,
-	semestre_ofertado int not null,
-	id_turma int not null,
-	numero_questao int not null,
-	data_limite_entrega date not null,
-	descricao text,
-	data_questao date not null,
-	constraint pkquestao primary key (id),
-	constraint unkquestao unique (nome_disciplina, ano_ofertado, semestre_ofertado, id_turma, numero_questao),
-	constraint fkquestao foreign key (nome_disciplina) references disciplina(id),
-	constraint fkquestao_2 foreign key (ano_ofertado) references disciplina_ofertada (id),	
-	constraint fkquestao_3 foreign key (semestre_ofertado) references disciplina_ofertada (id),
-	constraint fkquestao_4 foreign key (id_turma) references turma (id)
+CREATE TABLE turma (
+	id INT IDENTITY(1, 1) NOT NULL
+	,nome_disciplina INT NOT NULL
+	,ano_ofertado INT NOT NULL
+	,semestre_ofertado INT NOT NULL
+	,id_turma CHAR(2) NOT NULL
+	,turno VARCHAR(15) NOT NULL
+	,ra_professor INT NOT NULL
+	,CONSTRAINT pk_turma PRIMARY KEY (id)
+	,CONSTRAINT fk_turma FOREIGN KEY (nome_disciplina) REFERENCES disciplina (id)
+	,CONSTRAINT fk_turma_2 FOREIGN KEY (ano_ofertado) REFERENCES disciplina_ofertada (id)
+	,CONSTRAINT fk_turma_3 FOREIGN KEY (semestre_ofertado) REFERENCES disciplina_ofertada (id)
+	,CONSTRAINT fk_turma_4 FOREIGN KEY (ra_professor) REFERENCES core_professor (user_id)
+	,CONSTRAINT un_turma UNIQUE (nome_disciplina, ano_ofertado, semestre_ofertado, id_turma)
+	,CONSTRAINT ck_turma CHECK (id_turma >= 1)
 )
 
-Create table arquivo_questao (
-	id INT IDENTITY(1, 1) not null,
-	nome_disciplina int not null,
-	ano_ofertado int not null,
-	semestre_ofertado int not null,
-	id_turma int not null,
-	numero_questao int not null,
-	arquivo_questao varchar(500) not null,
-	constraint pkArquivoQuestao primary key (id),
-	constraint ucArquivoQuestao unique (nome_disciplina, ano_ofertado, semestre_ofertado, id_turma, numero_questao, arquivo_questao),
-	constraint fkArquivoQuestao foreign key (nome_disciplina) references disciplina (id),
-	constraint fkArquivoQuestao_2 foreign key (ano_ofertado) references disciplina_ofertada (id),
-	constraint fkArquivoQuestao_3 foreign key (semestre_ofertado) references disciplina_ofertada (id),
-	constraint fkArquivoQuestao_4 foreign key (id_turma) references turma (id),
-	constraint fkArquivoQuestao_5 foreign key (numero_questao) references questao (id)
+CREATE TABLE matricula (
+	id INT IDENTITY(1, 1) NOT NULL
+	,ra_aluno INT NOT NULL
+	,nome_disciplina INT NOT NULL
+	,ano_ofertado INT NOT NULL
+	,semestre_ofertado INT NOT NULL
+	,id_turma INT NOT NULL
+	,CONSTRAINT pk_matricula PRIMARY KEY (id)
+	,CONSTRAINT fk_matricula FOREIGN KEY (ra_aluno) REFERENCES core_aluno (user_id)
+	,CONSTRAINT fk_matricula_2 FOREIGN KEY (nome_disciplina) REFERENCES disciplina (id)
+	,CONSTRAINT fk_matricula_3 FOREIGN KEY (ano_ofertado) REFERENCES disciplina_ofertada (id)
+	,CONSTRAINT fk_matricula_4 FOREIGN KEY (semestre_ofertado) REFERENCES disciplina_ofertada (id)
+	,CONSTRAINT fk_matricula_5 FOREIGN KEY (id_turma) REFERENCES turma (id)
+	,CONSTRAINT un_matricula UNIQUE (ra_aluno, nome_disciplina, ano_ofertado, semestre_ofertado, id_turma)
 )
 
-Create table resposta (
-	id INT IDENTITY(1, 1) not null,
-	nome_disciplina int not null,
-	ano_ofertado int not null,
-	semestre_ofertado int not null,
-	id_turma int not null,
-	numero_questao int not null,
-	ra_aluno int not null,
-	data_avaliacao date not null,
-	nota decimal(4,2) not null,
-	avaliacao text not null,
-	descricao text not null,
-	data_de_envio date not null,
-	constraint pkresposta primary key (id),
-	constraint ucresposta unique (nome_disciplina, ano_ofertado, semestre_ofertado, id_turma, numero_questao, ra_aluno),
-	constraint fkresposta foreign key (nome_disciplina) references disciplina (id),
-	constraint fkresposta_2 foreign key (ano_ofertado) references disciplina_ofertada (id),
-	constraint fkresposta_3 foreign key (semestre_ofertado) references disciplina_ofertada (id),
-	constraint fkresposta_4 foreign key (id_turma) references turma (id),
-	constraint fkresposta_5 foreign key (numero_questao) references questao (id)
+CREATE TABLE curso_turma (
+	id INT IDENTITY(1, 1) NOT NULL
+	,sigla_curso INT NOT NULL
+	,nome_disciplina INT NOT NULL
+	,ano_ofertado INT NOT NULL
+	,semestre_ofertado INT NOT NULL
+	,id_turma INT NOT NULL
+	,CONSTRAINT pk_curso_turma PRIMARY KEY (id)
+	,CONSTRAINT fk_curso_turma FOREIGN KEY (sigla_curso) REFERENCES curso (id)
+	,CONSTRAINT fk_curso_turma_2 FOREIGN KEY (nome_disciplina) REFERENCES disciplina (id)
+	,CONSTRAINT fk_curso_turma_3 FOREIGN KEY (ano_ofertado) REFERENCES disciplina_ofertada (id)
+	,CONSTRAINT fk_curso_turma_4 FOREIGN KEY (semestre_ofertado) REFERENCES disciplina_ofertada (id)
+	,CONSTRAINT fk_curso_turma_5 FOREIGN KEY (id_turma) REFERENCES turma (id)
+	,CONSTRAINT un_curso_turma UNIQUE (sigla_curso, nome_disciplina, ano_ofertado, semestre_ofertado, id_turma)
 )
 
-create table arquivo_resposta (
-	id INT IDENTITY(1, 1) not null,
-	nome_disciplina int not null,
-	ano_ofertado int not null,
-	semestre_ofertado int not null,
-	id_turma int not null,
-	numero_questao int not null,
-	ra_aluno int not null,
-	arquivo_resposta varchar (500) not null,
-	constraint pkArquivosResposta primary key (id),
-	constraint ucArquivosResposta unique (nome_disciplina, ano_ofertado, semestre_ofertado, id_turma, numero_questao, ra_aluno, arquivo_resposta),
-	constraint fkArquivosResposta foreign key (nome_disciplina) references disciplina (id),
-	constraint fkArquivosResposta_2 foreign key (ano_ofertado) references disciplina_ofertada (id),
-	constraint fkArquivosResposta_3 foreign key (semestre_ofertado) references disciplina_ofertada (id),
-	constraint fkArquivosResposta_4 foreign key (id_turma) references turma (id),
-	constraint fkArquivosResposta_5 foreign key (numero_questao) references questao (id),
-	constraint fkArquivosResposta_6 foreign key (ra_aluno) references core_aluno (user_id)
+CREATE TABLE questao (
+	id INT IDENTITY(1, 1) NOT NULL
+	,nome_disciplina INT NOT NULL
+	,ano_ofertado INT NOT NULL
+	,semestre_ofertado INT NOT NULL
+	,id_turma INT NOT NULL
+	,numero_questao INT NOT NULL
+	,data_limite DATETIME
+	,descricao TEXT
+	,data_inicio AS GETDATE()
+	,CONSTRAINT pk_questao PRIMARY KEY (id)
+	,CONSTRAINT fk_questao FOREIGN KEY (nome_disciplina) REFERENCES disciplina (id)
+	,CONSTRAINT fk_questao_2 FOREIGN KEY (ano_ofertado) REFERENCES disciplina_ofertada (id)
+	,CONSTRAINT fk_questao_3 FOREIGN KEY (semestre_ofertado) REFERENCES disciplina_ofertada (id)
+	,CONSTRAINT fk_questao_4 FOREIGN KEY (id_turma) REFERENCES turma (id)
+	,CONSTRAINT un_questao UNIQUE (nome_disciplina, ano_ofertado, semestre_ofertado, id_turma, numero_questao)
 )
 
-Create table matricula (
-	id INT IDENTITY (1, 1) not null,
-	ra_aluno int,
-	nome_disciplina int,
-	ano_ofertado int,
-	semestre_ofertado int,
-	id_turma int,
-	constraint pkmatricula primary key (id),
-	constraint ucmatricula unique (ra_aluno, nome_disciplina, ano_ofertado, semestre_ofertado, id_turma),
-	constraint fkmatricula foreign key (ra_aluno) references core_aluno (user_id),
-	constraint fkmatricula_2 foreign key (nome_disciplina) references disciplina (id),
-	constraint fkmatricula_3 foreign key (ano_ofertado) references disciplina_ofertada (id),	
-	constraint fkmatricula_4 foreign key (semestre_ofertado) references disciplina_ofertada (id),
-	constraint fkmatricula_5 foreign key (id_turma) references turma (id)
+
+CREATE TABLE resposta (
+	id INT IDENTITY(1, 1) NOT NULL
+	,nome_disciplina INT NOT NULL
+	,ano_ofertado INT NOT NULL
+	,semestre_ofertado INT NOT NULL
+	,id_turma INT NOT NULL
+	,numero_questao INT NOT NULL
+	,ra_aluno INT NOT NULL
+	,data_avaliacao DATE
+	,nota DECIMAL(4, 2)
+	,avaliacao TEXT
+	,descricao TEXT
+	,data_envio AS GETDATE()
+	,CONSTRAINT pk_resposta PRIMARY KEY (id)
+	,CONSTRAINT fk_resposta FOREIGN KEY (nome_disciplina) REFERENCES disciplina (id)
+	,CONSTRAINT fk_resposta_2 FOREIGN KEY (ano_ofertado) REFERENCES disciplina_ofertada (id)
+	,CONSTRAINT fk_resposta_3 FOREIGN KEY (semestre_ofertado) REFERENCES disciplina_ofertada (id)
+	,CONSTRAINT fk_resposta_4 FOREIGN KEY (id_turma) REFERENCES turma (id)
+	,CONSTRAINT fk_resposta_5 FOREIGN KEY (numero_questao) REFERENCES questao (id)
+	,CONSTRAINT fk_resposta_6 FOREIGN KEY (ra_aluno) REFERENCES core_aluno (user_id)
+	,CONSTRAINT un_resposta UNIQUE (nome_disciplina, ano_ofertado, semestre_ofertado, id_turma, numero_questao, ra_aluno)
 )
 
-Create table curso_turma (
-	id INT IDENTITY (1, 1) not null,
-	sigla_curso int,
-	nome_disciplina int,
-	ano_ofertado int,
-	semestre_ofertado int,
-	id_turma int,
-	constraint pkCursoTurma primary key (id),
-	constraint ucCursoTurma unique (sigla_curso, nome_disciplina, ano_ofertado, semestre_ofertado, id_turma),
-	constraint fkCursoTurma foreign key (sigla_curso) references cursos (id),
-	constraint fkCursoTurma_2 foreign key (nome_disciplina) references disciplina (id),
-	constraint fkCursoTurma_3 foreign key (ano_ofertado) references disciplina_ofertada (id),
-	constraint fkCursoTurma_4 foreign key (semestre_ofertado) references disciplina_ofertada (id),
-	constraint fkCursoTurma_5 foreign key (id_turma) references turma (id)
+CREATE TABLE arquivo_questao (
+	id INT IDENTITY(1, 1) NOT NULL
+	,nome_disciplina INT NOT NULL
+	,ano_ofertado INT NOT NULL
+	,semestre_ofertado INT NOT NULL
+	,id_turma INT NOT NULL
+	,numero_questao INT NOT NULL
+	,arquivo_questao VARCHAR(500) NOT NULL
+	,CONSTRAINT pk_arquivo_questao PRIMARY KEY (id)
+	,CONSTRAINT fk_arquivo_questao FOREIGN KEY (nome_disciplina) REFERENCES disciplina (id)
+	,CONSTRAINT fk_arquivo_questao_2 FOREIGN KEY (ano_ofertado) REFERENCES disciplina_ofertada (id)
+	,CONSTRAINT fk_arquivo_questao_3 FOREIGN KEY (semestre_ofertado) REFERENCES disciplina_ofertada (id)
+	,CONSTRAINT fk_arquivo_questao_4 FOREIGN KEY (id_turma) REFERENCES turma (id)
+	,CONSTRAINT un_arquivo_questao UNIQUE (nome_disciplina, ano_ofertado, semestre_ofertado, id_turma, numero_questao, arquivo_questao)
+)
+
+CREATE TABLE arquivo_resposta (
+	id INT IDENTITY(1, 1) NOT NULL
+	,nome_disciplina INT NOT NULL
+	,ano_ofertado INT NOT NULL
+	,semestre_ofertado INT NOT NULL
+	,id_turma INT NOT NULL
+	,numero_questao INT NOT NULL
+	,ra_aluno INT NOT NULL
+	,arquivo_resposta VARCHAR(500) NOT NULL
+	,CONSTRAINT pk_arquivo_resposta PRIMARY KEY (id)
+	,CONSTRAINT fk_arquivo_resposta FOREIGN KEY (nome_disciplina) REFERENCES disciplina (id)
+	,CONSTRAINT fk_arquivo_resposta_2 FOREIGN KEY (ano_ofertado) REFERENCES disciplina_ofertada (id)
+	,CONSTRAINT fk_arquivo_resposta_3 FOREIGN KEY (semestre_ofertado) REFERENCES disciplina_ofertada (id)
+	,CONSTRAINT fk_arquivo_resposta_4 FOREIGN KEY (id_turma) REFERENCES turma (id)
+	,CONSTRAINT fk_arquivo_resposta_5 FOREIGN KEY (numero_questao) REFERENCES questao (id)
+	,CONSTRAINT fk_arquivo_resposta_6 FOREIGN KEY (ra_aluno) REFERENCES core_aluno (user_id)
+	,CONSTRAINT un_arquivo_resposta UNIQUE (nome_disciplina, ano_ofertado, semestre_ofertado, id_turma, numero_questao, ra_aluno, arquivo_resposta)
 )
 
 SELECT * FROM curso
