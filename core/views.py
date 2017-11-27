@@ -58,7 +58,7 @@ def matricula(request):
     cursos = []
     turmas = []
     disciplinas = []
-    
+        
     if request.method == 'POST':
         post_turma = (request.POST.get("turma"))
         if (post_turma != "-- Turma --"):
