@@ -6,7 +6,7 @@ from django import forms
 class NovoAlunoForm(forms.ModelForm):
     class Meta:
         model = Aluno
-        fields = ('ra', 'nome', 'email', 'celular', 'curso', 'semestre')
+        fields = ('ra', 'nome', 'email', 'celular', 'curso', 'semestre', 'ano_ingresso')
 
     def save(self, commit=True):
         user = super(NovoAlunoForm, self).save(commit=False)
@@ -20,17 +20,17 @@ class NovoAlunoForm(forms.ModelForm):
 class AlterarAlunoForm(forms.ModelForm):
     class Meta:
         model = Aluno
-        fields = ('email', 'nome', 'curso', 'celular', 'ativo', 'semestre')
+        fields = ('email', 'nome', 'curso', 'celular', 'ativo', 'semestre', 'ano_ingresso')
 
 
 class AlunoAdmin(UserAdmin):
     form = AlterarAlunoForm
     add_form = NovoAlunoForm
-    list_display = ('ra', 'nome', 'curso', 'email', 'celular', 'semestre')
+    list_display = ('ra', 'nome', 'curso', 'email', 'celular', 'semestre', 'ano_ingresso')
     list_filter = ('user_type',)
-    fieldsets = ((None, {'fields': ('email', 'nome', 'curso', 'semestre')}),)
+    fieldsets = ((None, {'fields': ('email', 'nome', 'curso', 'semestre', 'ano_ingresso')}),)
     add_fieldsets = (
-        (None, {'fields': ('ra', 'email', 'nome', 'curso', 'celular','semestre')}),)
+        (None, {'fields': ('ra', 'email', 'nome', 'curso', 'celular','semestre', 'ano_ingresso')}),)
     search_fields = ('email',)
     ordering = ('email',)
     filter_horizontal = ()
