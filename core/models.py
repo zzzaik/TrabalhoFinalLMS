@@ -199,6 +199,7 @@ class Aluno(Usuario):
         Usuario, primary_key=True, db_column='user_id', parent_link=True)
     curso = models.ForeignKey(Curso, blank=True, null=False)
     celular = models.CharField('Celular', max_length=11, null=False)
+    ano_ingresso = models.IntegerField('Ano', null=False)
     semestre = models.IntegerField('Semestre', null=False, default=1)
     turma = models.ManyToManyField(to=Turma, through='Matricula')
 
