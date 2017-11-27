@@ -1,4 +1,4 @@
-Nome do servidor: db-lms-draco.database.windows.net
+Nome do servidor: draco-db.database.windows.net
 Autenticação: Autenticação do sqlserver
-Logon: LMS_DB_admin@db-lms-draco
+Logon: admin_draco@draco-db
 Senha: P@ssw0rd

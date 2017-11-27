@@ -77,10 +77,10 @@ WSGI_APPLICATION = 'site_TFM.wsgi.application'
 DATABASES = {
     'default': { # Banco no MSSQL
         'ENGINE': "sql_server.pyodbc",
-        'NAME': "db-lms-project",
-        'HOST': "db-lms-draco.database.windows.net",
+        'NAME': "db-lms",
+        'HOST': "draco-db.database.windows.net",
        'PORT': '1433',
-       'USER': "LMS_DB_admin@db-lms-draco",
+       'USER': "admin_draco@draco-db",
         'PASSWORD': "P@ssw0rd",
    }
 }

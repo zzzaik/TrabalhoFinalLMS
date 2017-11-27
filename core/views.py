@@ -14,6 +14,7 @@ def checa_professor(user):
 
 
 def index(request):
+    print 
     return render(request, 'index.html')
 
 
@@ -141,7 +142,6 @@ def upload_aluno(request):
             form.ra_aluno=aluno.ra
             form.save()
     else:
-        
         form = fileUploadAluno()
 
     contexto = {
@@ -154,8 +154,7 @@ def upload_prof(request):
     prof = Professor.objects.get(ra=request.user.ra)
     turmas = []
     for t in Turma.objects.filter(ra_professor=prof):
-        turmas.append(t)
-    
+        turmas.append(t)    
     if request.POST:
         arquivo = ArquivoQuestao()
         form = fileUploadProf(request.POST,request.FILES)
@@ -172,6 +171,7 @@ def upload_prof(request):
     return render(request,'upload_prof.html',contexto)
 
 def exibir_boletim(request):
+
     notas = []
     contador = 0
     aluno = Aluno.objects.get(parent_link=request.user.id)
