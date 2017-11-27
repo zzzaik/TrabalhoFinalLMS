@@ -38,20 +38,6 @@ def recuperar_senha(request):
 @login_required(login_url='/entrar')
 @user_passes_test(checa_aluno, login_url='/?erro=acesso', redirect_field_name=None)
 def area_aluno(request):
-    curso_turma = []
-    disciplinas = []
-    cursos = []
-    turmas = []
-    A = Aluno.objects.get(ra=request.user.ra)
-    DO = DisciplinaOfertada.objects.filter(ano = A.ano_ingresso, semestre = A.semestre)
-    for x in range(0, len(DO)):
-        CT = CursoTurma.objects.filter(sigla_curso=A.curso.id, ano_ofertado=DO[x].id, semestre_ofertado = DO[x].id)
-        curso_turma.append(CT[0])
-        for y in curso_turma:
-                disciplinas.append(y.nome_disciplina)
-                cursos.append(y.sigla_curso)
-                turmas.append(y.id_turma)
-    print(disciplinas[0], cursos[0], turmas[0])
     context = {
         'data_agora': now
     }
@@ -69,17 +55,37 @@ def primeiro_login(request):
 
 
 def matricula(request):
-    disciplinas = request.POST.getlist('disciplinas')
-    # como passar um array pelo POST; django:
-    # https://stackoverflow.com/questions/4581114/django-questionhow-to-pass-a-list-parameter-using-post-method
-    context = {
-        'cursos': 'lista de cursos',  # query em função do RA do aluno
-        'disciplinas': disciplinas,  # disciplinas selecionadas p/ matrícula
-        'turmas': 'lista de turmas',  # turmas da disciplina selecionada
-        'matricula': 'ra_aluno'  # pego na sessão
-    }
-    return render(request, 'matricula.html', context)
+    time = now
+    aluno = Aluno.objects.get(ra = request.user.ra)
+    cursos = []
+    turmas = []
+    disciplinas = []
+        
+    if request.method == 'POST':
+        post_turma = (request.POST.get("turma"))
+        if (post_turma != "-- Turma --"):
+            print("OK")
+        else:
+            print("NOT OK")
 
+    disciplina_ofertada = DisciplinaOfertada.objects.filter(ano = aluno.ano_ingresso, semestre = aluno.semestre)
+    for x in range(0, len(disciplina_ofertada)):
+        curso_turma = CursoTurma.objects.filter(sigla_curso = aluno.curso_id, ano_ofertado = disciplina_ofertada[x].id, semestre_ofertado = disciplina_ofertada[x].id)
+        for y in curso_turma:
+            disciplinas.append(y.nome_disciplina)
+            if str(y.id_turma) not in turmas:
+                turmas.append(str(y.id_turma))
+    
+         
+    contexto = {
+        "curso_turma":curso_turma,
+        "turmas":turmas,
+        "disciplinas":disciplinas,
+        "mes_atual":time.month,
+        "ano_atual":time.year
+    }
+
+    return render(request, 'matricula.html', contexto)
 
 def historico(request):
     disciplinas = request.POST.getlist('disciplinas')
