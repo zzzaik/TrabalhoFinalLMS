@@ -13,33 +13,37 @@
             <p>Codigo Inválido</p> 
             </br>
     {% endif %}-->
-<div class="content">
+<div class="maxWidth">
     <fieldset class="flexFieldSet">
     <legend>Criar Matrícula</legend>
         <form class="flexForm" method="POST">
         {% csrf_token %}
             <div class="inputGroup">
                 <label for="ano">Ano: </label>
-                <select class="informs" name="ano" id="ano">
-                    <option>-- Ano --</option>
-                    {% for c in cursos %}
-                    <option value="{{ c.sigla_curso }}">{{ c.sigla_curso }}</option>
-                    {% endfor %}
-                </select>
+                <input type="text" value= "{{ ano_atual }}" class="informs" name="ano" id="ano" readonly>
+                
                 <label for="semestre">Semestre: </label>
-                <select class="informs" name="semestre" id="semestre">
-                    <option>-- Semestre --</option>
-                    <option>1</option>
-                    <option>1</option>                    
-                </select>
+                <input type="text" 
+                    value= {% if mes_atual < 7%}
+                                "1"
+                           {% else %}
+                                "2"
+                           {% endif %}
+                    class="informs" name="semestre" readonly>
+                                
                 <label for="turma">Turma: </label>
                 <select class="informs" name="turma" id="turma">
-                    <option>-- Turma --</option>
-                    {% for t in turmas %}
-                    <option value="{{ t.id_turma }}">{{ t.id_turma }}</option>
+                    <option> -- Turma -- </option>
+                    {% for t in turmas  %}                        
+                       
+                        <option value="{{ t }}">{{ t }}</option>
+                       
                     {% endfor %}                   
-                </select>
+                </select>                
             </div>
+            </br>
+            <button type="submit" class="submitBtn">Filtrar</button>
+            </br>
             <div class="inputGroup dropdownList">
                 <label for="disciplina">Disciplinas:</label>
                 <div class="selectionBox" onclick="selection_list()">
@@ -56,6 +60,38 @@
             <button type="submit" class="submitBtn">Matricular</button>
         </form>
     </fieldset>
-    
+    <fieldset class="flexFieldSet">
+    <legend>Histórico</legend>
+        <form class="flexForm" method="POST">
+            <div class="inputGroup">
+            <label for="buscaAno">Ano: </label>
+            <select class="informs" name="buscaAno" id="buscaAno">
+                <option>-- Ano --</option>
+                {% for c in curso %}
+                <option value="{{ c.ano }}">{{ c.ano }}</option>
+                {% endfor %}
+            </select>
+            <label for="buscaSemestre">Semestre: </label>
+            <select class="informs" name="buscaSemestre" id="buscaSemestre">
+                <option>-- Semestre --</option>
+                <option>1</option>
+                <option>2</option>
+            </select>
+            <button type="submit" class="submitBtn">Buscar</button>
+            </div>
+            <table>
+                <tr>
+                    <th>Disciplina</th>
+                    <th>Turma</th>
+                </tr>
+                {% for m in matricula %}
+                <tr>
+                    <td>m.nome_disciplina</td>
+                    <td>m.id_turma</td>
+                </tr>
+                {% endfor %}
+            </table>
+        </form>
+    </fieldset>
 </div>
 {% endblock %}
