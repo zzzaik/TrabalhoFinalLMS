@@ -219,26 +219,34 @@ def upload_prof(request):
 @login_required(login_url='/entrar')
 @user_passes_test(checa_aluno, login_url='/?erro=acesso', redirect_field_name=None)
 def exibir_boletim(request):
+    #notas = []
+    #contador = 0
+    #aluno = Aluno.objects.get(parent_link=request.user.id)
+    #matriculas = Matricula.objects.filter(ra_aluno=aluno) 
+    #boletim = {}
 
-    notas = []
-    contador = 0
-    aluno = Aluno.objects.get(parent_link=request.user.id)
-    matriculas = Matricula.objects.filter(ra_aluno=aluno)
-    boletim = {}
-    for x in matriculas:
-        print(x)
-        for disciplinas in x:
-            boletim = {disciplinas.nome_diciplina}
-            for notas in Resposta.objects.filter(ra_aluno=aluno, nome_disciplina=disciplinas.nome_disciplina):
-                contador += 1
-                notas.append(notas.nota)
+    #for disciplinas in matriculas.Matricula.nome_disciplina:
+    #    boletim = {disciplinas.nome_diciplina}
+    #    for notas in Resposta.objects.filter(ra_aluno=aluno, nome_disciplina=disciplinas.nome_disciplina):
+    #        contador += 1
+    #        notas.append(nota.nota)
 
-            media = notas / contador
-            boletim[disciplinas.nome_diciplina] = media
-            contadod = 0
+    #    media = notas / contador
+    #    boletim[disciplinas.nome_diciplina] = media
+    #    contador = 0
 
+    #--STUB--
+    boletim = {
+        'semestre_ofertado':'2º Semestre',
+        'disciplinas':{
+            'Linguagem de Programação II':'8.5',
+            'Linguagem SQL':'9.0',
+            'Gestão de Projetos':'8.0',
+            'Engenharia de Software':'7.7',
+            'Tecnologia Web':'10.0'
+        }
+    }
     contexto = {
-        "boletim": boletim,
-        "matriculas": matriculas
+        "boletim": boletim
     }
     return render(request, 'boletim.html', contexto)
