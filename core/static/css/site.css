@@ -161,6 +161,30 @@ div.copyright {
 }
 }
 
+/* Tabelas */
+.tblContainer{
+	display: flex;
+	flex-direction:column;
+}
+.tblHead{
+	display:flex;
+	align-content: stretch;
+}
+.tblLine{
+	background-color: #f2f2f2;
+	display: flex;
+	flex-direction: row;
+}
+
+.tblLine:nth-child(odd){
+	border-right: 1px solid white;
+	background-color: #d4d4d4;
+}
+
+.tblLine:hover{
+	background-color: #32c9ff;
+	transition:0.5s;
+}
 /* Forms*/
 .flexFieldSet{
 	display:flex;
@@ -329,6 +353,9 @@ label{
 }
 .flexColumn{
 	flex-flow: column;
+}
+.flexRow{
+	flex-flow: row;
 }
 .show{
 	display:block;
