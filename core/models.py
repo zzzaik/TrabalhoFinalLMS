@@ -85,7 +85,7 @@ class GradeCurricular(models.Model):
         unique_together = (('sigla_curso', 'ano', 'quantidade_semestre'),)
 
     def __str__(self):
-        return '%s  %s  %s' % (self.sigla_curso, self.ano, self.quantidade_semestre)
+        return '%s' % (self.id)
 
 
 class Periodo(models.Model):
@@ -146,7 +146,7 @@ class DisciplinaOfertada(models.Model):
         unique_together = (('nome_disciplina', 'ano', 'semestre'),)
 
     def __str__(self):
-        return '%s  %s  %s' % (self.nome_disciplina, self.ano, self.semestre)
+        return '%s' % (self.id)
 
 
 class Turma(models.Model):
@@ -191,7 +191,7 @@ class CursoTurma(models.Model):
                             'ano_ofertado', 'semestre_ofertado', 'id_turma'),)
 
     def __str__(self):
-        return '%s %s %s %s %s' % (self.sigla_curso, self.id_turma, self.nome_disciplina, self.ano_ofertado, self.semestre_ofertado)
+        return '%s' % (self.id)
 
 
 class Aluno(Usuario):
@@ -223,7 +223,7 @@ class Matricula(models.Model):
                             'ano_ofertado', 'semestre_ofertado', 'id_turma'),)
 
     def __str__(self):
-        return '%s %s %s %s %s' % (self.ra_aluno, self.id_turma, self.nome_disciplina, self.ano_ofertado, self.semestre_ofertado)
+        return '%s' % (self.id)
 
 
 class PeriodoDisciplina(models.Model):
@@ -245,7 +245,7 @@ class PeriodoDisciplina(models.Model):
                             'quantidade_semestre', 'numero_periodo', 'nome_disciplina'),)
 
     def __str__(self):
-        return '%s %s %s' % (self.quantidade_semestre, self.numero_periodo, self.nome_disciplina)
+        return '%s' % (self.id)
 
 
 class Questao(models.Model):
@@ -270,7 +270,7 @@ class Questao(models.Model):
                             'semestre_ofertado', 'id_turma', 'numero_questao'),)
 
     def __str__(self):
-        return '%s %s %s' % (self.numero_questao, self.nome_disciplina, self.ano_ofertado)
+        return '%s' % (self.id)
 
 
 class Resposta(models.Model):

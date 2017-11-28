@@ -1,10 +1,6 @@
 {% extends 'base.html' %}
 
 {% load static %}
-
-{% block estilo_unico %}{% static '/' %}css/site.css{% endblock %}
-
-{% block script_unico %}{% endblock %}
 	   
 {% block title %}Login{% endblock %}
 
@@ -20,7 +16,6 @@
     </p>
     {% endfor %}
         <button type="submit" class="submitBtn">Enviar</button>
-        <a href="{% url 'recuperar_senha' %}">Esqueci a senha</a>
     </form>
 </fieldset>
 </div>

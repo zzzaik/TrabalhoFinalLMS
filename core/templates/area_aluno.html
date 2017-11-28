@@ -1,21 +1,17 @@
 {% extends 'base.html' %}
 {% load static %}
-
-{% block estilo_unico %}{% static '/' %}css/site.css{% endblock %}
-
-{% block script_unico %}{% endblock %}
 	   
-{% block title %}Área do aluno{% endblock %}
+{% block title %}Área do Aluno - IMPACTA{% endblock %}
 
 {% block main %}
 <section class="content">
     <div class="areaAluno">
     <div class="listLinks">
         <ul class=flexList>
-            <li class="liLink" onclick="dropDown('liDrop')">Matrículas
+            <a class="liLink matricula" onclick="matricula_function()">Matrículas</a>
                 <div class="selectionList flexColumn" id="liDrop">
-                    <a class="linkBtn" href="{% url 'matricula' %}">Criar Matrícula</a>
-                    <a class="linkBtn" href="{% url 'historico' %}">Histórico</a>
+                    <a class="liLink btn" href="{% url 'matricula' %}">Criar Matrícula</a>
+                    <a class="liLink btn" href="{% url 'historico' %}">Histórico</a>
                 </div>
             </li>
             <li class="liLink"><a class="liLink" href="{% url 'msg_aluno' %}">Mensagens</a></li>

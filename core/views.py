@@ -31,10 +31,6 @@ def noticias(request):
     return render(request, 'noticias.html')
 
 
-def recuperar_senha(request):
-    return render(request, 'recuperar_senha.html')
-
-
 @login_required(login_url='/entrar')
 @user_passes_test(checa_aluno, login_url='/?erro=acesso', redirect_field_name=None)
 def area_aluno(request):
@@ -50,43 +46,63 @@ def area_professor(request):
     return render(request, 'area_professor.html')
 
 
-def primeiro_login(request):
-    return render(request, 'primeiro_login.html')
-
-
+@login_required(login_url='/entrar')
+@user_passes_test(checa_aluno, login_url='/?erro=acesso', redirect_field_name=None)
 def matricula(request):
     time = now
-    aluno = Aluno.objects.get(ra = request.user.ra)
+    aluno = Aluno.objects.get(ra=request.user.ra)
     cursos = []
     turmas = []
     disciplinas = []
-        
-    if request.method == 'POST':
-        post_turma = (request.POST.get("turma"))
-        if (post_turma != "-- Turma --"):
-            print("OK")
-        else:
-            print("NOT OK")
-
-    disciplina_ofertada = DisciplinaOfertada.objects.filter(ano = aluno.ano_ingresso, semestre = aluno.semestre)
+    curso_turma = []
+    cont_post = ['csrfmiddlewaretoken', 'ano', 'semestre', 'turma']
+    disciplina_ofertada = DisciplinaOfertada.objects.filter(
+        ano=aluno.ano_ingresso, semestre=aluno.semestre)
     for x in range(0, len(disciplina_ofertada)):
-        curso_turma = CursoTurma.objects.filter(sigla_curso = aluno.curso_id, ano_ofertado = disciplina_ofertada[x].id, semestre_ofertado = disciplina_ofertada[x].id)
+        curso_turma = CursoTurma.objects.filter(
+            sigla_curso=aluno.curso_id, ano_ofertado=disciplina_ofertada[x].id, semestre_ofertado=disciplina_ofertada[x].id)
         for y in curso_turma:
             disciplinas.append(y.nome_disciplina)
             if str(y.id_turma) not in turmas:
                 turmas.append(str(y.id_turma))
-    
-         
+    if request.POST:
+        post_turma = (request.POST.get("turma"))
+        if (post_turma != "-- Turma --"):
+            pass
+        else:
+            for y in request.POST.keys():
+                if y not in cont_post:
+                    cont_post.append(y)
+            for x in range(4, len(cont_post)):
+                if request.POST[cont_post[x]]:
+                    d = Disciplina.objects.get(id=request.POST[cont_post[x]])
+                    do = DisciplinaOfertada.objects.get(nome_disciplina=d)
+                    t = Turma.objects.get(nome_disciplina=d)
+                    if Matricula.objects.get(ra_aluno=aluno, nome_disciplina=d, ano_ofertado=do, semestre_ofertado=do, id_turma=t):
+                        pass
+                    else:
+                        Matricula.objects.create(
+                            ra_aluno=aluno, nome_disciplina=d, ano_ofertado=do, semestre_ofertado=do, id_turma=t)
+                else:
+                    pass
+            curso_turma = ''
+            disciplinas = ''
+    else:
+        curso_turma = ''
+        disciplinas = ''
     contexto = {
-        "curso_turma":curso_turma,
-        "turmas":turmas,
-        "disciplinas":disciplinas,
-        "mes_atual":time.month,
-        "ano_atual":time.year
+        "curso_turma": curso_turma,
+        "turmas": turmas,
+        "disciplinas": disciplinas,
+        "mes_atual": time.month,
+        "ano_atual": time.year
     }
 
     return render(request, 'matricula.html', contexto)
 
+
+@login_required(login_url='/entrar')
+@user_passes_test(checa_aluno, login_url='/?erro=acesso', redirect_field_name=None)
 def historico(request):
     disciplinas = request.POST.getlist('disciplinas')
     # como passar um array pelo POST; django:
@@ -108,6 +124,8 @@ def pag_curso(request, sigla):
     return render(request, "pag_curso.html", contexto)
 
 
+@login_required(login_url='/entrar')
+@user_passes_test(checa_aluno, login_url='/?erro=acesso', redirect_field_name=None)
 def msg_aluno(request):
     context = {
         'user': ['aluno 1', 'aluno 2', 'aluno 3', 'aluno 4'],
@@ -117,6 +135,8 @@ def msg_aluno(request):
     return render(request, 'msg_aluno.html', context)
 
 
+@login_required(login_url='/entrar')
+@user_passes_test(checa_professor, login_url='/?erro=acesso', redirect_field_name=None)
 def msg_professor(request):
     context = {
         'cursos': ['ADS', 'BD'],
@@ -134,27 +154,47 @@ def msg_professor(request):
     return render(request, 'msg_professor.html', context)
 
 
+@login_required(login_url='/entrar')
+@user_passes_test(checa_aluno, login_url='/?erro=acesso', redirect_field_name=None)
 def upload_aluno(request):
     aluno = Aluno.objects.get(ra=request.user.ra)
-    matriculas = []
-    for m in Matricula.objects.filter(ra_aluno=aluno):
-        matriculas.append(m)
+    disciplinas = []
+    turmas = []
+    ano = []
+    semestre = []
+    disciplina_ofertada = DisciplinaOfertada.objects.filter(ano=aluno.ano_ingresso, semestre=aluno.semestre)
+    for x in range(0, len(disciplina_ofertada)):
+        curso_turma = CursoTurma.objects.filter(
+            sigla_curso=aluno.curso_id, ano_ofertado=disciplina_ofertada[x].id, semestre_ofertado=disciplina_ofertada[x].id)
+        for y in curso_turma:
+            disciplinas.append(y.nome_disciplina)
+            ano.append(y.ano_ofertado)
+            semestre.append(y.semestre_ofertado)
+            if str(y.id_turma) not in turmas:
+                turmas.append(str(y.id_turma))
     if request.POST:
-        arquivo = ArquivoResposta(ra_aluno=aluno)
         form = fileUploadAluno(request.POST, request.FILES, instance=aluno)
         if form.is_valid():
             form.ra_aluno = aluno.ra
-            form.save()
+            #d = Disciplina.objects.get(id=request.POST[cont_post[x]])
+            #do = DisciplinaOfertada.objects.get(nome_disciplina=d)
+            #t = Turma.objects.get(nome_disciplina=d)
+            #ArquivoResposta.objects.create()
     else:
         form = fileUploadAluno()
 
     contexto = {
         "form": form,
-        "matriculas": matriculas,
+        "disciplinas": disciplinas,
+        'turmas': turmas,
+        'ano': ano,
+        'semestre': semestre
     }
     return render(request, 'upload_aluno.html', contexto)
 
 
+@login_required(login_url='/entrar')
+@user_passes_test(checa_professor, login_url='/?erro=acesso', redirect_field_name=None)
 def upload_prof(request):
     prof = Professor.objects.get(ra=request.user.ra)
     turmas = []
@@ -176,6 +216,8 @@ def upload_prof(request):
     return render(request, 'upload_prof.html', contexto)
 
 
+@login_required(login_url='/entrar')
+@user_passes_test(checa_aluno, login_url='/?erro=acesso', redirect_field_name=None)
 def exibir_boletim(request):
 
     notas = []
@@ -183,19 +225,20 @@ def exibir_boletim(request):
     aluno = Aluno.objects.get(parent_link=request.user.id)
     matriculas = Matricula.objects.filter(ra_aluno=aluno)
     boletim = {}
+    for x in matriculas:
+        print(x)
+        for disciplinas in x:
+            boletim = {disciplinas.nome_diciplina}
+            for notas in Resposta.objects.filter(ra_aluno=aluno, nome_disciplina=disciplinas.nome_disciplina):
+                contador += 1
+                notas.append(notas.nota)
 
-    for disciplinas in matriculas.Matricula.nome_disciplina:
-        boletim = {disciplinas.nome_diciplina}
-        for notas in Resposta.objects.filter(ra_aluno=aluno, nome_disciplina=disciplinas.nome_disciplina):
-            contador += 1
-            notas.append(nota.nota)
+            media = notas / contador
+            boletim[disciplinas.nome_diciplina] = media
+            contadod = 0
 
-        media = notas / contador
-        boletim[disciplinas.nome_diciplina] = media
-        contadod = 0
-
-        contexto = {
-            "boletim": boletim,
-            "matriculas": matriculas
-        }
+    contexto = {
+        "boletim": boletim,
+        "matriculas": matriculas
+    }
     return render(request, 'boletim.html', contexto)

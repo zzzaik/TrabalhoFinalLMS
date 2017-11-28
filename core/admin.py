@@ -20,17 +20,17 @@ class NovoAlunoForm(forms.ModelForm):
 class AlterarAlunoForm(forms.ModelForm):
     class Meta:
         model = Aluno
-        fields = ('email', 'nome', 'curso', 'celular', 'ativo', 'semestre', 'ano_ingresso')
+        fields = ('email', 'nome', 'curso', 'celular', 'ativo', 'semestre', 'ano_ingresso', 'ativo')
 
 
 class AlunoAdmin(UserAdmin):
     form = AlterarAlunoForm
     add_form = NovoAlunoForm
-    list_display = ('ra', 'nome', 'curso', 'email', 'celular', 'semestre', 'ano_ingresso')
+    list_display = ('ra', 'nome', 'curso', 'email', 'celular', 'semestre', 'ano_ingresso', 'ativo')
     list_filter = ('user_type',)
-    fieldsets = ((None, {'fields': ('email', 'nome', 'curso', 'semestre', 'ano_ingresso')}),)
+    fieldsets = ((None, {'fields': ('email', 'nome', 'curso', 'semestre', 'ano_ingresso', 'ativo')}),)
     add_fieldsets = (
-        (None, {'fields': ('ra', 'email', 'nome', 'curso', 'celular','semestre', 'ano_ingresso')}),)
+        (None, {'fields': ('ra', 'email', 'nome', 'curso', 'celular','semestre', 'ano_ingresso', 'ativo')}),)
     search_fields = ('email',)
     ordering = ('email',)
     filter_horizontal = ()
@@ -60,12 +60,12 @@ class AlterarProfessorForm(forms.ModelForm):
 class ProfessorAdmin(UserAdmin):
     form = AlterarProfessorForm
     add_form = NovoProfessorForm
-    list_display = ('nome', 'apelido', 'email')
+    list_display = ('nome', 'apelido', 'email', 'ativo')
     list_filter = ('user_type',)
     fieldsets = (
-        (None, {'fields': ('email', 'nome', 'apelido')}),)
+        (None, {'fields': ('email', 'nome', 'apelido', 'ativo')}),)
     add_fieldsets = ((None, {'fields': (
-        'ra', 'email', 'nome', 'apelido', 'celular')}),)
+        'ra', 'email', 'nome', 'apelido', 'celular', 'ativo')}),)
     search_fields = ('email',)
     ordering = ('email',)
     filter_horizontal = ()
@@ -89,17 +89,17 @@ class NovoCoordenadorForm(forms.ModelForm):
 class AlterarCoordenadorForm(forms.ModelForm):
     class Meta:
         model = Usuario
-        fields = ('email', 'nome')
+        fields = ('email', 'nome', 'ativo')
 
 class CoordenadorAdmin(UserAdmin):
     form = AlterarCoordenadorForm
     add_form = NovoCoordenadorForm
-    list_display = ('nome', 'email')
+    list_display = ('nome', 'email', 'ativo')
     list_filter = ('user_type',)
     fieldsets = (
-        (None, {'fields': ('email', 'nome')}),)
+        (None, {'fields': ('email', 'nome', 'ativo')}),)
     add_fieldsets = ((None, {'fields': (
-        'ra', 'email', 'nome')}),)
+        'ra', 'email', 'nome', 'ativo')}),)
     search_fields = ('email',)
     ordering = ('email',)
     filter_horizontal = ()

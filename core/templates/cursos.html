@@ -1,16 +1,14 @@
 {% extends 'base.html' %}
 {% load static %}
-{% block estilo_unico %}{% static '/' %}css/site.css{% endblock %} 
-{% block script_unico %}{% endblock %}
-{% block login %}{% endblock %}
-{% block img_user %}{% endblock %}
-{% block title %}Cursos - Impacta{% endblock %} 
+
+{% block title %}Cursos - IMPACTA{% endblock %} 
+
 {% block main %}
 <section class = 'content width40 maxHeight'>
 	<h1 class="maxWidth centerText">Cursos</h1>
 	<ul class="flexList">
 		{% for curso in cursos %}
-		<li class="liLink tranparency"><a class="linkBtn maxWidth" href = "{% url 'pag_curso' sigla=curso.sigla_curso %}">{{ curso }}</a></li>
+		<li class="liLink tranparency"><a class="linkBtn maxWidth" href = "{% url 'pag_curso' sigla=curso.sigla_curso %}">{{ curso.nome_curso }}</a></li>
 		{% endfor %}
 	</ul>
 </section>

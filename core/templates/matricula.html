@@ -1,18 +1,9 @@
 {% extends 'area_aluno.html' %}
 {% load static %}
+
+{% block title %}Matricula - Área do Aluno{% endblock %} 
+
 {% block conteudoAluno %}
-<!--<var class="flag">F</var>
-    {% if flag == 'T' %}
-        <section>
-		    </br>
-		    <p>Codigo Válido</p> 
-            </br>
-    {% else %}
-        <section>
-           </br>
-            <p>Codigo Inválido</p> 
-            </br>
-    {% endif %}-->
 <div class="maxWidth">
     <fieldset class="flexFieldSet">
     <legend>Criar Matrícula</legend>
@@ -24,7 +15,7 @@
                 
                 <label for="semestre">Semestre: </label>
                 <input type="text" 
-                    value= {% if mes_atual < 7%}
+                    value= {% if mes_atual < 7 %}
                                 "1"
                            {% else %}
                                 "2"
@@ -47,50 +38,17 @@
             <div class="inputGroup dropdownList">
                 <label for="disciplina">Disciplinas:</label>
                 <div class="selectionBox" onclick="selection_list()">
-                    <span>-- Disciplinas --</span>
+                    <span>-- Disciplinas -- Clique para expandir</span>
                 </div>
                 <!-- como passar um array pelo POST; django:
                     https://stackoverflow.com/questions/4581114/django-questionhow-to-pass-a-list-parameter-using-post-method -->
                 <li class="selectionList" id="disciplinas">
                     {% for d in disciplinas %}
-                    <ul><input type="checkbox" name="disciplinas"value="{{ a.nome_disciplina }}">{{ a.nome_disciplina }}</input></ul>
+                    <ul><input type="checkbox" name="{{ d.nome_disciplina }}" value='{{ d.id }}'>{{ d.nome_disciplina }}</input></ul>
                     {% endfor %}
                 </li>
             </div>
             <button type="submit" class="submitBtn">Matricular</button>
-        </form>
-    </fieldset>
-    <fieldset class="flexFieldSet">
-    <legend>Histórico</legend>
-        <form class="flexForm" method="POST">
-            <div class="inputGroup">
-            <label for="buscaAno">Ano: </label>
-            <select class="informs" name="buscaAno" id="buscaAno">
-                <option>-- Ano --</option>
-                {% for c in curso %}
-                <option value="{{ c.ano }}">{{ c.ano }}</option>
-                {% endfor %}
-            </select>
-            <label for="buscaSemestre">Semestre: </label>
-            <select class="informs" name="buscaSemestre" id="buscaSemestre">
-                <option>-- Semestre --</option>
-                <option>1</option>
-                <option>2</option>
-            </select>
-            <button type="submit" class="submitBtn">Buscar</button>
-            </div>
-            <table>
-                <tr>
-                    <th>Disciplina</th>
-                    <th>Turma</th>
-                </tr>
-                {% for m in matricula %}
-                <tr>
-                    <td>m.nome_disciplina</td>
-                    <td>m.id_turma</td>
-                </tr>
-                {% endfor %}
-            </table>
         </form>
     </fieldset>
 </div>
