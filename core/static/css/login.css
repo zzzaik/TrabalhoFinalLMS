@@ -1,50 +1,7 @@
-section {
-	display: flex;
-	flex-wrap: wrap;
-	justify-content: center;
+.btnLogin{
+	margin-top:1.3em;
+	border-radius: 10px;
+	font-size: 70%;
+	width:40%;
 }
-form {
-	margin: 1em;
-	margin-top: 4.53em;
-	margin-bottom: 13em;
-	width: 619px;
-    	padding: 30px;
-    	text-align: justify;
-    	background-color: #ddd;
-    	border-radius: 15px;
-}
-.classe {
-	width: 20%;
-	padding: 5px 15px;
-	border-radius: 7px;
-	border-color: #0055cc #0055cc #003580;
-	background-image: -webkit-linear-gradient(top, #0088cc, #0055cc);
-    background-color: #0074cc;
-    color: #ffffff;
-	text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
-}
-.flexForm {
-	justify-content: center;
-}
-.itens {
-	display: flex;
-	justify-content: space-between;
-	margin-bottom: 0.3em;
-}
-.informs {
-	width: 60%;
-}
-.itensFinais {
-	display: flex;
-	align-items: center;
-	flex-direction: column;
-	margin-bottom: 0.3em;
-}
-.formLogin {
-	font-size: 11px;
-}
-@media only screen and (min-width: 320px) and (max-width: 762px) {
-	button {
-		width: 50%;
-	}
-}
+

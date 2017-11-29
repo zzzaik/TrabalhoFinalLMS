@@ -1,0 +1,28 @@
+{% extends 'area_aluno.html' %}
+{% load static %}
+
+{% block title %}Boletim - Área do Aluno{% endblock %}
+
+{% block conteudoAluno %}
+<div class="content">
+    <table>
+        <div class="tblContainer">
+            {% for disciplina in boletim %}
+            <tr class="tblHead">
+                <th rowspan="{{ len(boletim) }}">{{ semestre_ofertado.value() }}</th>
+            </tr>
+            <tr class="tblHead flexRow">
+                <th>Disciplina</th>
+                <th>Media</th>
+            </tr>
+            {% for nota in boletim['disciplinas'] %}
+            <tr class="tblLine flexRow">
+                <td>{{ nota.key() }}</td>
+                <td>{{ nota.value() }}</td>
+            </tr>
+            {% endfor %}
+            {% endfor %}
+        </div>
+    </table>
+</div>
+{% endblock %}

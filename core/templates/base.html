@@ -1,48 +1,50 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
 	<meta charset="UTF-8" />
 	<meta name="viewport" content="width = device-width, initial-scale = 1.0" />
 	<link rel="icon" href="{% static '/' %}img/icone.ico" type="image/x-icon" />
 	<link rel="stylesheet" href="{% static '/' %}css/site.css" />
 	<link rel="stylesheet" href='{% block estilo_unico %}{% endblock %}' />
-	<script src="{% static '/' %}src/site.js"></script>
-	<script src="{% block script_unico %}{% endblock %}"></script>
+	<script src="{% static '/' %}js/script.js"></script>
 	<title>{% block title %}{% endblock %}</title>
 </head>
 <body>
 	<header class="motherNav">
 		<nav class="menu">
-			<div class = 'menus'>
+			<div class='menus'>
 				<a href="/" title="Logo Faculdade Impacta">
 					<img class="img_logo" src="{% static '/' %}img/logo-novo.png" alt="Logo e link para a home" />
 				</a>
-				<nav class = 'menu_extenco'>
-					<a class = 'link' href="{% url 'cursos' %}" title="Cursos"><button class="linkBtn">Cursos</button></a>
-					<a class = 'link' href="{% url 'noticias' %}" title="Notícias"><button class="linkBtn" >Notícias</button></a>
+				<nav class='menu_extenco'>
+					<a class='link' href="{% url 'cursos' %}" title="Cursos">
+						<button class="linkBtn">Cursos</button>
+					</a>
+					<a class='link' href="{% url 'noticias' %}" title="Notícias">
+						<button class="linkBtn">Notícias</button>
+					</a>
 				</nav>
 			</div>
 			<div class='menus'>
 				{% if not user.is_authenticated %}
 				<button class="user" title="Entre">
 					<a href="{% url 'entrar' %}">
-						<img class="img_user" src="{% if not user.is_athenticated %}{% static '/' %}img/img_user.png{% else %}{% static '/' %}img/img_user.png{% endif %}"
-						 alt="Usuario" />
+						<img class="img_user" src="{% static '/' %}img/img_user.png" alt="Usuario" />
 					</a>
 				</button>
 				{% else %}
 				<div>
 					<button class="user" onclick="login_function()" title="Logado">
-						<img class="img_user" src="{% if logado == False %}{% static '/' %}img/img_user.png{% else %}{% static '/' %}img/img_user.png{% endif %}"
-						 alt="Usuario" />
+						<img class="img_user" src="{% static '/' %}img/img_user.png" alt="Usuario" />
 					</button>
 					<nav id="drop_login" class="conteudo_login">
 						{% if user.user_type == 'A' %}
-						<a href="{% url 'aluno' %}">Área do aluno</a>
+						<a href="{% url 'area_aluno' %}">Área do aluno</a>
 						<a href="{% url 'sair' %}">Sair</a>
 						{% elif user.user_type == 'P' %}
-						<a href="{% url 'professor' %}">Área do professor</a>
+						<a href="{% url 'area_professor' %}">Área do professor</a>
 						<a href="{% url 'sair' %}">Sair</a>
 						{% elif user.user_type == 'C' %}
 						<a href="/admin">Área do coordenador</a>
@@ -63,7 +65,7 @@
 			</div>
 		</nav>
 	</header>
-	<main class='content'>
+	<main class="marginTop5">
 		{% block main %}{% endblock %}
 	</main>
 	<footer>
@@ -93,4 +95,5 @@
 		</div>
 	</footer>
 </body>
+
 </html>

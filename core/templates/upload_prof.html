@@ -1,0 +1,63 @@
+{% extends 'area_professor.html' %}
+{% load static %}
+
+{% block title %}Trabalhos e Exercícios - Área do Professor{% endblock %} 
+
+{% block conteudoProf %}
+<div class="width80 maxHeight content">
+        <fieldset class="flexFieldSet">
+        <legend>Upload de Arquivos</legend>
+        <form class="flexForm" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="inputGroup">
+                <label for="disciplina">Disciplina: </label>
+                <select  class="informs" name="disciplina" id="disciplina">
+                    {% for d in turmas.nome_disciplina %}
+                    <option>{{ d }}</option>
+                    {% endfor %}
+                    <option>ADS</option>
+                </select>
+    
+                <label for="ano_ofertado">Ano: </label>
+                <select  class="informs" name="ano_ofertado" id="ano_ofertado">
+                    {% for ano in turmas.ano_ofertado %}
+                    <option>{{ ano }}</option>
+                    {% endfor %}
+                    <option>2017</option>
+                </select>
+    
+                <label for="semestre_ofertado">Semestre: </label>
+                <select  class="informs width20" name="semestre_ofertado" id="semestre_ofertado">
+                    {% for sem in turmas.semestre_ofertado %}
+                    <option>{{ sem }}</option>
+                    {% endfor %}
+                    <option>2</option>
+                </select>
+    
+                <label for="id_turma">Turma: </label>
+                <select  class="informs width20" name="id_turma" id="id_turma">
+                    {% for turma in turmas.id_turma %}
+                    <option>{{ turma }}</option>
+                    {% endfor %}
+                    <option>b</option>
+                </select>
+            </div>
+            <div class="inputGroup">
+                <label for="questao">Número da Questão</label>
+                <input class="informs width10" name="questao" id="questao" type="number"></input>
+                <label for="arquivo">Selecionar Arquivo: </label>
+                <div id="arquivo">{{ form.arquivo_questao }}</div>
+            </div>
+            <button class="submitBtn"type="submit">Enviar</button>
+        </form>
+        </fieldset>
+        <div class="content">
+            <h2 class="maxWidth centerText">Atividades e Exercícios</h2>
+            <div class="listLinks maxWidth">
+            <ul class="flexList">
+                <li class="liLink"><a href="#">exercício 1</a></li>
+            </ul>
+            </div>
+        </div>
+    </div>
+{% endblock %}

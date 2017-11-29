@@ -1,0 +1,68 @@
+{% extends 'area_professor.html' %}
+{% load static %}
+
+{% block title %}Mensagem - Área do Professor{% endblock %} 
+
+{% block conteudoProf %}
+<div class="width80 maxHeight content">
+    <fieldset class="flexFieldSet">
+    <legend>Filtrar Mensagens</legend>
+        <form class="flexForm" method="POST">
+        {% csrf_token %}
+            <div class="inputGroup">
+                <label for="filtroCurso">Curso: </label>
+                <select class="informs" name="filtroCurso" id="filtrCurso">
+                    <option>-- Curso --</option>
+                    {% for c in cursos %}
+                    <option value="{{ c }}">{{ c }}</option>
+                    {% endfor %}
+                </select>
+                <label for="filtroTurma">Turma: </label>
+                <select class="informs" name="filtroTurma" id="filtroTurma">
+                    <option>-- Turma --</option>
+                    {% for t in turmas %}
+                    <option value="{{ t }}">{{ t }}</option>
+                    {% endfor %}
+                </select>
+                <button type="button" class="submitBtn" onclick="filtrarAlunos()">Filtrar</button>
+            </div>
+        </form>
+    </fieldset>
+        <div class="msgPanel">
+        {% for a,desc in alunos.items %}
+            <div class="msg">
+                <p class="remetente">{{ a }} - {{ desc }}</p>
+                <p class="texto">{{ mensagem }}</p>
+                <span>{{ data_agora }}</span>
+            </div>
+        {% endfor %}
+        </div>
+    
+    <fieldset class="flexFieldSet">
+    <legend>Enviar Mensagens</legend>
+        <form class="flexForm" method="POST">
+            {% csrf_token %}
+            <input type="hidden" name="ra_remetente" value="ra_remetente"></input>
+            <input type="hidden" name="data_envio" value="{{ data_agora }}"></input>
+            <div class="inputGroup">
+                <label for="curso">Curso: </label>
+                <select class="informs" name="curso" id="curso">
+                    <option>-- Curso --</option>
+                    {% for c in cursos %}
+                    <option value="{{ c.sigla_curso }}">{{ c.sigla_curso }}</option>
+                    {% endfor %}
+                </select>
+                <label for="turma">Turma: </label>
+                <select class="informs" name="turma" id="turma">
+                    <option>-- Turma --</option>
+                    {% for t in turmas %}
+                    <option value="{{ t.id_turma }}">{{ t.id_turma }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <textarea class="inputTextArea" name="msg"></textarea>
+            <button type="submit" class="submitBtn">Enviar</button>
+        </form>
+    </fieldset>
+</div>
+{% endblock %}

@@ -77,13 +77,26 @@ WSGI_APPLICATION = 'site_TFM.wsgi.application'
 DATABASES = {
     'default': { # Banco no MSSQL
         'ENGINE': "sql_server.pyodbc",
-        'NAME': "db-lms-project",
-        'HOST': "db-lms-draco.database.windows.net",
-        'PORT': '1433',
-        'USER': "LMS_DB_admin@db-lms-draco",
+        'NAME': "db-lms",
+        'HOST': "draco-db.database.windows.net",
+       'PORT': '1433',
+       'USER': "admin_draco@draco-db",
         'PASSWORD': "P@ssw0rd",
-    }
+   }
 }
+
+#Conexão com Banco local SQL Server
+
+#DATABASES = {
+#    'default': {
+#        'ENGINE': "sql_server.pyodbc",
+#        'NAME': "teste",
+#        'HOST': "localhost",
+#      'PORT': '1433',
+#      'USER': "sa",
+#        'PASSWORD': "union",
+#  }
+#}
 
 # Password validation
 # https://docs.djangoproject.com/en/1.11/ref/settings/#auth-password-validators
